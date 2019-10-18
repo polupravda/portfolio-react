@@ -1,12 +1,18 @@
 import React from "react";
 import "../App.scss";
 import Logo from "./Logo";
+import { introText } from "../Content.js";
 
-function Intro({ introText }) {
+function Intro() {
   return (
     <div id="intro">
-      <Logo />
-      <p class="text-vertical">{introText.myTitle}</p>
+      <div className="column">
+        <div className="row">
+          <p className="text-vertical">{introText.myTitle}</p>
+          <Logo />
+        </div>
+        <p className="myIntro">{introText.myIntro}</p>
+      </div>
     </div>
   );
 }

@@ -1,19 +1,30 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import App from "../App";
-import Works from "./Works";
-import Contact from "./Contact";
-import NotFound from "./NotFound";
+import Home from "../views/Home";
+import Works from "../views/Works";
+import Contact from "../views/Contact";
+import NotFound from "../views/NotFound";
+import Background from "./Background";
 
 const Router = () => (
-  <BrowserRouter>
-    <Switch>
-      <Route exact path="/" component={App} />
-      <Route path="/works" component={Works} />
-      <Route path="/contact" component={Contact} />
-      <Route component={NotFound} />
-    </Switch>
-  </BrowserRouter>
+  <Background>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/works">
+          <Works />
+        </Route>
+        <Route path="/contact">
+          <Contact />
+        </Route>
+        <Route>
+          <NotFound />
+        </Route>
+      </Switch>
+    </BrowserRouter>
+  </Background>
 );
 
 export default Router;

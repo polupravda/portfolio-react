@@ -4,8 +4,10 @@
 $app-yellow: #ffb600;
 $app-black: #333;
 $app-white: #fff;
-$font-primary: "Space Mono", monospace;
-$font-secondary: "Gaegu", cursive;
+$font-primary: "Space Mono",
+monospace;
+$font-secondary: "Gaegu",
+cursive;
 
 // Mixins
 @mixin mobile {
@@ -13,6 +15,7 @@ $font-secondary: "Gaegu", cursive;
     @content;
   }
 }
+
 @mixin bodyFontSize {
   font-size: 16px;
 
@@ -27,6 +30,18 @@ body {
   a {
     cursor: url("/assets/images/cursor-hover.png"), auto;
   }
+}
+
+// General
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
 }
 
 // Styles
@@ -93,9 +108,9 @@ h2 {
 
 #intro {
   display: flex;
-  line-height: 0;
+
   text-align: left;
-  font-size: 20px;
+
 }
 
 #logo {
@@ -114,6 +129,8 @@ h2 {
 
 .text-vertical {
   writing-mode: vertical-rl;
+  font-size: 20px;
+  line-height: 0;
 }
 
 .navbar-items-container {
@@ -271,6 +288,7 @@ h2 {
     display: inline-block;
     position: relative;
   }
+
   #elef-1 {
     position: absolute;
     left: 30%;
@@ -278,6 +296,7 @@ h2 {
     transform: scale(0.3);
     animation: elefFall 15s ease-out infinite forwards;
   }
+
   #elef-2 {
     position: absolute;
     top: 0;
@@ -285,6 +304,7 @@ h2 {
     transform: scale(0.3);
     animation: elefFall 15s ease-out 5s infinite forwards;
   }
+
   #elef-3 {
     position: absolute;
     top: 0;
@@ -333,15 +353,406 @@ h2 {
   }
 }
 
+// Stone404
+
+#stone404-container {
+  position: absolute;
+  bottom: 100vh;
+  animation: stoneFall 600ms linear 3s forwards 1;
+}
+
+#stone404 {
+  height: 13vw;
+  // animation: stoneRoll 5s linear infinite;
+}
+
+.error-code {
+  font-size: 15vw;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.error-message {
+  font-size: 2.5vw;
+  margin-bottom: 7vh;
+}
+
+// Bear
+
+#bear-container {
+  display: inline-block;
+  position: relative;
+  height: 55vh;
+  width: 45vh;
+  z-index: 5;
+  transform-origin: left;
+  animation: wave 1s infinite ease-in-out alternate;
+
+  img {
+    position: absolute;
+    display: block;
+  }
+
+  #bear-core {
+    height: 100%;
+  }
+
+  .wheel {
+    height: 29%;
+  }
+
+  .wheel-back {
+    bottom: 0;
+    right: 14%;
+    animation: wheelRotation 10s linear 20ms infinite;
+  }
+
+  .wheel-front {
+    bottom: 0;
+    left: 0;
+    animation: wheelRotation 10s linear infinite;
+  }
+
+  .bb-gate {
+    height: 18%;
+    right: 4%;
+    bottom: 29%;
+    transform-origin: left;
+    transform: rotate(-36deg);
+    animation: gate 2s ease-out infinite;
+  }
+
+  .leg-back {
+    height: 30%;
+    bottom: 14%;
+    left: 45%;
+    animation: pedal 1s linear 500ms infinite;
+  }
+
+  .leg-front {
+    transform-origin: top;
+    height: 46%;
+    left: 41%;
+    bottom: 9%;
+    animation: pedal 1s linear infinite;
+  }
+
+}
+
+// Ninja
+
+#ninja-container {
+  display: inline-block;
+  position: relative;
+  height: 50vh;
+  width: 45vh;
+  z-index: 5;
+
+  img {
+    position: absolute;
+    display: block;
+  }
+
+}
+
+.ninja-body {
+  height: 87%;
+  right: 0;
+  bottom: 0;
+}
+
+.ninja-arm {
+  height: 50%;
+  right: 32%;
+  top: 0;
+  transform-origin: 85% 80%;
+  animation: forge 1s cubic-bezier(1, .01, .99, .84) infinite;
+}
+
+.ninja-anvil {
+  bottom: 0;
+  height: 36%;
+  right: 50%;
+}
+
+.ninja-laptop {
+  height: 20%;
+  bottom: 31%;
+  transform-origin: bottom;
+  animation: laptop 1s cubic-bezier(1, .01, .99, .84) infinite;
+}
+
+// ap-m-demo-container
+
+.ap-m-demo-container,
+.ap-d-demo-container {
+  position: relative;
+  display: flex;
+  width: 100%;
+
+  div {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+// Rope
+
+#rope-container {
+  height: 30vh;
+  width: 25vh;
+  position: relative;
+  z-index: 10;
+  justify-content: center;
+}
+
+.rope {
+  height: 30vh;
+  width: 25vh;
+  position: absolute;
+  left: 15%;
+  bottom: -4.5vh;
+}
+
+// Tag
+
+.tag-container {
+  position: relative;
+  align-items: center;
+  font-family: "Gaegu", cursive;
+  width: 17vh;
+  transform: rotate(-10deg);
+
+  .tag-text {
+    position: absolute;
+    display: block;
+    top: 0.5vh;
+    margin: 0 auto;
+    font-family: $font-secondary;
+    text-transform: uppercase;
+    color: $app-white;
+    font-size: 22px;
+    margin-top: -4vh;
+  }
+
+  svg {
+    fill: $app-black;
+  }
+
+  #arrow-fat-container {
+    height: 10vh;
+    width: 10vh;
+    transform: rotate(63deg);
+  }
+}
+
+.hint-container {
+  position: absolute;
+  width: 26vh;
+  left: 35%;
+  top: 20%;
+
+  svg {
+    fill: $app-black;
+  }
+
+  span {
+    position: absolute;
+    width: 20vh;
+    left: 3vh;
+    top: 2.5vh;
+    line-height: 1.2;
+    font-size: 12px;
+  }
+}
+
+// Pda
+
+.device-container-right {
+  margin-left: 5vh;
+}
+
+#pda-container {
+  display: inline-block;
+  position: relative;
+  height: 60vh;
+  width: 35.5vh;
+  z-index: 5;
+
+  img {
+    position: absolute;
+    display: block;
+  }
+}
+
+.pda {
+  height: 100%;
+}
+
+.ap-before {
+  width: 26.3vh;
+  overflow: auto;
+}
+
+.screen-canvas {
+  overflow: scroll;
+}
+
+.ap-before-canvas {
+  width: 25.5vh;
+  height: 40vh;
+  left: 13.5%;
+  top: 7%;
+  border-radius: 0.5vh 0.5vh 2vh 2vh;
+  position: absolute;
+  overflow-x: hidden;
+
+  &::after {
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, .8);
+    content: '';
+    display: block;
+    height: 40vh;
+    position: sticky;
+    top: 0;
+    width: 25.5vh;
+  }
+}
+
+// Iphone
+
+#iphone-container {
+  display: inline-block;
+  position: relative;
+  height: 60vh;
+  width: 30.5vh;
+  z-index: 5;
+
+  img {
+    position: absolute;
+    display: block;
+  }
+}
+
+.iphone {
+  height: 100%;
+}
+
+.ap-after {
+  width: 25.5vh;
+  overflow: auto;
+}
+
+.ap-after-canvas {
+  width: 25.5vh;
+  height: 55.7vh;
+  left: 8.5%;
+  top: 3.7%;
+  border-radius: 2.5vh;
+  position: absolute;
+  overflow-x: hidden;
+}
+
+// Old Desktop
+
+.device-container-right {
+  margin-left: 5vh;
+}
+
+#old-desktop-container {
+  display: inline-block;
+  position: relative;
+  height: 80vh;
+  width: 77.5vh;
+  z-index: 5;
+
+  img {
+    position: absolute;
+    display: block;
+  }
+}
+
+.old-desktop {
+  height: 100%;
+}
+
+.ap-before-d {
+  width: 63.5vh;
+  overflow: auto;
+}
+
+.screen-canvas-d {
+  overflow: scroll;
+}
+
+.ap-before-d-canvas {
+  width: 63.5vh;
+  height: 48vh;
+  left: 9%;
+  top: 9%;
+  position: absolute;
+  overflow-x: hidden;
+
+  &::after {
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, .6);
+    content: '';
+    display: block;
+    height: 48vh;
+    position: sticky;
+    top: 0;
+    width: 63.5vh;
+  }
+}
+
+// Apple Desktop
+
+#apple-desktop-container {
+  display: inline-block;
+  position: relative;
+  height: 60vh;
+  width: 81vh;
+  z-index: 5;
+
+  img {
+    position: absolute;
+    display: block;
+  }
+}
+
+.ap-d-demo-container {
+  .device-container-right {
+    width: 100%;
+  }
+}
+
+.apple-desktop {
+  height: 100%;
+}
+
+.ap-after-d {
+  width: 78.5vh;
+  overflow: auto;
+}
+
+.ap-after-d-canvas {
+  width: 78.5vh;
+  height: 44.2vh;
+  left: 1.4%;
+  top: 1.7%;
+  position: absolute;
+  overflow-x: hidden;
+}
+
 // Animations
 
 @keyframes buttonRotation {
   0% {
     transform: rotate(0deg);
   }
+
   50% {
     transform: rotate(90deg);
   }
+
   100% {
     transform: rotate(180deg);
   }
@@ -352,6 +763,7 @@ h2 {
     stroke-dasharray: 140 540;
     stroke-dashoffset: -474;
   }
+
   100% {
     stroke-dasharray: 760;
     stroke-dashoffset: 0;
@@ -363,13 +775,16 @@ h2 {
     top: 0;
     transform: rotate(90deg) scale(0.25);
   }
+
   15% {
     transform: rotate(-10deg) scale(0.5);
   }
+
   30% {
     top: 100%;
     transform: rotate(-15deg) scale(0.7);
   }
+
   100% {
     top: 100%;
     transform: rotate(-15deg) scale(0.7);
@@ -380,7 +795,111 @@ h2 {
   0% {
     background-position: 0 0;
   }
+
   100% {
     background-position: 100% 0;
+  }
+}
+
+@keyframes stoneFall {
+  0% {
+    bottom: 100vh;
+  }
+
+  72%,
+  78% {
+    bottom: 3vw;
+  }
+
+  85% {
+    bottom: 3.2vw;
+  }
+
+  100% {
+    bottom: 3vw;
+  }
+}
+
+@keyframes wheelRotation {
+  0% {
+    transform: rotate(3600deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes pedal {
+  0% {
+    transform: rotate(360deg) translateX(3px) rotate(-360deg) scaleY(1);
+  }
+
+  100% {
+    transform: rotate(0deg) translateX(3px) rotate(0deg) scaleY(1);
+  }
+}
+
+@keyframes wave {
+  0% {
+    transform: translateY(-2%) rotate(2deg);
+  }
+
+  100% {
+    transform: translateY(2%) rotate(0deg);
+  }
+}
+
+@keyframes gate {
+  0% {
+    transform: rotate(-36deg);
+  }
+
+  70% {
+    transform: rotate(-40deg);
+  }
+
+  100% {
+    transform: rotate(-36deg);
+  }
+}
+
+@keyframes forge {
+  0% {
+    transform: rotate(45deg);
+  }
+
+  50% {
+    transform: rotate(-90deg);
+  }
+
+  100% {
+    transform: rotate(45deg);
+  }
+}
+
+@keyframes laptop {
+  0% {
+    transform: scaleY(1);
+  }
+
+  50% {
+    transform: scaleY(1);
+  }
+
+  65% {
+    transform: scaleY(0.2);
+  }
+
+  53% {
+    transform: scaleY(0.2);
+  }
+
+  80% {
+    transform: scaleY(1);
+  }
+
+  100% {
+    transform: scaleY(1);
   }
 }

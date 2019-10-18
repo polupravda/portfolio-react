@@ -1,7 +1,8 @@
 import React from "react";
 import "../App.scss";
+import { skillsList, toolsList } from "../Content.js";
 
-function Skills({ skillsList, toolsList }) {
+function Skills() {
   return (
     <div className="skills-container">
       <h2>{skillsList.title}</h2>
