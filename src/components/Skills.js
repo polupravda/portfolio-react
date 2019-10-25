@@ -1,24 +1,14 @@
 import React from "react";
 import "../App.scss";
-import { skillsList, toolsList } from "../Content.js";
+import { skillsList } from "../Content";
 
 function Skills() {
   return (
-    <div className="skills-container">
+    <div id="skills">
       <h2>{skillsList.title}</h2>
       <div className="i-container">
         {skillsList.items.map(item => (
           <span>{item}</span>
-        ))}
-      </div>
-      <h2>{toolsList.title}</h2>
-      <div className="tools-items-container">
-        {toolsList.items.map(item => (
-          <div className="i-container">
-            {item.map(i => (
-              <span>{i}</span>
-            ))}
-          </div>
         ))}
       </div>
     </div>

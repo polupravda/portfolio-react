@@ -1,6 +1,7 @@
 import React from "react";
 import "../App.scss";
 import NavItem from "./NavItem";
+import Linkedin from "./Linkedin";
 
 function NavBar() {
   return (
@@ -8,6 +9,7 @@ function NavBar() {
       <NavItem name="Home" url="/" />
       <NavItem name="About" url="/about" />
       <NavItem name="Contact" url="/contact" />
+      <Linkedin />
     </div>
   );
 }

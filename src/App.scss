@@ -32,18 +32,6 @@ body {
   }
 }
 
-// General
-
-.column {
-  display: flex;
-  flex-direction: column;
-}
-
-.row {
-  display: flex;
-  flex-direction: row;
-}
-
 // Styles
 .App {
   text-align: center;
@@ -73,12 +61,14 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
+  overflow-x: hidden;
   @include bodyFontSize;
 }
 
 h2 {
-  font-size: 23px;
+  font-size: 28px;
   font-weight: 700;
+  text-transform: uppercase;
   font-family: $font-primary;
 
   @include mobile {
@@ -103,38 +93,118 @@ h2 {
   background-repeat: no-repeat;
   background-size: contain;
   background-attachment: fixed;
-  z-index: 6;
 }
 
-#intro {
-  display: flex;
-
-  text-align: left;
-
+.scene {
+  height: 100vh;
+  display: grid;
+  z-index: 1;
 }
 
-#logo {
-  font-family: $font-primary;
-  font-weight: 700;
-  font-size: 50px;
-  color: $app-white;
-  line-height: 0;
-  text-align: left;
+#scene-1 {
+  grid-template-rows: 1fr max-content max-content 2fr;
+  grid-template-columns: 1fr 1fr 3fr 1fr;
+  grid-gap: 2vh;
+  align-items: start;
+  grid-template-areas: '. . . .'
+    '. logo logo .'
+    'fox fox introduction-text .'
+    'fox fox . .';
+  margin-bottom: 50vh;
+  margin-top: 10px;
 
-  .logo-initial {
-    font-size: 80px;
-    color: $app-black;
+  #profession {
+    font-family: $font-secondary;
+    font-size: 3.5vw;
+    line-height: 0.7;
+    text-transform: uppercase;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  #logo {
+    position: relative;
+    grid-area: logo;
+
+    path {
+      fill: $app-black;
+
+      &:hover {
+        fill: $app-yellow;
+      }
+    }
+  }
+
+  #myIntro {
+    grid-area: introduction-text;
+  }
+
+  #fox-anim {
+    justify-self: start;
+  }
+
+  #fox-anim-box {
+    grid-area: fox;
   }
 }
 
-.text-vertical {
-  writing-mode: vertical-rl;
-  font-size: 20px;
-  line-height: 0;
+#scene-2 {
+  grid-template-rows: 1fr max-content max-content 2fr;
+  grid-template-columns: 1fr 1fr 3fr 1fr;
+  grid-gap: 2vh;
+  align-items: start;
+  grid-template-areas: '. . . .'
+    '. skills tools .'
+    '. . ninja ninja'
+    '. . . .';
+
+  #skills {
+    grid-area: skills;
+  }
+
+  #tools {
+    grid-area: tools;
+  }
+
+  #ninja-anim-box {
+    grid-area: ninja;
+  }
+
+  .ninja-initial {
+    position: fixed;
+    bottom: 1vw;
+    right: -40vw;
+  }
+
+  .ninja-appear {
+    position: fixed;
+    bottom: 1vw;
+    right: -40vw;
+    animation: ninjaApper 1s ease-out forwards;
+  }
+
+  .ninja-hide {
+    position: fixed;
+    bottom: 1vw;
+    right: -40vw;
+    animation: ninjaHide 1s ease-out forwards;
+  }
+}
+
+.skills-pinned {
+  position: fixed;
+  top: 0;
+}
+
+.skills-initial {
+  position: relative;
 }
 
 .navbar-items-container {
   display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .navbar-items {
@@ -142,7 +212,8 @@ h2 {
   color: $app-white;
   font-size: 18px;
   text-decoration: none;
-  margin: 0 10px;
+  text-transform: uppercase;
+  margin: 0.5vh 0;
 
   &:hover {
     .underline-path {
@@ -155,8 +226,7 @@ h2 {
   height: 10px;
   margin: 0 auto;
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-150%);
   width: 60px;
   z-index: -1;
 }
@@ -169,7 +239,8 @@ h2 {
   stroke: $app-yellow;
 }
 
-.skills-container {
+#skills,
+#tools {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -255,17 +326,23 @@ h2 {
   }
 }
 
-.App-link {
-  color: #09d3ac;
-}
-
-#navabar-container {
+#navbar-container {
   position: fixed;
-  width: 100%;
-  top: 0;
+  z-index: 1000;
+  top: 5vh;
+  right: 3vw;
   display: flex;
   align-items: center;
   justify-content: flex-end;
+
+  #linkedin {
+    fill: $app-yellow;
+    margin: 5vh 0;
+
+    &:hover {
+      fill: $app-black;
+    }
+  }
 }
 
 // Ufo
@@ -276,7 +353,6 @@ h2 {
   transform: rotate(15deg);
   bottom: 10vh;
   right: 0;
-  z-index: 5;
 
   @include mobile {
     bottom: -5vh;
@@ -317,8 +393,8 @@ h2 {
 // Fox
 
 #fox {
-  height: 40vh;
-  width: 60vh;
+  height: 25vw;
+  width: 37vw;
   background: url("/assets/images/fox.png") no-repeat 0 0%;
   background-size: 1000%;
   animation: sprite 3.5s steps(9) infinite;
@@ -332,7 +408,6 @@ h2 {
   position: absolute;
   top: 8vh;
   left: 2vw;
-  z-index: 5;
 
   @include mobile {
     top: 2vh;
@@ -384,7 +459,6 @@ h2 {
   position: relative;
   height: 55vh;
   width: 45vh;
-  z-index: 5;
   transform-origin: left;
   animation: wave 1s infinite ease-in-out alternate;
 
@@ -441,12 +515,11 @@ h2 {
 
 // Ninja
 
-#ninja-container {
+#ninja {
   display: inline-block;
   position: relative;
   height: 50vh;
   width: 45vh;
-  z-index: 5;
 
   img {
     position: absolute;
@@ -742,6 +815,50 @@ h2 {
   overflow-x: hidden;
 }
 
+// Animated Classes
+
+.hidden {
+  visibility: hidden;
+}
+
+.intro-anim {
+  animation: introAnim 1s ease-out;
+
+  #fox-anim-box {
+    animation: yAxis 800ms ease-out forwards;
+  }
+
+  .fox-pinned {
+    position: fixed;
+    bottom: 10vh;
+
+    #fox-anim {
+      animation: xAxis 800ms ease-in forwards;
+    }
+  }
+
+  .fox-unpinned {
+    position: fixed;
+    bottom: 10vh;
+
+    #fox-anim {
+
+      animation: foxUnpin 1s ease-in forwards;
+      transform: scale(2);
+    }
+  }
+}
+
+@keyframes introAnim {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
 // Animations
 
 @keyframes buttonRotation {
@@ -901,5 +1018,59 @@ h2 {
 
   100% {
     transform: scaleY(1);
+  }
+}
+
+@keyframes xAxis {
+  0% {
+    animation-timing-function: ease-in;
+    transform: translateX(-20vw);
+  }
+
+  100% {
+    animation-timing-function: ease-in;
+    transform: translateX(0);
+  }
+}
+
+@keyframes yAxis {
+  0% {
+    animation-timing-function: ease-out;
+    transform: translateY(-20vw);
+  }
+
+  100% {
+    animation-timing-function: ease-out;
+    transform: translateY(0);
+  }
+}
+
+@keyframes foxUnpin {
+  0% {
+    transform: translateX(0) scale(1);
+  }
+
+  100% {
+    transform: translateX(100vw) scale(0);
+  }
+}
+
+@keyframes ninjaApper {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-60vw);
+  }
+}
+
+@keyframes ninjaHide {
+  0% {
+    transform: translateX(-60vw);
+  }
+
+  100% {
+    transform: translateX(0);
   }
 }

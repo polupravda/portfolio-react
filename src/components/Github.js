@@ -12,6 +12,11 @@ class Github extends React.Component {
       [event.target.name]: event.target.value
     });
   };
+  async componentDidMount() {
+    const response = await fetch("https://thecatapi.com/v1/images/search");
+    const myJson = await response.json();
+    console.log(myJson);
+  }
   render() {
     return (
       <>

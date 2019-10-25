@@ -4,7 +4,7 @@ import { history } from "../Content.js";
 
 function History() {
   return (
-    <div className="history-container">
+    <div id="history">
       <h2>{history.historyHeading}</h2>
       <div className="i-container">
         <span>{history.historyP1}</span>
