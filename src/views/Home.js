@@ -1,5 +1,6 @@
 import React from "react";
 import "../App.scss";
+import { Controller, Scene } from 'react-scrollmagic';
 
 import Skills from "../components/Skills";
 import Tools from "../components/Tools";
@@ -24,7 +25,6 @@ class Home extends React.Component {
       introAnim: "hidden",
       foxPinned: "fox-pinned",
       ninjaAppear: "ninja-initial",
-      skillsAnim: ""
     };
   }
 
@@ -48,13 +48,10 @@ class Home extends React.Component {
     // Animate scenes
     const triggerElement1 = document.getElementById("myIntro");
     const triggerElement2 = document.getElementById("scene-2");
-    const triggerElement3 = document.getElementById("scene-3");
 
     const checkTriggerElements = () => {
       // distance from bottom/to top when the animation is supposed to start/end
       const triggerMargin = window.innerHeight / 5;
-      // trigger element is 20 vh in viewport
-      const triggerInAt = window.scrollY + window.innerHeight - triggerMargin;
 
       // bottom of the triggerElement1
       const triggerBottom1 =
@@ -65,13 +62,8 @@ class Home extends React.Component {
       // bottom of the triggerElement2
       const triggerBottom2 =
         triggerElement2.offsetTop + triggerElement2.clientHeight;
-      const trigger2IsShownEnough = triggerInAt > triggerElement2.offsetTop;
-      const trigger2IsHiddenEnough =
-        window.scrollY + triggerMargin <= triggerBottom2;
-      const trigger2IsPassed = window.scrollY + triggerMargin > triggerBottom2;
 
       const triggerTop2 = triggerElement2.offsetTop;
-      const triggerTop3 = triggerElement3.offsetTop;
 
       if (trigger1IsHiddenEnough) {
         this.setState({ foxPinned: "fox-unpinned" });
@@ -79,34 +71,19 @@ class Home extends React.Component {
         this.setState({ foxPinned: "fox-pinned" });
       }
 
-      // when scene-2 reaches top of the screen, it gets pinned. 
-      // Ninja of .pinned class gets its animation.
-      // the top of the next scene triggers unpinning
-      if(window.scrollY >= triggerTop2 && window.scrollY <= triggerTop3) {
-        this.setState({ skillsAnim: "skills-pinned" });
-      }
+      const trigger2NotAppearedYet = window.scrollY < triggerTop2;
+      const trigger2Appeared = window.scrollY >= triggerTop2;
+      const trigger2NotDisappearedYet = window.scrollY <= triggerBottom2;
 
-      // // animate ninja based on skills container as a trigger
-      // if (trigger2IsShownEnough && trigger2IsHiddenEnough) {
-      //   this.setState({ ninjaAppear: "ninja-appear" });
-      // } else if (trigger2IsPassed) {
-      //   this.setState({ ninjaAppear: "ninja-hide" });
-      // } else {
-      //   this.setState({ ninjaAppear: "ninja-initial" });
-      // }
+      if(trigger2NotAppearedYet) {
+        this.setState({ ninjaAppear: "" });
+      } else if (trigger2Appeared && trigger2NotDisappearedYet) {
+        this.setState({ ninjaAppear: "ninja-appear" });
+      } else {
+        this.setState({ ninjaAppear: "ninja-hide" });
+      } 
 
-      // // pin skills and tools containers
-      // if(window.scrollY >= triggerTop2 && window.scrollY < triggerTop3) {
-      //   this.setState({ skillsAnim: "skills-pinned" })
-      // }
-
-      console.log(
-        "appear: ",
-        trigger2IsShownEnough,
-        trigger2IsHiddenEnough,
-        "hide: ",
-        trigger2IsPassed
-      );
+      console.log(triggerElement2.offsetTop, "window.scrollY: ", window.scrollY, "triggerElement1.offsetTop: ", triggerElement1.offsetTop, "trigger2NotAppearedYet: ", trigger2NotAppearedYet, "trigger2Appeared: ", trigger2Appeared, "trigger2NotDisappearedYet: ", trigger2NotDisappearedYet);
     };
 
     window.addEventListener("scroll", debounce(checkTriggerElements));
@@ -132,20 +109,27 @@ class Home extends React.Component {
               <Fox />
             </div>
           </div>
-          <div className={"scene " + this.state.skillsAnim} id="scene-2">
+          <Controller>
+          <Scene duration={800} pin={true} triggerHook={0}>
+          <div className="scene" id="scene-2">
             <Skills />
             <Tools />
             <div className={this.state.ninjaAppear} id="ninja-anim-box">
               <Ninja />
             </div>
           </div>
-          <div className={"scene " + this.state.historyAnim} id="scene-3">
+          </Scene>
+          <Scene duration={800} pin={true} triggerHook={0}>
+          <div className="scene" id="scene-3">
             <History />
             <Bear />
           </div>
+          </Scene>
+          <div className="scene" id="scene-3">
           <ProfHighlights content={profHighlights.y2018} />
           <ApMDemo />
           <ApDDemo />
+          </div>
           <ProfHighlights content={profHighlights.y2017} />
           <ProfHighlights content={profHighlights.y2016} />
           <ProfHighlights content={profHighlights.y2015} />
@@ -153,6 +137,7 @@ class Home extends React.Component {
           <ButtonPrimary buttonText="Learn more" />
           <ButtonSecondary buttonText="More info" />
           {/* <Github /> */}
+          </Controller>
         </section>
       </>
     );

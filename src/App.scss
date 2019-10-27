@@ -33,6 +33,10 @@ body {
 }
 
 // Styles
+.test {
+  background: red;
+}
+
 .App {
   text-align: center;
   font-family: $font-primary;
@@ -158,6 +162,7 @@ h2 {
     '. skills tools .'
     '. . ninja ninja'
     '. . . .';
+  padding-bottom: 100vh;
 
   #skills {
     grid-area: skills;
@@ -197,8 +202,8 @@ h2 {
   top: 0;
 }
 
-.skills-initial {
-  position: relative;
+.skills-unpinned {
+  position: static;
 }
 
 .navbar-items-container {
