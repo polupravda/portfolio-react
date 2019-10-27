@@ -24,7 +24,7 @@ class Home extends React.Component {
     this.state = {
       introAnim: "hidden",
       foxPinned: "fox-pinned",
-      ninjaAppear: "ninja-initial",
+      ninjaHidden: "hidden",
     };
   }
 
@@ -59,31 +59,28 @@ class Home extends React.Component {
       const trigger1IsHiddenEnough =
         window.scrollY > triggerBottom1 - triggerMargin;
 
-      // bottom of the triggerElement2
-      const triggerBottom2 =
-        triggerElement2.offsetTop + triggerElement2.clientHeight;
-
-      const triggerTop2 = triggerElement2.offsetTop;
-
       if (trigger1IsHiddenEnough) {
         this.setState({ foxPinned: "fox-unpinned" });
       } else {
         this.setState({ foxPinned: "fox-pinned" });
       }
 
-      const trigger2NotAppearedYet = window.scrollY < triggerTop2;
-      const trigger2Appeared = window.scrollY >= triggerTop2;
-      const trigger2NotDisappearedYet = window.scrollY <= triggerBottom2;
+      const animHiddenBeforeThisAppears = document.getElementById("skills");
+      const beforeAnimationArea = animHiddenBeforeThisAppears.getBoundingClientRect().top;
 
-      if(trigger2NotAppearedYet) {
-        this.setState({ ninjaAppear: "" });
-      } else if (trigger2Appeared && trigger2NotDisappearedYet) {
-        this.setState({ ninjaAppear: "ninja-appear" });
-      } else {
-        this.setState({ ninjaAppear: "ninja-hide" });
-      } 
+      if(beforeAnimationArea <= triggerMargin) {
+        this.setState({ ninjaHidden: "" });
+      }
 
-      console.log(triggerElement2.offsetTop, "window.scrollY: ", window.scrollY, "triggerElement1.offsetTop: ", triggerElement1.offsetTop, "trigger2NotAppearedYet: ", trigger2NotAppearedYet, "trigger2Appeared: ", trigger2Appeared, "trigger2NotDisappearedYet: ", trigger2NotDisappearedYet);
+      // if(trigger2NotAppearedYet) {
+      //   this.setState({ ninjaAppear: "" });
+      // } else if (trigger2Appeared && trigger2NotDisappearedYet) {
+      //   this.setState({ ninjaAppear: "ninja-appear" });
+      // } else {
+      //   this.setState({ ninjaAppear: "ninja-hide" });
+      // } 
+
+      console.log(beforeAnimationArea);
     };
 
     window.addEventListener("scroll", debounce(checkTriggerElements));
@@ -110,11 +107,11 @@ class Home extends React.Component {
             </div>
           </div>
           <Controller>
-          <Scene duration={800} pin={true} triggerHook={0}>
+          <Scene duration={800} pin={true} triggerHook={0} classToggle="parent-ninja">
           <div className="scene" id="scene-2">
             <Skills />
             <Tools />
-            <div className={this.state.ninjaAppear} id="ninja-anim-box">
+            <div className={this.state.ninjaHidden} id="ninja-anim-box">
               <Ninja />
             </div>
           </div>

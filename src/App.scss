@@ -172,28 +172,41 @@ h2 {
     grid-area: tools;
   }
 
-  #ninja-anim-box {
-    grid-area: ninja;
-  }
+  // .ninja-initial {
+  //   position: fixed;
+  //   bottom: 1vw;
+  //   right: -40vw;
+  // }
 
-  .ninja-initial {
-    position: fixed;
+  // .ninja-appear {
+  //   position: fixed;
+  //   bottom: 1vw;
+  //   right: -40vw;
+  //   animation: ninjaApper 1s ease-out forwards;
+  // }
+
+  // .ninja-hide {
+  //   position: fixed;
+  //   bottom: 1vw;
+  //   right: -40vw;
+  //   animation: ninjaHide 1s ease-out forwards;
+  // }
+}
+
+#ninja-anim-box {
+  grid-area: ninja;
+      position: fixed;
     bottom: 1vw;
     right: -40vw;
-  }
+    animation: ninjaHide 1s ease-out forwards;
+}
 
-  .ninja-appear {
+.parent-ninja {
+  #ninja-anim-box {
     position: fixed;
     bottom: 1vw;
     right: -40vw;
     animation: ninjaApper 1s ease-out forwards;
-  }
-
-  .ninja-hide {
-    position: fixed;
-    bottom: 1vw;
-    right: -40vw;
-    animation: ninjaHide 1s ease-out forwards;
   }
 }
 
