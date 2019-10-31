@@ -7,8 +7,8 @@ function History() {
     <div id="history">
       <h2>{history.historyHeading}</h2>
       <div className="i-container">
-        <span>{history.historyP1}</span>
-        <span>{history.historyP2}</span>
+        <p>{history.historyP1}</p>
+        <p>{history.historyP2}</p>
       </div>
     </div>
   );

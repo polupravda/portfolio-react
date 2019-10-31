@@ -1,6 +1,6 @@
 import React from "react";
 import "../App.scss";
-import { Controller, Scene } from 'react-scrollmagic';
+import { Controller, Scene } from "react-scrollmagic";
 
 import Skills from "../components/Skills";
 import Tools from "../components/Tools";
@@ -13,6 +13,7 @@ import NavBar from "../components/NavBar";
 import Bear from "../components/Bear";
 import Ninja from "../components/Ninja";
 import History from "../components/History";
+import Octopus from "../components/Octopus";
 import ApMDemo from "../components/ApMDemo";
 import ApDDemo from "../components/ApDDemo";
 import ProfHighlights from "../components/ProfHighlights";
@@ -24,7 +25,9 @@ class Home extends React.Component {
     this.state = {
       introAnim: "hidden",
       foxPinned: "fox-pinned",
-      ninjaHidden: "hidden",
+      ninja: "hidden",
+      octopusAnim: "hidden",
+      octopusLifeAnim: ""
     };
   }
 
@@ -47,7 +50,6 @@ class Home extends React.Component {
 
     // Animate scenes
     const triggerElement1 = document.getElementById("myIntro");
-    const triggerElement2 = document.getElementById("scene-2");
 
     const checkTriggerElements = () => {
       // distance from bottom/to top when the animation is supposed to start/end
@@ -65,22 +67,42 @@ class Home extends React.Component {
         this.setState({ foxPinned: "fox-pinned" });
       }
 
-      const animHiddenBeforeThisAppears = document.getElementById("skills");
-      const beforeAnimationArea = animHiddenBeforeThisAppears.getBoundingClientRect().top;
+      // animated element loses .hidden once its sibling is in viewport
+      const ninjaTrigger = document.getElementById("skills");
+      const ninjaBeforeAnimationArea = ninjaTrigger.getBoundingClientRect().top;
 
-      if(beforeAnimationArea <= triggerMargin) {
-        this.setState({ ninjaHidden: "" });
+      if (
+        ninjaBeforeAnimationArea <= triggerMargin * 4 &&
+        ninjaBeforeAnimationArea >= 0
+      ) {
+        this.setState({ ninja: "ninja-appear" });
+      } else if (ninjaBeforeAnimationArea < 0) {
+        this.setState({ ninja: "ninja-hide" });
+      } else {
+        this.setState({ ninja: "hidden" });
       }
 
-      // if(trigger2NotAppearedYet) {
-      //   this.setState({ ninjaAppear: "" });
-      // } else if (trigger2Appeared && trigger2NotDisappearedYet) {
-      //   this.setState({ ninjaAppear: "ninja-appear" });
-      // } else {
-      //   this.setState({ ninjaAppear: "ninja-hide" });
-      // } 
+      // animation scene-3
+      // animated element loses .hidden once its sibling is in viewport
+      const octopusTrigger = document.getElementById("history");
+      const octopusBeforeAnimationArea = octopusTrigger.getBoundingClientRect()
+        .top;
 
-      console.log(beforeAnimationArea);
+      if (
+        octopusBeforeAnimationArea <= triggerMargin * 4 &&
+        octopusBeforeAnimationArea >= 0
+      ) {
+        this.setState({ octopusAnim: "octopus-fall" });
+        this.setState({ octopusLifeAnim: "octopus-birth-anim" });
+      } else if (octopusBeforeAnimationArea < 0) {
+        this.setState({ octopusAnim: "octopus-hide" });
+        this.setState({ octopusLifeAnim: "octopus-fly-away-anim" });
+      } else {
+        this.setState({ octopusAnim: "hidden" });
+        this.setState({ octopusLifeAnim: "hidden" });
+      }
+
+      console.log("jaja");
     };
 
     window.addEventListener("scroll", debounce(checkTriggerElements));
@@ -107,33 +129,59 @@ class Home extends React.Component {
             </div>
           </div>
           <Controller>
-          <Scene duration={800} pin={true} triggerHook={0} classToggle="parent-ninja">
-          <div className="scene" id="scene-2">
-            <Skills />
-            <Tools />
-            <div className={this.state.ninjaHidden} id="ninja-anim-box">
-              <Ninja />
-            </div>
-          </div>
-          </Scene>
-          <Scene duration={800} pin={true} triggerHook={0}>
-          <div className="scene" id="scene-3">
-            <History />
-            <Bear />
-          </div>
-          </Scene>
-          <div className="scene" id="scene-3">
-          <ProfHighlights content={profHighlights.y2018} />
-          <ApMDemo />
-          <ApDDemo />
-          </div>
-          <ProfHighlights content={profHighlights.y2017} />
-          <ProfHighlights content={profHighlights.y2016} />
-          <ProfHighlights content={profHighlights.y2015} />
-          <ProfHighlights content={profHighlights.y2014} />
-          <ButtonPrimary buttonText="Learn more" />
-          <ButtonSecondary buttonText="More info" />
-          {/* <Github /> */}
+            <Scene
+              duration={800}
+              pin={true}
+              triggerHook={0}
+              classToggle="parent-ninja"
+            >
+              <div className="scene" id="scene-2">
+                <Skills />
+                <Tools />
+                <div className={this.state.ninja} id="ninja-anim-box">
+                  <Ninja />
+                </div>
+              </div>
+            </Scene>
+            <Scene duration={800} pin={true} triggerHook={0}>
+              <div className="scene" id="scene-3">
+                <History />
+                <div className={this.state.octopusAnim} id="octopus-anim-box">
+                  <Octopus octopusLifeAnim={this.state.octopusLifeAnim} />
+                </div>
+              </div>
+            </Scene>
+            <Scene duration={800} pin={true} triggerHook={0}>
+              <div className="scene" id="scene-3">
+                <ProfHighlights content={profHighlights.y2018} />
+                <ApMDemo />
+                <ApDDemo />
+              </div>
+            </Scene>
+            <Scene duration={800} pin={true} triggerHook={0}>
+              <div className="scene" id="scene-4">
+                <ProfHighlights content={profHighlights.y2017} />
+              </div>
+            </Scene>
+            <Scene duration={800} pin={true} triggerHook={0}>
+              <div className="scene" id="scene-5">
+                <ProfHighlights content={profHighlights.y2016} />
+                <Bear />
+              </div>
+            </Scene>
+            <Scene duration={800} pin={true} triggerHook={0}>
+              <div className="scene" id="scene-6">
+                <ProfHighlights content={profHighlights.y2015} />
+              </div>
+            </Scene>
+            <Scene duration={800} pin={true} triggerHook={0}>
+              <div className="scene" id="scene-7">
+                <ProfHighlights content={profHighlights.y2014} />
+                <ButtonPrimary buttonText="Learn more" />
+                <ButtonSecondary buttonText="More info" />
+              </div>
+            </Scene>
+            {/* <Github /> */}
           </Controller>
         </section>
       </>

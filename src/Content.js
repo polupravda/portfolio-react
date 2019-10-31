@@ -36,7 +36,7 @@ export const history = {
   historyP1:
     "I started my career in tech in 2011 as a Web Designer. On my way I have worked mostly in product companies, but also have entrepreneurial experience  and shortly worked as a freelancer.",
   historyP2:
-    "Today I am fully engaged in web development. However, I never miss a chance to get my hands dirty creating an exellent look for my creations."
+    "Today I am fully engaged in web development. However, I am still extremely excited when it comes to degital design and animation."
 };
 
 export const profHighlights = {
