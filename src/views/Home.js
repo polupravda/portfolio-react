@@ -15,7 +15,9 @@ import Ninja from "../components/Ninja";
 import History from "../components/History";
 import Octopus from "../components/Octopus";
 import ApMDemo from "../components/ApMDemo";
-import ApDDemo from "../components/ApDDemo";
+// import ApDDemo from "../components/ApDDemo";
+import OldDesktop from "../components/OldDesktop";
+import AppleDesktop from "../components/AppleDesktop";
 import ProfHighlights from "../components/ProfHighlights";
 import { profHighlights } from "../Content";
 
@@ -152,30 +154,32 @@ class Home extends React.Component {
               </div>
             </Scene>
             <Scene duration={800} pin={true} triggerHook={0}>
-              <div className="scene" id="scene-3">
+              <div className="scene" id="scene-4">
                 <ProfHighlights content={profHighlights.y2018} />
                 <ApMDemo />
-                <ApDDemo />
-              </div>
-            </Scene>
-            <Scene duration={800} pin={true} triggerHook={0}>
-              <div className="scene" id="scene-4">
-                <ProfHighlights content={profHighlights.y2017} />
+                {/* <ApDDemo /> */}
+                <OldDesktop />
+                <AppleDesktop />
               </div>
             </Scene>
             <Scene duration={800} pin={true} triggerHook={0}>
               <div className="scene" id="scene-5">
+                <ProfHighlights content={profHighlights.y2017} />
+              </div>
+            </Scene>
+            <Scene duration={800} pin={true} triggerHook={0}>
+              <div className="scene" id="scene-6">
                 <ProfHighlights content={profHighlights.y2016} />
                 <Bear />
               </div>
             </Scene>
             <Scene duration={800} pin={true} triggerHook={0}>
-              <div className="scene" id="scene-6">
+              <div className="scene" id="scene-7">
                 <ProfHighlights content={profHighlights.y2015} />
               </div>
             </Scene>
             <Scene duration={800} pin={true} triggerHook={0}>
-              <div className="scene" id="scene-7">
+              <div className="scene" id="scene-8">
                 <ProfHighlights content={profHighlights.y2014} />
                 <ButtonPrimary buttonText="Learn more" />
                 <ButtonSecondary buttonText="More info" />

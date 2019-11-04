@@ -243,11 +243,15 @@ h2 {
 
   #octopus-anim {
     grid-area: octopus;
-    position: absolute;
   }
 
   #history {
     grid-area: history;
+    z-index: 3;
+  }
+
+  h2 {
+    color: $app-yellow;
   }
 }
 
@@ -319,6 +323,153 @@ h2 {
     line-height: 1;
     margin: 7px 0;
   }
+}
+
+#scene-4 {
+  grid-template-rows: 1fr 4fr 4fr 4fr 1fr;
+  grid-template-columns: 1fr 4fr 4fr 2fr 2fr 1fr;
+  grid-gap: 2vh;
+  align-items: start;
+  width: 100vw;
+  grid-template-areas:
+    '. . . mobileDemo mobileDemo .'
+    '. story2018 story2018 mobileDemo mobileDemo .'
+    '. story2018 story2018 . . .'
+    '. story2018 story2018 oldDesktop appleDesktop .'
+    '. . . oldDesktop appleDesktop .';
+  padding-bottom: 100vh;
+
+  .mobile-container-right {
+    margin-left: -7vw;
+  }
+
+  .desktop-container-right {
+    margin-left: -7vw;
+  }
+
+  #year {
+    grid-area: year;
+  }
+
+  .prof-highlights-container {
+    grid-area: story2018;
+  }
+
+  .ap-m-demo-container {
+    grid-area: mobileDemo;
+    position: absolute;
+
+    #pda-all,
+    #iphone-all {
+      transform-origin: top;
+      // transform: scale(0.5);
+
+      // &.demo-device-active {
+      //   animation: demoDeviceZoomIn 300ms ease-out forwards;
+      //   z-index: 2;
+      // }
+
+      // &.demo-device-inactive {
+      //   animation: demoDeviceZoomOut 300ms ease-out forwards;
+      // }
+    }
+  }
+
+  .demo-device-mobile-small {
+    transform: scale(0.5);
+
+    #ap-website-mobile-before {
+      width: 26vh;
+    }
+
+    #ap-website-mobile-after {
+      width: 25.3vh;
+    }
+  }
+
+  .demo-device-mobile-zooming-in {
+    animation: demoDeviceZoomIn 300ms ease-out forwards;
+    z-index: 2;
+
+    #ap-website-mobile-before {
+      width: 0;
+    }
+
+    #ap-website-mobile-after {
+      width: 0;
+    }
+  }
+
+  .demo-device-mobile-zooming-out {
+    animation: demoDeviceZoomOut 300ms ease-out forwards;
+    z-index: 2;
+
+    #ap-website-mobile-before {
+      width: 0;
+    }
+
+    #ap-website-mobile-after {
+      width: 0;
+    }
+  }
+
+  .demo-device-mobile-big {
+    transform: scale(1);
+
+    #ap-website-mobile-before {
+      width: 26vh;
+    }
+
+    #ap-website-mobile-after {
+      width: 25.3vh;
+    }
+  }
+
+  #old-desktop-container {
+    grid-area: oldDesktop;
+  }
+
+  #apple-desktop-container {
+    grid-area: appleDesktop;
+  }
+
+  #old-desktop-container,
+  #apple-desktop-container {
+    position: absolute;
+    transform-origin: bottom right;
+    bottom: 1vh;
+    transform: scale(0.3);
+  }
+
+  // .ap-d-demo-container {
+  //   grid-area: desktopDemo;
+  //   height: 50vh;
+  //   position: absolute;
+  //   bottom: 0;
+
+  //   #apple-desktop-all {
+  //     width: 100%;
+  //   }
+
+  //   #old-desktop-all {
+  //     width: 100%;
+  //   }
+
+  //   #apple-desktop-all,
+  //   #old-desktop-all {
+  //     position: absolute;
+  //     transform: scale(0.5);
+
+  //     &.demo-device-active {
+  //       animation: demoDeviceZoomIn 300ms ease-out forwards;
+  //       z-index: 2;
+  //     }
+
+  //     &.demo-device-inactive {
+  //       animation: demoDeviceZoomOut 300ms ease-out forwards;
+  //     }
+  //   }
+  // }
 }
 
 .button-primary-container {
@@ -603,19 +754,19 @@ h2 {
 
   #egg-top {
     transform-origin: 4vw 22vw;
-    animation: eggTop 500ms ease-in 1000ms forwards;
+    animation: eggTop 500ms ease-in 500ms forwards;
   }
 
   #egg-bottom {
     transform-origin: -20vw 30vw;
-    animation: eggBottom 500ms ease-in 1300ms forwards;
+    animation: eggBottom 500ms ease-in 800ms forwards;
   }
 }
 
 .octopus-hide {
   position: fixed;
   bottom: 0;
-  animation: octopusHide 500ms linear forwards;
+  animation: octopusHide 1000ms linear forwards;
 
   #egg-top {
     visibility: hidden;
@@ -640,12 +791,12 @@ h2 {
 }
 
 #octopus-float-y-anim {
-    animation: yAxisOct 2.5s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64);
+  animation: yAxisOct 2.5s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64);
 }
 
 .octopus-birth-anim {
   transform: scale(0);
-  animation: octopusBirth 1000ms ease-out 1000ms forwards;
+  animation: octopusBirth 1000ms ease-out 600ms forwards;
 }
 
 .octopus-fly-away-anim {
@@ -792,10 +943,6 @@ h2 {
 
 // Pda
 
-.device-container-right {
-  margin-left: 5vh;
-}
-
 #pda-container {
   display: inline-block;
   position: relative;
@@ -878,15 +1025,12 @@ h2 {
 
 // Old Desktop
 
-.device-container-right {
-  margin-left: 5vh;
-}
-
 #old-desktop-container {
   display: inline-block;
   position: relative;
-  height: 80vh;
-  width: 77.5vh;
+  height: 48.5vw;
+  width: 47vw;
+  right: 14vw;
   z-index: 5;
 
   img {
@@ -900,7 +1044,7 @@ h2 {
 }
 
 .ap-before-d {
-  width: 63.5vh;
+  width: 39vw;
   overflow: auto;
 }
 
@@ -909,8 +1053,8 @@ h2 {
 }
 
 .ap-before-d-canvas {
-  width: 63.5vh;
-  height: 48vh;
+  width: 39.5vw;
+  height: 29.2vw;
   left: 9%;
   top: 9%;
   position: absolute;
@@ -920,10 +1064,10 @@ h2 {
     box-shadow: inset 0 0 8px rgba(0, 0, 0, .6);
     content: '';
     display: block;
-    height: 48vh;
+    height: 47vw;
     position: sticky;
     top: 0;
-    width: 63.5vh;
+    width: 39vw;
   }
 }
 
@@ -932,8 +1076,9 @@ h2 {
 #apple-desktop-container {
   display: inline-block;
   position: relative;
-  height: 60vh;
-  width: 81vh;
+  height: 48.5vw;
+  width: 65.5vw;
+  right: 0;
   z-index: 5;
 
   img {
@@ -953,14 +1098,14 @@ h2 {
 }
 
 .ap-after-d {
-  width: 78.5vh;
+  width: 63.8vw;
   overflow: auto;
 }
 
 .ap-after-d-canvas {
-  width: 78.5vh;
-  height: 44.2vh;
-  left: 1.4%;
+  width: 64.5vw;
+  height: 35.8vw;
+  left: 1%;
   top: 1.7%;
   position: absolute;
   overflow-x: hidden;
@@ -1208,20 +1353,32 @@ h2 {
 @keyframes ninjaApper {
   0% {
     transform: translateX(0);
+    opacity: 0;
+  }
+
+  1% {
+    opacity: 1;
   }
 
   100% {
     transform: translateX(-60vw);
+    opacity: 1;
   }
 }
 
 @keyframes ninjaHide {
   0% {
     transform: translateX(-60vw);
+    opacity: 1;
+  }
+
+  99% {
+    opacity: 0;
   }
 
   100% {
     transform: translateX(0);
+    opacity: 0;
   }
 }
 
@@ -1232,26 +1389,28 @@ h2 {
 
   72%,
   78% {
-    bottom: 3vw;
+    bottom: -6vh;
   }
 
   85% {
-    bottom: 3.2vw;
+    bottom: -4vh;
   }
 
   100% {
-    bottom: 3vw;
+    bottom: -6vh;
   }
 }
 
 @keyframes eggTop {
   0% {
-    transform:  rotate(0deg);
+    transform: rotate(0deg);
     opacity: 1;
   }
+
   99% {
     opacity: 1;
   }
+
   100% {
     transform: rotate(-90deg);
     opacity: 0;
@@ -1260,12 +1419,14 @@ h2 {
 
 @keyframes eggBottom {
   0% {
-    transform:  rotate(0deg);
+    transform: rotate(0deg);
     opacity: 1;
   }
+
   95% {
     opacity: 1;
   }
+
   100% {
     transform: rotate(90deg);
     opacity: 0;
@@ -1276,6 +1437,11 @@ h2 {
   0% {
     opacity: 1;
   }
+
+  99% {
+    opacity: 1;
+  }
+
   100% {
     opacity: 0;
   }
@@ -1285,6 +1451,7 @@ h2 {
   0% {
     transform: rotate(-30deg);
   }
+
   100% {
     transform: rotate(15deg);
   }
@@ -1294,6 +1461,7 @@ h2 {
   0% {
     transform: rotate(30deg);
   }
+
   100% {
     transform: rotate(-15deg);
   }
@@ -1317,7 +1485,28 @@ h2 {
   0% {
     transform: scale(0);
   }
+
   100% {
     transform: scale(1);
+  }
+}
+
+@keyframes demoDeviceZoomIn {
+  0% {
+    transform: scale(0.5);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes demoDeviceZoomOut {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0.5);
   }
 }

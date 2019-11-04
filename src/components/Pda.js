@@ -8,7 +8,8 @@ function Pda() {
       <div className="screen-canvas ap-before-canvas">
         <img
           src="/assets/images/AP-before-m.png"
-          alt=""
+          alt="androidpit web site mobile version before rebranding"
+          id="ap-website-mobile-before"
           className="ap-before"
         />
       </div>

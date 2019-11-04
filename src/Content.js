@@ -32,18 +32,18 @@ export const toolsList = {
 };
 
 export const history = {
-  historyHeading: "A bit of history.",
+  historyHeading: "A bit of history...",
   historyP1:
     "I started my career in tech in 2011 as a Web Designer. On my way I have worked mostly in product companies, but also have entrepreneurial experience  and shortly worked as a freelancer.",
   historyP2:
-    "Today I am fully engaged in web development. However, I am still extremely excited when it comes to degital design and animation."
+    "Today I am fully engaged in web development. However, I am still extremely excited when it comes to digital design and animation."
 };
 
 export const profHighlights = {
   y2018: {
     year: "2018",
     highlightParagraphs: [
-      "My team and I performed rebranding of Androidpit - one of the biggest Tech News Portals in Germany, redesigned the web portal and rebuilt certain parts of it. The brand got a fresh look, the potal inteface got friendlier user interface. The navigation of the portal was reconsidered in order to support a better optimisation for search engines, as well as its architecture and technology stack changed.",
+      "My team and I performed rebranding of Androidpit - one of the biggest Tech News Portals in Germany, redesigned the web portal and rebuilt certain parts of it. The brand got a fresh look, the potal inteface got a friendlier user interface. The navigation of the portal was reconsidered in order to support a better optimisation for search engines, as well as its architecture and technology stack changed.",
       "I held multiple talks and workshops dedicated to design and front-end, 2 of them in international conferences: PyCon.DE ’18 and PyConPl ’18."
     ]
   },
