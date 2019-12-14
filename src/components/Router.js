@@ -1,28 +1,33 @@
 import React from "react";
+import "../App.scss";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from "../views/Home";
 import Works from "../views/Works";
 import Contact from "../views/Contact";
 import NotFound from "../views/NotFound";
 import Background from "./Background";
+import NavBar from "../components/NavBar";
 
 const Router = () => (
   <Background>
     <BrowserRouter>
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route path="/works">
-          <Works />
-        </Route>
-        <Route path="/contact">
-          <Contact />
-        </Route>
-        <Route>
-          <NotFound />
-        </Route>
-      </Switch>
+      <NavBar />
+      <section id="main">
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/works">
+            <Works />
+          </Route>
+          <Route path="/contact">
+            <Contact />
+          </Route>
+          <Route>
+            <NotFound />
+          </Route>
+        </Switch>
+      </section>
     </BrowserRouter>
   </Background>
 );

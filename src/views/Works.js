@@ -1,8 +1,11 @@
 import React from "react";
 import "../App.scss";
+import APit from "./APit";
 
 function Works() {
-  return <h1>Works</h1>;
+  return (
+    <APit/>
+  );
 }
 
 export default Works;

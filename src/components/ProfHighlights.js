@@ -1,10 +1,11 @@
 import React from "react";
 import "../App.scss";
+import Year from "./Year";
 
 function ProfHighlights({ content: { year, highlightParagraphs } }) {
   return (
-    <div className="prof-highlights-container">
-      <h3>{year}</h3>
+    <div className="prof-highlights-container" id={year}>
+      <Year year={year}/>
       <div className="i-container">
         <div>
           {highlightParagraphs.map(paragraph => {

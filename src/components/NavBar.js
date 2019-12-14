@@ -5,12 +5,16 @@ import Linkedin from "./Linkedin";
 
 function NavBar() {
   return (
-    <div class="navbar-items-container">
-      <NavItem name="Home" url="/" />
-      <NavItem name="About" url="/about" />
-      <NavItem name="Contact" url="/contact" />
-      <Linkedin />
-    </div>
+    <header className="App-header">
+      <div id="navbar-container">
+        <div class="navbar-items-container">
+          <NavItem name="Home" url="/" />
+          <NavItem name="Works" url="/works" />
+          <NavItem name="Contact" url="/contact" />
+          <Linkedin />
+        </div>
+      </div>
+    </header>
   );
 }
 

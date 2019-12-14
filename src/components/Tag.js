@@ -7,7 +7,7 @@ class Tag extends React.Component {
     return (
       <div class="tag-container">
         <ArrowFat />
-        <span class="tag-text">{this.props.tagText}</span>
+        <div class="tag-text">{this.props.tagText}</div>
       </div>
     );
   }

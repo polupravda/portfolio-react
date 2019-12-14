@@ -11,7 +11,7 @@ function AppleDesktop() {
       />
       <div className="screen-canvas ap-after-d-canvas">
         <img
-          src="/assets/images/AP-after-d.png"
+          src="/assets/images/ap-after-d.png"
           alt="androidpit web site destop version after rebranding"
           id="ap-website-desktop-after"
           className="ap-after-d"

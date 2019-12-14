@@ -7,18 +7,15 @@ import Tools from "../components/Tools";
 import ButtonPrimary from "../components/ButtonPrimary";
 import ButtonSecondary from "../components/ButtonSecondary";
 import Fox from "../components/Fox";
-// import Github from "../components/Github";
 import Intro from "../components/Intro";
-import NavBar from "../components/NavBar";
 import Bear from "../components/Bear";
 import Ninja from "../components/Ninja";
 import History from "../components/History";
 import Octopus from "../components/Octopus";
 import ApMDemo from "../components/ApMDemo";
-// import ApDDemo from "../components/ApDDemo";
-import OldDesktop from "../components/OldDesktop";
-import AppleDesktop from "../components/AppleDesktop";
 import ProfHighlights from "../components/ProfHighlights";
+import ObVideo from "../components/ObVideo";
+import APitTools from "../components/APitTools";
 import { profHighlights } from "../Content";
 
 class Home extends React.Component {
@@ -29,7 +26,9 @@ class Home extends React.Component {
       foxPinned: "fox-pinned",
       ninja: "hidden",
       octopusAnim: "hidden",
-      octopusLifeAnim: ""
+      octopusLifeAnim: "",
+      bear: "hidden",
+      ob: "hidden"
     };
   }
 
@@ -84,27 +83,55 @@ class Home extends React.Component {
         this.setState({ ninja: "hidden" });
       }
 
-      // animation scene-3
-      // animated element loses .hidden once its sibling is in viewport
-      const octopusTrigger = document.getElementById("history");
-      const octopusBeforeAnimationArea = octopusTrigger.getBoundingClientRect()
-        .top;
+        // animation scene-3
+        // animated element loses .hidden once its sibling is in viewport
+        const octopusTrigger = document.getElementById("history");
+        const octopusBeforeAnimationArea = octopusTrigger.getBoundingClientRect()
+            .top;
 
-      if (
-        octopusBeforeAnimationArea <= triggerMargin * 4 &&
-        octopusBeforeAnimationArea >= 0
-      ) {
-        this.setState({ octopusAnim: "octopus-fall" });
-        this.setState({ octopusLifeAnim: "octopus-birth-anim" });
-      } else if (octopusBeforeAnimationArea < 0) {
-        this.setState({ octopusAnim: "octopus-hide" });
-        this.setState({ octopusLifeAnim: "octopus-fly-away-anim" });
-      } else {
-        this.setState({ octopusAnim: "hidden" });
-        this.setState({ octopusLifeAnim: "hidden" });
-      }
+        if (
+            octopusBeforeAnimationArea <= triggerMargin * 4 &&
+            octopusBeforeAnimationArea >= 0
+        ) {
+            this.setState({ octopusAnim: "octopus-fall" });
+            this.setState({ octopusLifeAnim: "octopus-birth-anim" });
+        } else if (octopusBeforeAnimationArea < 0) {
+            this.setState({ octopusAnim: "octopus-hide" });
+            this.setState({ octopusLifeAnim: "octopus-fly-away-anim" });
+        } else {
+            this.setState({ octopusAnim: "hidden" });
+            this.setState({ octopusLifeAnim: "hidden" });
+        }
 
-      console.log("jaja");
+
+        // animation scene-5
+        const obTrigger = document.getElementById("2017");
+        const obBeforeAnimationArea = obTrigger.getBoundingClientRect().top;
+        if (
+            obBeforeAnimationArea <= triggerMargin * 4 &&
+            obBeforeAnimationArea >= 0
+        ) {
+            this.setState({ ob: "ob-appear" });
+        } else if (obBeforeAnimationArea < 0) {
+            this.setState({ ob: "ob-hide" });
+        } else {
+            this.setState({ ob: "hidden" });
+        }
+
+        // animation scene-6
+        // animated element loses .hidden once its sibling is in viewport
+        const bearTrigger = document.getElementById("2016");
+        const bearBeforeAnimationArea = bearTrigger.getBoundingClientRect().top;
+        if (
+            bearBeforeAnimationArea <= triggerMargin * 4 &&
+            bearBeforeAnimationArea >= 0
+        ) {
+            this.setState({ bear: "bear-appear" });
+        } else if (bearBeforeAnimationArea < 0) {
+            this.setState({ bear: "bear-hide" });
+        } else {
+            this.setState({ bear: "hidden" });
+        }
     };
 
     window.addEventListener("scroll", debounce(checkTriggerElements));
@@ -115,15 +142,13 @@ class Home extends React.Component {
     }, 1000);
   }
 
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.special);
+  }
   render() {
     return (
       <>
-        <header className="App-header">
-          <div id="navbar-container">
-            <NavBar />
-          </div>
-        </header>
-        <section id="main">
+        <section>
           <div className={"scene " + this.state.introAnim} id="scene-1">
             <Intro />
             <div className={this.state.foxPinned} id="fox-anim-box">
@@ -157,20 +182,30 @@ class Home extends React.Component {
               <div className="scene" id="scene-4">
                 <ProfHighlights content={profHighlights.y2018} />
                 <ApMDemo />
-                {/* <ApDDemo /> */}
-                <OldDesktop />
-                <AppleDesktop />
+                <div id="androidpit-button-container">
+                  <APitTools />
+                  <ButtonSecondary
+                    buttonText="Visit Web Site"
+                    buttonLink="https://www.androidpit.de/"
+                    buttonWidth="70px"
+                  />
+                </div>
               </div>
             </Scene>
             <Scene duration={800} pin={true} triggerHook={0}>
               <div className="scene" id="scene-5">
                 <ProfHighlights content={profHighlights.y2017} />
+                <div className={this.state.ob} id="ob-anim-box">
+                  <ObVideo />
+                </div>
               </div>
             </Scene>
             <Scene duration={800} pin={true} triggerHook={0}>
               <div className="scene" id="scene-6">
                 <ProfHighlights content={profHighlights.y2016} />
-                <Bear />
+                <div className={this.state.bear} id="bear-anim-box">
+                  <Bear />
+                </div>
               </div>
             </Scene>
             <Scene duration={800} pin={true} triggerHook={0}>
@@ -185,7 +220,6 @@ class Home extends React.Component {
                 <ButtonSecondary buttonText="More info" />
               </div>
             </Scene>
-            {/* <Github /> */}
           </Controller>
         </section>
       </>

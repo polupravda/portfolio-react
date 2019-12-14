@@ -4,12 +4,17 @@ import "../App.scss";
 class ButtonSecondary extends React.Component {
   render() {
     return (
-      <div class="button-primary-container">
-        <a href="#" alt="">
-          <svg viewBox="0 0 142.58 47.86" width="100%">
-            <path
-              class="st0"
-              d="M140.31,15.53c-1.6,1.06-3.17,2.15-4.73,3.26c-0.3-0.98-0.59-1.96-0.84-2.92c-0.07-0.25-0.13-0.51-0.19-0.78
+      <div id="button-secondary">
+        <a
+          href={this.props.buttonLink}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div class="button-primary-container">
+            <svg viewBox="0 0 142.58 47.86" width="100%" height={this.props.buttonWidth}>
+              <path
+                class="st0"
+                d="M140.31,15.53c-1.6,1.06-3.17,2.15-4.73,3.26c-0.3-0.98-0.59-1.96-0.84-2.92c-0.07-0.25-0.13-0.51-0.19-0.78
                       c0.46-0.7,0.92-1.38,1.37-2.08c0.93-1.44-1.02-2.85-2.25-1.89c-0.58-2.1-1.51-4.04-3.45-4.89c-0.28-0.12-0.58-0.23-0.88-0.33
                       c0.14-0.2,0.28-0.41,0.42-0.61c0.94-1.4-1.25-3.12-2.36-1.82c-0.49,0.58-0.98,1.15-1.47,1.73c-3.42-0.38-7.26-0.09-10.22-0.26
                       c-1.61-0.09-3.22-0.16-4.83-0.23c0.37-0.79,0.73-1.58,1.1-2.36c0.56-1.21-0.71-3.02-2.05-2.05c-1.91,1.37-3.83,2.75-5.74,4.12
@@ -104,9 +109,10 @@ class ButtonSecondary extends React.Component {
                       c0.46,0.78,1.51,1.2,2.27,0.32c1.01-1.17,2.02-2.34,3.03-3.51c0.27,0.03,0.55,0,0.78-0.11c-1.25,1.5-2.53,2.97-3.83,4.42
                       C122.92,36.35,121.56,36.26,120.29,36.22z M135.2,31.49c-0.1,0.04-0.19,0.08-0.28,0.15c-0.02,0.02-0.05,0.03-0.07,0.05
                       c0.14-0.22,0.27-0.44,0.41-0.66C135.24,31.18,135.23,31.34,135.2,31.49z"
-            />
-          </svg>
-          <span class="button-text">{this.props.buttonText}</span>
+              />
+            </svg>
+            <span class="button-text">{this.props.buttonText}</span>
+          </div>
         </a>
       </div>
     );
