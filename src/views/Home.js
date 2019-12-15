@@ -30,111 +30,119 @@ class Home extends React.Component {
       bear: "hidden",
       ob: "hidden"
     };
+    this.debouncedScrollListener = this.debounce(this.checkTriggerElements);
   }
 
-  componentDidMount() {
-    function debounce(func, wait = 20, immediate = true) {
-      let timeout;
-      return function() {
-        const context = this,
-          args = arguments;
-        const later = function() {
-          timeout = null;
-          if (!immediate) func.apply(context, args);
-        };
-        const callNow = immediate && !timeout;
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-        if (callNow) func.apply(context, args);
+  debounce = (func, wait = 20, immediate = true) => {
+    let timeout;
+    return function() {
+      const context = this,
+        args = arguments;
+      const later = function() {
+        timeout = null;
+        if (!immediate) func.apply(context, args);
       };
-    }
+      const callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      if (callNow) func.apply(context, args);
+    };
+  };
 
+  checkTriggerElements = () => {
     // Animate scenes
     const triggerElement1 = document.getElementById("myIntro");
 
-    const checkTriggerElements = () => {
-      // distance from bottom/to top when the animation is supposed to start/end
-      const triggerMargin = window.innerHeight / 5;
+    // distance from bottom/to top when the animation is supposed to start/end
+    const triggerMargin = window.innerHeight / 5;
 
-      // bottom of the triggerElement1
-      const triggerBottom1 =
-        triggerElement1.offsetTop + triggerElement1.clientHeight;
-      const trigger1IsHiddenEnough =
-        window.scrollY > triggerBottom1 - triggerMargin;
+    // bottom of the triggerElement1
+    const triggerBottom1 =
+      triggerElement1 &&
+      triggerElement1.offsetTop + triggerElement1.clientHeight;
+    const trigger1IsHiddenEnough =
+      window.scrollY > triggerBottom1 - triggerMargin;
 
-      if (trigger1IsHiddenEnough) {
-        this.setState({ foxPinned: "fox-unpinned" });
-      } else {
-        this.setState({ foxPinned: "fox-pinned" });
-      }
+    if (trigger1IsHiddenEnough) {
+      this.setState({ foxPinned: "fox-unpinned" });
+    } else {
+      this.setState({ foxPinned: "fox-pinned" });
+    }
 
-      // animated element loses .hidden once its sibling is in viewport
-      const ninjaTrigger = document.getElementById("skills");
-      const ninjaBeforeAnimationArea = ninjaTrigger.getBoundingClientRect().top;
+    // animated element loses .hidden once its sibling is in viewport
+    const ninjaTrigger = document.getElementById("skills");
+    const ninjaBeforeAnimationArea =
+      ninjaTrigger && ninjaTrigger.getBoundingClientRect().top;
 
-      if (
-        ninjaBeforeAnimationArea <= triggerMargin * 4 &&
-        ninjaBeforeAnimationArea >= 0
-      ) {
-        this.setState({ ninja: "ninja-appear" });
-      } else if (ninjaBeforeAnimationArea < 0) {
-        this.setState({ ninja: "ninja-hide" });
-      } else {
-        this.setState({ ninja: "hidden" });
-      }
+    if (
+      ninjaBeforeAnimationArea <= triggerMargin * 4 &&
+      ninjaBeforeAnimationArea >= 0
+    ) {
+      this.setState({ ninja: "ninja-appear" });
+    } else if (ninjaBeforeAnimationArea < 0) {
+      this.setState({ ninja: "ninja-hide" });
+    } else {
+      this.setState({ ninja: "hidden" });
+    }
 
-        // animation scene-3
-        // animated element loses .hidden once its sibling is in viewport
-        const octopusTrigger = document.getElementById("history");
-        const octopusBeforeAnimationArea = octopusTrigger.getBoundingClientRect()
-            .top;
+    // animation scene-3
+    // animated element loses .hidden once its sibling is in viewport
+    const octopusTrigger = document.getElementById("history");
+    const octopusBeforeAnimationArea =
+      octopusTrigger && octopusTrigger.getBoundingClientRect().top;
 
-        if (
-            octopusBeforeAnimationArea <= triggerMargin * 4 &&
-            octopusBeforeAnimationArea >= 0
-        ) {
-            this.setState({ octopusAnim: "octopus-fall" });
-            this.setState({ octopusLifeAnim: "octopus-birth-anim" });
-        } else if (octopusBeforeAnimationArea < 0) {
-            this.setState({ octopusAnim: "octopus-hide" });
-            this.setState({ octopusLifeAnim: "octopus-fly-away-anim" });
-        } else {
-            this.setState({ octopusAnim: "hidden" });
-            this.setState({ octopusLifeAnim: "hidden" });
-        }
+    if (
+      octopusBeforeAnimationArea <= triggerMargin * 4 &&
+      octopusBeforeAnimationArea >= 0
+    ) {
+      this.setState({ octopusAnim: "octopus-fall" });
+      this.setState({ octopusLifeAnim: "octopus-birth-anim" });
+    } else if (octopusBeforeAnimationArea < 0) {
+      this.setState({ octopusAnim: "octopus-hide" });
+      this.setState({ octopusLifeAnim: "octopus-fly-away-anim" });
+    } else {
+      this.setState({ octopusAnim: "hidden" });
+      this.setState({ octopusLifeAnim: "hidden" });
+    }
 
+    // animation scene-5
+    const obTrigger = document.getElementById("2017");
+    const obBeforeAnimationArea =
+      obTrigger && obTrigger.getBoundingClientRect().top;
+    if (
+      obBeforeAnimationArea <= triggerMargin * 4 &&
+      obBeforeAnimationArea >= 0
+    ) {
+      this.setState({ ob: "ob-appear" });
+    } else if (obBeforeAnimationArea < 0) {
+      this.setState({ ob: "ob-hide" });
+    } else {
+      this.setState({ ob: "hidden" });
+    }
 
-        // animation scene-5
-        const obTrigger = document.getElementById("2017");
-        const obBeforeAnimationArea = obTrigger.getBoundingClientRect().top;
-        if (
-            obBeforeAnimationArea <= triggerMargin * 4 &&
-            obBeforeAnimationArea >= 0
-        ) {
-            this.setState({ ob: "ob-appear" });
-        } else if (obBeforeAnimationArea < 0) {
-            this.setState({ ob: "ob-hide" });
-        } else {
-            this.setState({ ob: "hidden" });
-        }
+    // animation scene-6
+    // animated element loses .hidden once its sibling is in viewport
+    const bearTrigger = document.getElementById("2016");
+    const bearBeforeAnimationArea =
+      bearTrigger && bearTrigger.getBoundingClientRect().top;
+    if (
+      bearBeforeAnimationArea <= triggerMargin * 4 &&
+      bearBeforeAnimationArea >= 0
+    ) {
+      this.setState({ bear: "bear-appear" });
+    } else if (bearBeforeAnimationArea < 0) {
+      this.setState({ bear: "bear-hide" });
+    } else {
+      this.setState({ bear: "hidden" });
+    }
+  };
 
-        // animation scene-6
-        // animated element loses .hidden once its sibling is in viewport
-        const bearTrigger = document.getElementById("2016");
-        const bearBeforeAnimationArea = bearTrigger.getBoundingClientRect().top;
-        if (
-            bearBeforeAnimationArea <= triggerMargin * 4 &&
-            bearBeforeAnimationArea >= 0
-        ) {
-            this.setState({ bear: "bear-appear" });
-        } else if (bearBeforeAnimationArea < 0) {
-            this.setState({ bear: "bear-hide" });
-        } else {
-            this.setState({ bear: "hidden" });
-        }
-    };
+  testConsole = () => {
+    console.log("Home event listener");
+  };
 
-    window.addEventListener("scroll", debounce(checkTriggerElements));
+  componentDidMount() {
+    window.addEventListener("scroll", this.debouncedScrollListener);
 
     // Animate the first Scene after loading
     setTimeout(() => {
@@ -143,8 +151,9 @@ class Home extends React.Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener("scroll", this.special);
+    window.removeEventListener("scroll", this.debouncedScrollListener);
   }
+
   render() {
     return (
       <>
