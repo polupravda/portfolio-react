@@ -685,6 +685,117 @@ h2 {
   }
 }
 
+// Scene-7
+
+#scene-7 {
+  grid-template-rows: 1fr 2fr 2fr;
+  grid-template-columns: 1fr 3fr 1fr 1fr;
+  grid-gap: 2vh;
+  align-items: start;
+  grid-template-areas: '. . . .'
+    '. description lenin .'
+    'trolleybus trolleybus lenin .';
+  padding-bottom: 100vh;
+
+  .prof-highlights-container {
+    grid-area: description;
+  }
+
+  #trolleybus-anim-box {
+    grid-area: trolleybus;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+
+    &.trolleybus-appear {
+      animation: trolleybusApper 15s cubic-bezier(1,.01,.99,.84) forwards infinite;
+
+      #trolleybus {
+        animation: trolleybusGrow 15s cubic-bezier(1,.01,.99,.84) forwards infinite;
+      }
+    }
+
+    #trolleybus {
+      display: inline-block;
+      position: relative;
+      height: 50vh;
+      width: 68vh;
+      transform-origin: bottom left;
+
+      img {
+        position: absolute;
+        display: block;
+      }
+    }
+
+    #trolleybus-body {
+      height: 100%;
+      right: 0;
+      bottom: 0;
+    }
+
+    #trolleybus-arm {
+      height: 16%;
+      right: 14%;
+      top: 79px;
+      transform-origin: 15% 80%;
+      transform: rotate(315deg);
+      animation: trolleybusArm 600ms ease-in-out infinite alternate;
+    }
+  }
+
+  #lenin-anim-box {
+    grid-area: lenin;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+
+    #lenin {
+      display: inline-block;
+      position: absolute;
+      right: 10vw;
+      bottom: 0;
+      height: 80vh;
+      width: 30vh;
+
+      img {
+        position: absolute;
+        display: block;
+      }
+    }
+
+    #lenin-body {
+      height: 100%;
+      right: 0;
+      bottom: 0;
+    }
+
+    #lenin-arm {
+      height: 9%;
+      left: 0;
+      top: 18.2vh;
+      transform-origin: 85% 20%;
+      transform: rotate(475deg);
+      animation: leninArm 600ms ease-in-out infinite alternate;
+    }
+  }
+
+  .trolleybus-initial {
+    position: fixed;
+    bottom: 1vw;
+    right: -40vw;
+  }
+
+  .trolleybus-hide {
+    position: fixed;
+    bottom: 1vw;
+    right: -40vw;
+    animation: trolleybusHide 1s ease-out forwards;
+  }
+}
+
 // Button
 
 .button-primary-container {
@@ -2183,5 +2294,59 @@ $apit-padding-area-left: $apit-padding-area-right;
 
   100% {
     transform: scale(0);
+  }
+}
+
+@keyframes trolleybusArm {
+  0% {
+    transform: rotate(315deg);
+  }
+
+  100% {
+    transform: rotate(355deg);
+  }
+}
+
+@keyframes leninArm {
+  0% {
+    transform: rotate(455deg);
+  }
+
+  100% {
+    transform: rotate(475deg);
+  }
+}
+
+@keyframes trolleybusApper {
+  0% {
+    left: -5vw;
+    bottom: 6vw;
+  }
+
+  50% {
+    bottom: -1vw;
+  }
+
+  80% {
+    bottom: -5vw;
+  }
+
+  100% {
+    left: 100vw;
+    bottom: -30vw;
+  }
+}
+
+@keyframes trolleybusGrow {
+  0% {
+transform: scale(0);
+  }
+
+  20% {
+    transform: scale(0);
+  }
+
+  100% {
+transform: scale(2);
   }
 }

@@ -16,6 +16,8 @@ import ApMDemo from "../components/ApMDemo";
 import ProfHighlights from "../components/ProfHighlights";
 import ObVideo from "../components/ObVideo";
 import APitTools from "../components/APitTools";
+import Trolleybus from "../components/Trolleybus";
+import Lenin from "../components/Lenin";
 import { profHighlights } from "../Content";
 
 class Home extends React.Component {
@@ -28,7 +30,9 @@ class Home extends React.Component {
       octopusAnim: "hidden",
       octopusLifeAnim: "",
       bear: "hidden",
-      ob: "hidden"
+      ob: "hidden",
+      trolleybus: "trolleybus-appear",
+      lenin: ""
     };
     this.debouncedScrollListener = this.debounce(this.checkTriggerElements);
   }
@@ -220,6 +224,12 @@ class Home extends React.Component {
             <Scene duration={800} pin={true} triggerHook={0}>
               <div className="scene" id="scene-7">
                 <ProfHighlights content={profHighlights.y2015} />
+                <div className={this.state.lenin} id="lenin-anim-box">
+                  <Lenin />
+                </div>
+                <div className={this.state.trolleybus} id="trolleybus-anim-box">
+                  <Trolleybus />
+                </div>
               </div>
             </Scene>
             <Scene duration={800} pin={true} triggerHook={0}>
