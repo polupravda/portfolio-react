@@ -1,10 +1,10 @@
 import React from "react";
 import "../App.scss";
-import { tagText } from "../Content";
+import { hints } from "../Content";
 import Pda from "./Pda";
 import Iphone from "./Iphone";
 import Rope from "./Rope";
-import Hint from "./Hint";
+import Tag from "./Tag";
 
 class ApMDemo extends React.Component {
   state = {
@@ -43,19 +43,17 @@ class ApMDemo extends React.Component {
           className={this.state.demoDevice1Class}
           onClick={() => this.handleDemoDevice("Device1")}
         >
-          <Rope tagText={tagText.tagBefore} />
+          <Rope />
           <Pda />
         </div>
+        <Tag tagText={hints.clickOrScroll} />
         <div
           id="iphone-all"
           className={this.state.demoDevice2Class}
           onClick={() => this.handleDemoDevice("Device2")}
         >
-          <Rope tagText={tagText.tagAfter} />
+          <Rope />
           <Iphone />
-        </div>
-        <div className="">
-          <Hint />
         </div>
       </div>
     );

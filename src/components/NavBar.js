@@ -2,6 +2,7 @@ import React from "react";
 import "../App.scss";
 import NavItem from "./NavItem";
 import Linkedin from "./Linkedin";
+import Github from "./Github";
 
 function NavBar() {
   return (
@@ -12,6 +13,7 @@ function NavBar() {
           <NavItem name="Works" url="/works" />
           <NavItem name="Contact" url="/contact" />
           <Linkedin />
+          <Github />
         </div>
       </div>
     </header>

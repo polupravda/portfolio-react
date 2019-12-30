@@ -8,7 +8,7 @@ export const introText = {
   myName: "Elena Volovicheva",
   myTitle: "Creative Developer",
   myIntro:
-    "I design UI with unique looks which provide highly positive user experience, and I perform development for web with modern front-end and robust back-end."
+    "I design UI with unique looks which provide highly positive user experience, and I perform development for web with modern front-end and robust back-end. I am in Berlin."
 };
 
 export const skillsList = {
@@ -66,7 +66,7 @@ export const profHighlights = {
     ]
   },
   y2014: {
-    year: "Before 2015",
+    year: "2014",
     highlightParagraphs: [
       "Time of searching for my calling. Starting from 2011 I was working as a web designer, also shortly as a freelancer.",
       "In those years Ukraine was going through International-IT-Career-Boom. Europe realised that local developers were delivering high quality work for wages significantly lower that those in EU. Therefore remote job or relocation to Europe was very much in trend.",
@@ -77,12 +77,22 @@ export const profHighlights = {
 
 export const hints = {
   scrollMe: "Scroll me",
-  clickMe: "Click me"
+  clickMe: "Click me",
+  clickOrScroll: "Click or scroll"
 };
 
 export const aPitTechStack = {
   title: "Used Front-end Tools",
   techStackItems: ["Sass", "JS", "Vue.js", "Nuxt"]
+};
+
+export const finalWords = {
+  thanks: "Thanks",
+  paragraph0: "...for reading my story.",
+  paragraph1: "If you want to see examples of what I do, have a look at the demo of my selected",
+  works: "works",
+  paragraph2: "or visit me on",
+  github: "GitHub"
 };
 
 export const languages = {
@@ -100,9 +110,17 @@ export const languages = {
   ]
 };
 
+export const myContactDetails = {
+  github: "https://github.com/polupravda",
+  linkedin: "https://www.linkedin.com/in/volovicheva/",
+  phone: "+49 176 47110458",
+  email: "elena.volovicheva@gmail.com"
+}
+
 export const notFound = {
   errorCode: "404",
-  errorMessage: "Go home. There's nothing to be found here"
+  errorMessage: "Go home. There's nothing to be found here",
+  buttonText: "Back home"
 };
 
 export const aPitProject = {
@@ -146,8 +164,20 @@ export const aPitProject = {
   img9Description: "Comment from a member of AndroidPIT Community",
   tagText: "Scroll the screen to see more",
   paragraph11: "An Asian proverb says",
-  paragraph12: "“It is better to see something once, than to hear about it a thousand times.”",
+  paragraph12:
+    "“It is better to see something once, than to hear about it a thousand times.”",
   paragraph13: "Therefore don't waste your time and just...",
   buttonText: "Visit Web Site",
   buttonLink: "https://www.androidpit.de/"
 };
+
+export const contact = {
+  coffee: "Let's meet for a coffee",
+  contactMe: "If you have an idea to discuss",
+  intro1: "or you just want to meet me for a coffee somewhere in",
+  berlin: "Berlin",
+  intro2: "just drop me a message to",
+  intro3: "or call me",
+  intro4: "Would be also great to stay connected on",
+  linkedin: " LinkedIn",
+}

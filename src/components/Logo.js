@@ -6,7 +6,7 @@ function Logo() {
   return (
     <div id="logo">
       <span id="profession">{introText.myTitle}</span>
-      <svg viewBox="0 0 1082 199" version="1.1">
+      <svg viewBox="0 0 1082 199">
         <g
           fill-rule="evenodd"
         >

@@ -4,10 +4,8 @@
 $app-yellow: #ffb600;
 $app-black: #333;
 $app-white: #fff;
-$font-primary: "Space Mono",
-monospace;
-$font-secondary: "Gaegu",
-cursive;
+$font-primary: "Space Mono", monospace;
+$font-secondary: "Gaegu", cursive;
 
 // Mixins
 @mixin mobile {
@@ -66,6 +64,7 @@ body {
   background-size: cover;
   background-attachment: fixed;
   overflow-x: hidden;
+  scroll-snap-type: y mandatory;
   @include bodyFontSize;
 }
 
@@ -129,10 +128,11 @@ h2 {
   grid-template-columns: 1fr 1fr 3fr 1fr;
   grid-gap: 2vh;
   align-items: start;
-  grid-template-areas: '. . . .'
-    '. logo logo .'
-    'fox fox introduction-text .'
-    'fox fox . .';
+  grid-template-areas:
+    ". . . ."
+    ". logo logo ."
+    "fox fox introduction-text ."
+    "fox fox . .";
   margin-bottom: 50vh;
   margin-top: 10px;
 
@@ -181,11 +181,13 @@ h2 {
   grid-template-columns: 1fr 1fr 3fr 1fr;
   grid-gap: 2vh;
   align-items: start;
-  grid-template-areas: '. . . .'
-    '. skills tools .'
-    '. . ninja ninja'
-    '. . . .';
+  grid-template-areas:
+    ". . . ."
+    ". skills tools ."
+    ". . ninja ninja"
+    ". . . .";
   padding-bottom: 100vh;
+  scroll-snap-align: start;
 
   #skills {
     grid-area: skills;
@@ -203,23 +205,11 @@ h2 {
   right: -40vw;
 }
 
-.ninja-initial {
-  position: fixed;
-  bottom: 1vw;
-  right: -40vw;
-}
-
 .ninja-appear {
-  position: fixed;
-  bottom: 1vw;
-  right: -40vw;
   animation: ninjaApper 1s ease-out forwards;
 }
 
 .ninja-hide {
-  position: fixed;
-  bottom: 1vw;
-  right: -40vw;
   animation: ninjaHide 1s ease-out forwards;
 }
 
@@ -258,11 +248,13 @@ h2 {
   grid-template-columns: 1fr 1fr 3fr 1fr;
   grid-gap: 2vh;
   align-items: start;
-  grid-template-areas: '. . . .'
-    'octopus octopus history .'
-    'octopus octopus history .'
-    'octopus octopus . .';
+  grid-template-areas:
+    ". . . ."
+    "octopus octopus history ."
+    "octopus octopus history ."
+    "octopus octopus . .";
   padding-bottom: 100vh;
+  scroll-snap-align: start;
 
   #octopus-anim {
     grid-area: octopus;
@@ -355,11 +347,28 @@ h2 {
   align-items: start;
   width: 100vw;
   grid-template-areas:
-    '. . mobileDemo .'
-    '. story2018 mobileDemo .'
-    '. story2018 apitButton .'
-    '. . . .';
+    ". . mobileDemo ."
+    ". story2018 mobileDemo ."
+    ". story2018 apitButton ."
+    ". . . .";
   padding-bottom: 100vh;
+
+  #demo-anim-box {
+    grid-area: mobileDemo;
+    position: fixed;
+    top: 0;
+    right: 13vw;
+    transform-origin: left top 0;
+
+    &.demo-appear {
+      transform: translate3d(0, -50vh, 0);
+      animation: demoAppear 2000ms cubic-bezier(0.52, 0.01, 1, 0.37) forwards;
+    }
+
+    &.demo-hide {
+      animation: demoHide 500ms ease-out forwards;
+    }
+  }
 
   .mobile-container-right {
     margin-left: -7vw;
@@ -388,9 +397,6 @@ h2 {
   }
 
   .ap-m-demo-container {
-    grid-area: mobileDemo;
-    position: sticky;
-
     #pda-all {
       margin-right: -4vw;
       transform-origin: top;
@@ -403,22 +409,25 @@ h2 {
     // Tag
 
     .tag-container {
-      position: relative;
+      grid-row: 3;
+      grid-column: 3;
+      width: 15vh;
       align-items: center;
       font-family: "Gaegu", cursive;
-      width: 17vh;
-      transform: rotate(-10deg);
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      right: 32%;
+      top: 4vh;
 
       .tag-text {
-        position: absolute;
-        display: block;
-        top: 0.5vh;
-        margin: 0 auto;
+        position: relative;
         font-family: $font-secondary;
         text-transform: uppercase;
         color: $app-white;
-        font-size: 22px;
-        margin-top: -4vh;
+        font-size: 16px;
+        line-height: 1;
+        transform: matrix(1, -0.3, 0, 1, 0, 0);
       }
 
       svg {
@@ -426,29 +435,11 @@ h2 {
       }
 
       #arrow-fat-container {
+        align-self: flex-start;
         height: 10vh;
         width: 10vh;
-        transform: rotate(63deg);
-      }
-    }
-
-    .hint-container {
-      position: absolute;
-      width: 26vh;
-      left: 35%;
-      top: 20%;
-
-      svg {
-        fill: $app-black;
-      }
-
-      span {
-        position: absolute;
-        width: 20vh;
-        left: 3vh;
-        top: 2.5vh;
-        line-height: 1.2;
-        font-size: 12px;
+        transform: rotate(419deg);
+        margin-bottom: -72px;
       }
     }
   }
@@ -553,7 +544,6 @@ h2 {
     display: flex;
     justify-content: center;
 
-
     span:not(:first-child)::before {
       content: "+";
       margin: 0 12px;
@@ -568,9 +558,10 @@ h2 {
   grid-template-columns: 1fr 4fr 1fr;
   grid-gap: 2vh;
   align-items: start;
-  grid-template-areas: '. . .'
-    '. description .'
-    '. tv .';
+  grid-template-areas:
+    ". . ."
+    ". description ."
+    ". tv .";
   padding-bottom: 100vh;
 
   .prof-highlights-container {
@@ -648,9 +639,10 @@ h2 {
   grid-template-columns: 1fr 4fr 1fr;
   grid-gap: 2vh;
   align-items: start;
-  grid-template-areas: '. . .'
-    '. description .'
-    'bear bear bear';
+  grid-template-areas:
+    ". . ."
+    ". description ."
+    "bear bear bear";
   padding-bottom: 100vh;
 
   .prof-highlights-container {
@@ -692,9 +684,10 @@ h2 {
   grid-template-columns: 1fr 3fr 1fr 1fr;
   grid-gap: 2vh;
   align-items: start;
-  grid-template-areas: '. . . .'
-    '. description lenin .'
-    'trolleybus trolleybus lenin .';
+  grid-template-areas:
+    ". . . ."
+    ". description lenin ."
+    "trolleybus trolleybus lenin .";
   padding-bottom: 100vh;
 
   .prof-highlights-container {
@@ -708,11 +701,19 @@ h2 {
     bottom: 0;
     width: 100%;
 
-    &.trolleybus-appear {
-      animation: trolleybusApper 15s cubic-bezier(1,.01,.99,.84) forwards infinite;
+    &.trolleybus-hide {
+      animation: trolleybusHide 1000ms cubic-bezier(1, 0.01, 1, 0.29) forwards;
+    }
 
-      #trolleybus {
-        animation: trolleybusGrow 15s cubic-bezier(1,.01,.99,.84) forwards infinite;
+    #trolleybus {
+      animation: trolleybusApper 13000ms cubic-bezier(1, 0.01, 0.99, 0.84)
+        forwards infinite;
+
+      #trolleybus-container {
+        height: 100%;
+        transform-origin: bottom left;
+        animation: trolleybusGrow 13000ms cubic-bezier(1, 0.01, 0.99, 0.84)
+          forwards infinite;
       }
     }
 
@@ -752,6 +753,14 @@ h2 {
     bottom: 0;
     width: 100%;
 
+    &.lenin-appear {
+      animation: leninAppear 1s ease-out forwards;
+    }
+
+    &.lenin-hide {
+      animation: leninHide 1s ease-out forwards;
+    }
+
     #lenin {
       display: inline-block;
       position: absolute;
@@ -781,18 +790,286 @@ h2 {
       animation: leninArm 600ms ease-in-out infinite alternate;
     }
   }
+}
 
-  .trolleybus-initial {
-    position: fixed;
-    bottom: 1vw;
-    right: -40vw;
+// Scene-8
+
+#scene-8 {
+  grid-template-rows: 1fr 3fr 3fr 3fr;
+  grid-template-columns: 2fr 3fr 2fr;
+  grid-gap: 2vh;
+  align-items: start;
+  grid-template-areas:
+    ". . ."
+    "blackboard description ."
+    "teacher description ."
+    "teacher students .";
+  padding-bottom: 100vh;
+
+  img {
+    position: absolute;
+    display: block;
   }
 
-  .trolleybus-hide {
+  .prof-highlights-container {
+    grid-area: description;
+  }
+
+  #blackboard-anim-box {
+    grid-area: blackboard;
     position: fixed;
-    bottom: 1vw;
-    right: -40vw;
-    animation: trolleybusHide 1s ease-out forwards;
+    bottom: 0;
+    left: -2vw;
+
+    &.blackboard-appear {
+      transform: translate3d(0, -100vh, 0);
+      animation: blackboardAppear 2000ms cubic-bezier(0, 0.53, 0.07, 1) forwards;
+    }
+
+    &.blackboard-hide {
+      animation: blackboardHide 1000ms forwards;
+    }
+
+    #blackboard {
+      display: inline-block;
+      position: relative;
+      height: 30vw;
+      width: 23vw;
+    }
+  }
+
+  #teacher-anim-box {
+    grid-area: teacher;
+    position: fixed;
+    bottom: -0.5vw;
+    left: 11%;
+
+    &.teacher-appear {
+      transform: translate3d(0, 100vh, 0);
+      animation: teacherAppear 1000ms 1500ms ease-out forwards;
+    }
+
+    &.teacher-hide {
+      animation: blackboardHide 1000ms ease-in forwards;
+    }
+
+    #teacher {
+      display: inline-block;
+      position: relative;
+      height: 19vw;
+      width: 16vw;
+
+      #teacher-body {
+        height: 95%;
+        right: 0;
+        top: 0;
+      }
+
+      #teacher-arm {
+        height: 45%;
+        right: 20%;
+        top: 0%;
+        transform-origin: 100% 90%;
+        animation: teacherPoint 2000ms cubic-bezier(0.8, 0.01, 0.3, 1) alternate
+          infinite;
+      }
+
+      #teacher-foot {
+        height: 7%;
+        right: 10%;
+        bottom: 0;
+        transform-origin: 100% 30%;
+        animation: teacherStamp 150ms ease-out infinite alternate;
+      }
+    }
+  }
+
+  #students-anim-box {
+    grid-area: students;
+    position: fixed;
+    bottom: -100vh;
+    right: 7vw;
+
+    &.students-appear {
+      animation: studentsAppear 300ms 2500ms ease-out forwards;
+    }
+
+    &.students-hide {
+      animation: studentsHide 300ms 100ms ease-in forwards;
+    }
+
+    #students {
+      display: inline-block;
+      position: relative;
+      height: 20vw;
+      width: 18vw;
+    }
+  }
+}
+
+#scene-9 {
+  grid-template-rows: 1fr auto 1fr;
+  grid-template-columns: minmax(100px, 15vw) auto 1fr minmax(100px, 15vw);
+  align-items: flex-start;
+  grid-gap: 1vw;
+  height: 100vh;
+  z-index: 100;
+  font-size: 18px;
+  grid-template-areas:
+    ". . ."
+    ". description ."
+    "goat goat goat";
+
+  img {
+    position: absolute;
+    display: block;
+  }
+
+  #final-words {
+    grid-area: description;
+
+    display: grid;
+    grid-template-rows: 1fr auto auto auto auto 2fr;
+    grid-template-columns: 1fr;
+    align-items: flex-start;
+    grid-gap: 1vw;
+    height: 100vh;
+    z-index: 100;
+    font-size: 18px;
+
+    a {
+      text-decoration: underline;
+      text-decoration-color: $app-yellow;
+      text-decoration-style: wavy;
+      text-decoration-thickness: 0.04em;
+      text-underline-offset: 3px;
+  
+      &:hover {
+        color: $app-yellow;
+      }
+    }
+
+    .contact-data {
+      font-family: $font-secondary;
+      text-transform: uppercase;
+      font-size: 2.5vw;
+      line-height: 1.2;
+      font-weight: 300;
+      color: $app-black;
+      margin-bottom: 12px;
+      margin: 0 5px;
+    }
+
+    #thanks {
+      grid-row: 2;
+      grid-column: 1;
+      line-height: 1.2;
+
+      svg {
+        height: 20vh;
+        width: 70%;
+  
+        path {
+          fill: $app-black;
+    
+          &:hover {
+            fill: $app-yellow;
+          }
+    
+          &:active {
+            animation: letterJump 500ms ease-in-out;
+          }
+        }
+      }
+    }
+
+    #thanks-paragraph {
+      grid-row: 3;
+      grid-column: 1;
+      line-height: 1.2;
+      justify-self: end;
+    }
+
+    #final-words-works-container {
+      grid-row: 4;
+      grid-column: 1;
+      line-height: 1.2;
+    }
+
+    #final-words-github-container {
+      grid-row: 5;
+      grid-column: 1;
+      line-height: 1.2;
+      justify-self: end;
+    }
+  }
+
+  #goat-anim-box {
+    grid-area: goat;
+    position: fixed;
+    bottom: -1vw;
+    left: -4.5vw;
+    width: 100%;
+
+    &.goat-appear {
+      animation: goatAppear 1000ms cubic-bezier(0, 0.53, 0.07, 1) forwards;
+    }
+
+    &.goat-hide {
+      animation: goatdHide 1000ms forwards;
+    }
+
+    #goat {
+      display: inline-block;
+      position: relative;
+      height: 50vh;
+      width: 100%;
+
+      img {
+        position: absolute;
+        display: block;
+      }
+
+      #goat-body {
+        height: 87%;
+        left: 0;
+        bottom: 0;
+      }
+
+      .goat-fire {
+        transform-origin: 85% 50%;
+        mix-blend-mode: hard-light;
+        animation: goatFireGrow 2000ms forwards ease-out infinite;
+      }
+
+      #goat-fire-1-container {
+        position: absolute;
+        height: 20%;
+        left: 14%;
+        top: 23%;
+        animation: goatFire 2000ms forwards linear infinite;
+      }
+
+      #goat-fire-2-container {
+        position: absolute;
+        height: 20%;
+        left: 6%;
+        top: 26%;
+        animation: goatFire 2000ms forwards linear infinite;
+      }
+
+      #goat-fire-1 {
+        height: 100%;
+        left: 14%;
+        top: 27%;
+      }
+
+      #goat-fire-2 {
+        height: 100%;
+        left: 6%;
+        top: 32%;
+      }
+    }
   }
 }
 
@@ -841,7 +1118,17 @@ h2 {
 
   #linkedin {
     fill: $app-yellow;
-    margin: 5vh 0;
+    margin-top: 5vh;
+
+    &:hover {
+      fill: $app-black;
+    }
+  }
+
+  #github {
+    fill: $app-yellow;
+    margin-top: 1vh;
+    margin-right: -1px;
 
     &:hover {
       fill: $app-black;
@@ -934,26 +1221,61 @@ h2 {
 
 // Stone404
 
+#not-found {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  z-index: 100;
+
+  #code-404 {
+    margin: 16vh 0 2vh 0;
+
+    svg {
+      height: 15vh;
+
+      path,
+      rect {
+        fill: $app-white;
+
+        &:hover {
+          fill: $app-black;
+        }
+
+        &:active {
+          animation: letterJump 500ms ease-in-out;
+        }
+      }
+    }
+  }
+
+  .error-message {
+    font-size: 2.5vw;
+    margin-bottom: 7vh;
+  }
+}
+
 #stone404-container {
   position: absolute;
   bottom: 100vh;
-  animation: stoneFall 600ms linear 3s forwards 1;
+  animation: stoneFall 600ms linear 3s forwards;
+}
+
+#stone-shadow {
+  position: absolute;
+  bottom: 3vw;
+  width: 13vw;
+  height: 3vw;
+  background: #000;
+  border-radius: 50%;
+  filter: blur(2vw);
+  opacity: 0;
+  animation: stoneShadow 600ms linear 3s forwards;
 }
 
 #stone404 {
   height: 13vw;
-  // animation: stoneRoll 5s linear infinite;
-}
-
-.error-code {
-  font-size: 15vw;
-  font-weight: 700;
-  line-height: 1;
-}
-
-.error-message {
-  font-size: 2.5vw;
-  margin-bottom: 7vh;
 }
 
 // Bear
@@ -1014,7 +1336,6 @@ h2 {
     bottom: 9%;
     animation: pedal 1s linear infinite;
   }
-
 }
 
 // Ninja
@@ -1029,7 +1350,6 @@ h2 {
     position: absolute;
     display: block;
   }
-
 }
 
 .ninja-body {
@@ -1043,7 +1363,7 @@ h2 {
   right: 27%;
   top: 0;
   transform-origin: 85% 80%;
-  animation: forge 1s cubic-bezier(1, .01, .99, .84) infinite;
+  animation: forge 1s cubic-bezier(1, 0.01, 0.99, 0.84) infinite;
 }
 
 .ninja-anvil {
@@ -1057,7 +1377,7 @@ h2 {
   bottom: 32%;
   left: 14%;
   transform-origin: 85% 80%;
-  animation: laptop 1s cubic-bezier(1, .01, .99, .84) infinite;
+  animation: laptop 1s cubic-bezier(1, 0.01, 0.99, 0.84) infinite;
 }
 
 // Octopus
@@ -1186,7 +1506,6 @@ h2 {
 .ap-d-demo-container {
   position: relative;
   display: flex;
-  width: 100%;
 
   div {
     display: flex;
@@ -1241,8 +1560,6 @@ h2 {
 }
 
 .ap-before-canvas {
-  width: 31.7vw;
-  height: 23.2vw;
   left: 13.5%;
   top: 7%;
   border-radius: 0.5vh 0.5vh 2vh 2vh;
@@ -1250,10 +1567,10 @@ h2 {
   overflow-x: hidden;
 
   &::after {
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, .8);
-    content: '';
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
+    content: "";
     display: block;
-    height: 40vh;
+    height: 47vh;
     position: sticky;
     top: 0;
     width: 25.5vh;
@@ -1332,8 +1649,8 @@ h2 {
   overflow-x: hidden;
 
   &::after {
-    box-shadow: inset 0 0 8px rgba(0, 0, 0, .6);
-    content: '';
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.6);
+    content: "";
     display: block;
     height: 47vw;
     position: sticky;
@@ -1429,7 +1746,7 @@ $apit-padding-area-left: $apit-padding-area-right;
     grid-template-columns: $apit-padding-area-left auto 1fr $apit-padding-area-right;
     height: 100vh;
 
-    &>* {
+    & > * {
       margin: 0;
     }
 
@@ -1695,7 +2012,7 @@ $apit-padding-area-left: $apit-padding-area-right;
 
   #apit-scene-5 {
     display: grid;
-    grid-template-rows: 1fr auto auto auto 1fr;
+    grid-template-rows: 1fr auto auto auto auto 1fr;
     grid-template-columns: $apit-padding-area-left 1fr 1fr 1fr $apit-padding-area-right;
     grid-gap: 2vw;
     padding: 20vh 0;
@@ -1706,7 +2023,7 @@ $apit-padding-area-left: $apit-padding-area-right;
     }
 
     #apit-scene-5-paragraphs-1 {
-      grid-row: 3;
+      grid-row: 3 / span 2;
       grid-column: 2;
 
       p {
@@ -1860,7 +2177,7 @@ $apit-padding-area-left: $apit-padding-area-right;
       text-decoration: underline;
       text-decoration-color: $app-white;
       text-decoration-style: wavy;
-      text-decoration-thickness: .04em;
+      text-decoration-thickness: 0.04em;
       text-underline-offset: 3px;
       margin-bottom: 12px;
     }
@@ -1874,6 +2191,104 @@ $apit-padding-area-left: $apit-padding-area-right;
       grid-row: 4;
       grid-column: 3;
     }
+  }
+}
+
+#contact {
+  display: grid;
+  grid-template-rows: 1fr 1fr auto 1fr auto 1fr;
+  grid-template-columns: minmax(100px, 15vw) auto 1fr minmax(100px, 15vw);
+  align-items: flex-start;
+  grid-gap: 1vw;
+  height: 100vh;
+  z-index: 100;
+  font-size: 18px;
+
+  a {
+    text-decoration: underline;
+    text-decoration-color: $app-yellow;
+    text-decoration-style: wavy;
+    text-decoration-thickness: 0.04em;
+    text-underline-offset: 3px;
+
+    &:hover {
+      color: $app-yellow;
+    }
+  }
+
+  #coffee {
+    grid-row: 2;
+    grid-column: 2 / span 3;
+    width: 100%;
+    align-self: end;
+    margin-left: -4vw;
+
+    svg {
+      height: 20vh;
+      width: 70%;
+
+      path {
+        fill: $app-black;
+  
+        &:hover {
+          fill: $app-yellow;
+        }
+  
+        &:active {
+          animation: letterJump 500ms ease-in-out;
+        }
+      }
+    }
+  }
+
+  #contact-intro-container {
+    grid-row: 3;
+    grid-column: 3;
+    line-height: 1.2;
+
+    #berlin {
+      margin: 0 10px;
+    }
+  }
+
+  .contact-data {
+    font-family: $font-secondary;
+    text-transform: uppercase;
+    font-size: 2.5vw;
+    line-height: 1.2;
+    font-weight: 300;
+    color: $app-black;
+    margin-bottom: 12px;
+    margin: 0 5px;
+  }
+
+  #contact-phone-container {
+    grid-row: 4;
+    grid-column: 3;
+    justify-self: end;
+
+    #contact-phone {
+      line-height: 0.4;
+    }
+  }
+
+  #contact-linkedin-container {
+    grid-row: 5;
+    grid-column: 3;
+    justify-self: end;
+    line-height: 1;
+  }
+
+  #contact-me {
+    writing-mode: vertical-rl;
+    transform: scale(-1);
+    justify-self: end;
+    align-self: start;
+    grid-row: 3 / span 3;
+    grid-column: 2;
+    text-align: end;
+    padding: 0 0 1em 0;
+    line-height: 2;
   }
 }
 
@@ -1962,6 +2377,18 @@ $apit-padding-area-left: $apit-padding-area-right;
 
   100% {
     bottom: 3vw;
+  }
+}
+
+@keyframes stoneShadow {
+  0% {
+    opacity: 0;
+    filter: blur(2vw);
+  }
+
+  100% {
+    opacity: 0.8;
+    filter: blur(1vw);
   }
 }
 
@@ -2328,18 +2755,35 @@ $apit-padding-area-left: $apit-padding-area-right;
   }
 
   80% {
-    bottom: -5vw;
+    bottom: -4vw;
   }
 
   100% {
     left: 100vw;
-    bottom: -30vw;
+    bottom: -20vw;
+  }
+}
+
+@keyframes trolleybusHide {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  99% {
+    transform: translateX(99vw);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(100vw);
+    opacity: 0;
   }
 }
 
 @keyframes trolleybusGrow {
   0% {
-transform: scale(0);
+    transform: scale(0);
   }
 
   20% {
@@ -2347,6 +2791,231 @@ transform: scale(0);
   }
 
   100% {
-transform: scale(2);
+    transform: scale(2);
+  }
+}
+
+@keyframes leninAppear {
+  0% {
+    bottom: -100vh;
+  }
+
+  100% {
+    bottom: 0;
+  }
+}
+
+@keyframes leninHide {
+  0% {
+    bottom: 0;
+  }
+
+  100% {
+    bottom: -100vh;
+  }
+}
+
+@keyframes teacherStamp {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(15deg);
+  }
+}
+
+@keyframes teacherPoint {
+  0% {
+    transform: rotate(0deg);
+    right: 22%;
+  }
+
+  100% {
+    transform: rotate(6deg);
+    right: 20%;
+  }
+}
+
+@keyframes blackboardAppear {
+  15% {
+    transform: translate3d(0, 0, 0) scaleY(0.8);
+    transform-origin: left bottom 0;
+  }
+
+  25% {
+    transform: translate3d(0, -110px, 0) scaleY(1.2);
+  }
+
+  40% {
+    transform: translate3d(0, 0, 0) scaleY(0.9);
+    transform-origin: left bottom 0;
+  }
+
+  50% {
+    transform: translate3d(0, 0, 0) scaleY(1.1);
+    transform-origin: left bottom 0;
+  }
+
+  60% {
+    transform: translate3d(0, 0, 0) scaleY(1);
+    transform-origin: left bottom 0;
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes blackboardHide {
+  0% {
+    bottom: 0;
+  }
+
+  100% {
+    bottom: -100vh;
+  }
+}
+
+@keyframes teacherAppear {
+  15% {
+    transform: translate3d(0, 0, 0) scaleY(0.8);
+    transform-origin: left bottom 0;
+  }
+
+  25% {
+    transform: translate3d(0, -110px, 0) scaleY(1.2);
+  }
+
+  40% {
+    transform: translate3d(0, 0, 0) scaleY(0.9);
+    transform-origin: left bottom 0;
+  }
+
+  50% {
+    transform: translate3d(0, 0, 0) scaleY(1.1);
+    transform-origin: left bottom 0;
+  }
+
+  60% {
+    transform: translate3d(0, 0, 0) scaleY(1);
+    transform-origin: left bottom 0;
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes studentsAppear {
+  0% {
+    bottom: -100vh;
+  }
+
+  100% {
+    bottom: -1vw;
+  }
+}
+
+@keyframes studentsHide {
+  0% {
+    bottom: -1vw;
+  }
+
+  100% {
+    bottom: -100vh;
+  }
+}
+
+@keyframes demoAppear {
+  15% {
+    transform: translate3d(0, 0, 0) scaleY(1.2);
+  }
+
+  25% {
+    transform: translate3d(0, 0, 0) scaleY(1.2);
+  }
+
+  40% {
+    transform: translate3d(0, 0, 0) scaleY(0.9);
+  }
+
+  50% {
+    transform: translate3d(0, 0, 0) scaleY(1.1);
+  }
+
+  60% {
+    transform: translate3d(0, 0, 0) scaleY(0.95);
+  }
+
+  70% {
+    transform: translate3d(0, 0, 0) scaleY(1.05);
+  }
+
+  80% {
+    transform: translate3d(0, 0, 0) scaleY(0.98);
+  }
+
+  90% {
+    transform: translate3d(0, 0, 0) scaleY(1);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) scaleY(1);
+  }
+}
+
+@keyframes demoHide {
+  0% {
+    top: 0;
+  }
+
+  100% {
+    top: -100vh;
+  }
+}
+
+@keyframes goatFire {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  100% {
+    transform: translate(150vw, 15vw);
+    border: none;
+  }
+}
+
+@keyframes goatFireGrow {
+  0% {
+    transform: scale(0);
+  }
+
+  10% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes goatAppear {
+  0% {
+    bottom: -100vh;
+  }
+
+  100% {
+    bottom: -2vw;
+  }
+}
+
+@keyframes goatHide {
+  0% {
+    bottom: 0;
+  }
+
+  100% {
+    bottom: -100vh;
   }
 }

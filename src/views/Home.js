@@ -4,8 +4,7 @@ import { Controller, Scene } from "react-scrollmagic";
 
 import Skills from "../components/Skills";
 import Tools from "../components/Tools";
-import ButtonPrimary from "../components/ButtonPrimary";
-import ButtonSecondary from "../components/ButtonSecondary";
+import Button from "../components/Button";
 import Fox from "../components/Fox";
 import Intro from "../components/Intro";
 import Bear from "../components/Bear";
@@ -18,6 +17,12 @@ import ObVideo from "../components/ObVideo";
 import APitTools from "../components/APitTools";
 import Trolleybus from "../components/Trolleybus";
 import Lenin from "../components/Lenin";
+import Blackboard from "../components/Blackboard";
+import Teacher from "../components/Teacher";
+import Students from "../components/Students";
+import Goat from "../components/Goat";
+import FinalWords from "../components/FinalWords";
+
 import { profHighlights } from "../Content";
 
 class Home extends React.Component {
@@ -28,11 +33,16 @@ class Home extends React.Component {
       foxPinned: "fox-pinned",
       ninja: "hidden",
       octopusAnim: "hidden",
-      octopusLifeAnim: "",
+      octopusLifeAnim: "hidden",
+      demo: "hidden",
       bear: "hidden",
       ob: "hidden",
-      trolleybus: "trolleybus-appear",
-      lenin: ""
+      trolleybus: "hidden",
+      lenin: "hidden",
+      teacher: "hidden",
+      students: "hidden",
+      blackboard: "hidden",
+      goat: ""
     };
     this.debouncedScrollListener = this.debounce(this.checkTriggerElements);
   }
@@ -109,6 +119,21 @@ class Home extends React.Component {
       this.setState({ octopusLifeAnim: "hidden" });
     }
 
+    // animation scene-4
+    const demoTrigger = document.getElementById("2018");
+    const demoBeforeAnimationArea =
+      demoTrigger && demoTrigger.getBoundingClientRect().top;
+    if (
+      demoBeforeAnimationArea <= triggerMargin * 4 &&
+      demoBeforeAnimationArea >= 0
+    ) {
+      this.setState({ demo: "demo-appear" });
+    } else if (demoBeforeAnimationArea < 0) {
+      this.setState({ demo: "demo-hide" });
+    } else {
+      this.setState({ demo: "hidden" });
+    }
+
     // animation scene-5
     const obTrigger = document.getElementById("2017");
     const obBeforeAnimationArea =
@@ -125,7 +150,6 @@ class Home extends React.Component {
     }
 
     // animation scene-6
-    // animated element loses .hidden once its sibling is in viewport
     const bearTrigger = document.getElementById("2016");
     const bearBeforeAnimationArea =
       bearTrigger && bearTrigger.getBoundingClientRect().top;
@@ -139,13 +163,64 @@ class Home extends React.Component {
     } else {
       this.setState({ bear: "hidden" });
     }
-  };
 
-  testConsole = () => {
-    console.log("Home event listener");
+    // animation scene-7
+    const trolleybusTrigger = document.getElementById("2015");
+    const trolleybusBeforeAnimationArea =
+      trolleybusTrigger && trolleybusTrigger.getBoundingClientRect().top;
+    if (
+      trolleybusBeforeAnimationArea <= triggerMargin * 4 &&
+      trolleybusBeforeAnimationArea >= 0
+    ) {
+      this.setState({ trolleybus: "trolleybus-appear" });
+      this.setState({ lenin: "lenin-appear" });
+    } else if (trolleybusBeforeAnimationArea < 0) {
+      this.setState({ trolleybus: "trolleybus-hide" });
+      this.setState({ lenin: "lenin-hide" });
+    } else {
+      this.setState({ trolleybus: "hidden" });
+      this.setState({ lenin: "hidden" });
+    }
+
+    // animation scene-8
+    const teacherTrigger = document.getElementById("2014");
+    const teacherBeforeAnimationArea =
+      teacherTrigger && teacherTrigger.getBoundingClientRect().top;
+    if (
+      teacherBeforeAnimationArea <= triggerMargin * 4 &&
+      teacherBeforeAnimationArea >= 0
+    ) {
+      this.setState({ blackboard: "blackboard-appear" });
+      this.setState({ teacher: "teacher-appear" });
+      this.setState({ students: "students-appear" });
+    } else if (teacherBeforeAnimationArea < 0) {
+      this.setState({ blackboard: "blackboard-hide" });
+      this.setState({ teacher: "teacher-hide" });
+      this.setState({ students: "students-hide" });
+    } else {
+      this.setState({ blackboard: "hidden" });
+      this.setState({ teacher: "hidden" });
+      this.setState({ students: "hidden" });
+    }
+
+    // animation scene-9
+    const goatTrigger = document.getElementById("thanks");
+    const goatBeforeAnimationArea =
+      goatTrigger && goatTrigger.getBoundingClientRect().top;
+    if (
+      goatBeforeAnimationArea <= triggerMargin * 4 &&
+      goatBeforeAnimationArea >= 0
+    ) {
+      this.setState({ goat: "goat-appear" });
+    } else if (goatBeforeAnimationArea < 0) {
+      this.setState({ goat: "goat-hide" });
+    } else {
+      this.setState({ goat: "hidden" });
+    }
   };
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     window.addEventListener("scroll", this.debouncedScrollListener);
 
     // Animate the first Scene after loading
@@ -170,7 +245,7 @@ class Home extends React.Component {
           </div>
           <Controller>
             <Scene
-              duration={800}
+              duration={500}
               pin={true}
               triggerHook={0}
               classToggle="parent-ninja"
@@ -183,7 +258,7 @@ class Home extends React.Component {
                 </div>
               </div>
             </Scene>
-            <Scene duration={800} pin={true} triggerHook={0}>
+            <Scene duration={500} pin={true} triggerHook={0}>
               <div className="scene" id="scene-3">
                 <History />
                 <div className={this.state.octopusAnim} id="octopus-anim-box">
@@ -191,21 +266,24 @@ class Home extends React.Component {
                 </div>
               </div>
             </Scene>
-            <Scene duration={800} pin={true} triggerHook={0}>
+            <Scene duration={500} pin={true} triggerHook={0}>
               <div className="scene" id="scene-4">
                 <ProfHighlights content={profHighlights.y2018} />
-                <ApMDemo />
+                <div className={this.state.demo} id="demo-anim-box">
+                  <ApMDemo />
+                </div>
                 <div id="androidpit-button-container">
                   <APitTools />
-                  <ButtonSecondary
+                  <Button
                     buttonText="Visit Web Site"
                     buttonLink="https://www.androidpit.de/"
-                    buttonWidth="70px"
+                    buttonType="secondary"
+                    buttonWidth="210px"
                   />
                 </div>
               </div>
             </Scene>
-            <Scene duration={800} pin={true} triggerHook={0}>
+            <Scene duration={500} pin={true} triggerHook={0}>
               <div className="scene" id="scene-5">
                 <ProfHighlights content={profHighlights.y2017} />
                 <div className={this.state.ob} id="ob-anim-box">
@@ -213,7 +291,7 @@ class Home extends React.Component {
                 </div>
               </div>
             </Scene>
-            <Scene duration={800} pin={true} triggerHook={0}>
+            <Scene duration={500} pin={true} triggerHook={0}>
               <div className="scene" id="scene-6">
                 <ProfHighlights content={profHighlights.y2016} />
                 <div className={this.state.bear} id="bear-anim-box">
@@ -221,7 +299,7 @@ class Home extends React.Component {
                 </div>
               </div>
             </Scene>
-            <Scene duration={800} pin={true} triggerHook={0}>
+            <Scene duration={500} pin={true} triggerHook={0}>
               <div className="scene" id="scene-7">
                 <ProfHighlights content={profHighlights.y2015} />
                 <div className={this.state.lenin} id="lenin-anim-box">
@@ -232,13 +310,26 @@ class Home extends React.Component {
                 </div>
               </div>
             </Scene>
-            <Scene duration={800} pin={true} triggerHook={0}>
+            <Scene duration={500} pin={true} triggerHook={0}>
               <div className="scene" id="scene-8">
                 <ProfHighlights content={profHighlights.y2014} />
-                <ButtonPrimary buttonText="Learn more" />
-                <ButtonSecondary buttonText="More info" />
+                <div className={this.state.blackboard} id="blackboard-anim-box">
+                  <Blackboard />
+                </div>
+                <div className={this.state.teacher} id="teacher-anim-box">
+                  <Teacher />
+                </div>
+                <div className={this.state.students} id="students-anim-box">
+                  <Students />
+                </div>
               </div>
             </Scene>
+            <div className="scene" id="scene-9">
+              <div className={this.state.goat} id="goat-anim-box">
+                <Goat />
+              </div>
+              <FinalWords />
+            </div>
           </Controller>
         </section>
       </>
