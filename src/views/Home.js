@@ -14,7 +14,6 @@ import Octopus from "../components/Octopus";
 import ApMDemo from "../components/ApMDemo";
 import ProfHighlights from "../components/ProfHighlights";
 import ObVideo from "../components/ObVideo";
-import APitTools from "../components/APitTools";
 import Trolleybus from "../components/Trolleybus";
 import Lenin from "../components/Lenin";
 import Blackboard from "../components/Blackboard";
@@ -42,12 +41,18 @@ class Home extends React.Component {
       teacher: "hidden",
       students: "hidden",
       blackboard: "hidden",
-      goat: ""
+      goat: "hidden",
+      snapped: "",
+      scrollBackwards: false
     };
     this.debouncedScrollListener = this.debounce(this.checkTriggerElements);
+    this.debouncedScrollDirectionListener = this.debounce(
+      this.checkScrollDirection
+    );
+    this.scrollPos = 0;
   }
 
-  debounce = (func, wait = 20, immediate = true) => {
+  debounce = (func, wait = 10, immediate = true) => {
     let timeout;
     return function() {
       const context = this,
@@ -63,165 +68,263 @@ class Home extends React.Component {
     };
   };
 
-  checkTriggerElements = () => {
-    // Animate scenes
-    const triggerElement1 = document.getElementById("myIntro");
+  checkScrollDirection = () => {
+    if (document.body.getBoundingClientRect().top > this.scrollPos) {
+      this.setState({ scrollBackwards: true });
+      this.scrollPos = document.body.getBoundingClientRect().top;
+    } else {
+      this.setState({ scrollBackwards: false });
+      this.scrollPos = document.body.getBoundingClientRect().top;
+    }
+  };
 
-    // distance from bottom/to top when the animation is supposed to start/end
+  relationToView = el => {
+    const rect = el.getBoundingClientRect();
+    const elemTop = rect.top;
     const triggerMargin = window.innerHeight / 5;
 
-    // bottom of the triggerElement1
-    const triggerBottom1 =
-      triggerElement1 &&
-      triggerElement1.offsetTop + triggerElement1.clientHeight;
-    const trigger1IsHiddenEnough =
-      window.scrollY > triggerBottom1 - triggerMargin;
-
-    if (trigger1IsHiddenEnough) {
-      this.setState({ foxPinned: "fox-unpinned" });
+    if (elemTop <= triggerMargin * 4 && elemTop >= 0) {
+      return "isPartiallyVisible";
+    } else if (elemTop < window.innerHeight - triggerMargin) {
+      return "isPartiallyHidden";
+    } else if (elemTop > triggerMargin * 4 && elemTop <= triggerMargin * 6) {
+      return "isConditionForBackScrollHide";
     } else {
-      this.setState({ foxPinned: "fox-pinned" });
+      return "isHidden";
     }
+  };
 
-    // animated element loses .hidden once its sibling is in viewport
+  // The 1st and the last scenes has different conditions to display animation
+  relationToView1stScene = el => {
+    const triggerMargin = window.innerHeight / 5;
+    const elemBottom = el && el.offsetTop + el.clientHeight;
+
+    if (window.scrollY > elemBottom - triggerMargin) {
+      return "isVisible";
+    } else {
+      return "isPartiallyHidden";
+    }
+  };
+
+  checkTriggerElements = () => {
+    const introTrigger = document.getElementById("myIntro");
     const ninjaTrigger = document.getElementById("skills");
-    const ninjaBeforeAnimationArea =
-      ninjaTrigger && ninjaTrigger.getBoundingClientRect().top;
-
-    if (
-      ninjaBeforeAnimationArea <= triggerMargin * 4 &&
-      ninjaBeforeAnimationArea >= 0
-    ) {
-      this.setState({ ninja: "ninja-appear" });
-    } else if (ninjaBeforeAnimationArea < 0) {
-      this.setState({ ninja: "ninja-hide" });
-    } else {
-      this.setState({ ninja: "hidden" });
-    }
-
-    // animation scene-3
-    // animated element loses .hidden once its sibling is in viewport
     const octopusTrigger = document.getElementById("history");
-    const octopusBeforeAnimationArea =
-      octopusTrigger && octopusTrigger.getBoundingClientRect().top;
-
-    if (
-      octopusBeforeAnimationArea <= triggerMargin * 4 &&
-      octopusBeforeAnimationArea >= 0
-    ) {
-      this.setState({ octopusAnim: "octopus-fall" });
-      this.setState({ octopusLifeAnim: "octopus-birth-anim" });
-    } else if (octopusBeforeAnimationArea < 0) {
-      this.setState({ octopusAnim: "octopus-hide" });
-      this.setState({ octopusLifeAnim: "octopus-fly-away-anim" });
-    } else {
-      this.setState({ octopusAnim: "hidden" });
-      this.setState({ octopusLifeAnim: "hidden" });
-    }
-
-    // animation scene-4
     const demoTrigger = document.getElementById("2018");
-    const demoBeforeAnimationArea =
-      demoTrigger && demoTrigger.getBoundingClientRect().top;
-    if (
-      demoBeforeAnimationArea <= triggerMargin * 4 &&
-      demoBeforeAnimationArea >= 0
-    ) {
-      this.setState({ demo: "demo-appear" });
-    } else if (demoBeforeAnimationArea < 0) {
-      this.setState({ demo: "demo-hide" });
-    } else {
-      this.setState({ demo: "hidden" });
-    }
-
-    // animation scene-5
     const obTrigger = document.getElementById("2017");
-    const obBeforeAnimationArea =
-      obTrigger && obTrigger.getBoundingClientRect().top;
-    if (
-      obBeforeAnimationArea <= triggerMargin * 4 &&
-      obBeforeAnimationArea >= 0
-    ) {
-      this.setState({ ob: "ob-appear" });
-    } else if (obBeforeAnimationArea < 0) {
-      this.setState({ ob: "ob-hide" });
-    } else {
-      this.setState({ ob: "hidden" });
-    }
-
-    // animation scene-6
     const bearTrigger = document.getElementById("2016");
-    const bearBeforeAnimationArea =
-      bearTrigger && bearTrigger.getBoundingClientRect().top;
-    if (
-      bearBeforeAnimationArea <= triggerMargin * 4 &&
-      bearBeforeAnimationArea >= 0
-    ) {
-      this.setState({ bear: "bear-appear" });
-    } else if (bearBeforeAnimationArea < 0) {
-      this.setState({ bear: "bear-hide" });
-    } else {
-      this.setState({ bear: "hidden" });
-    }
-
-    // animation scene-7
     const trolleybusTrigger = document.getElementById("2015");
-    const trolleybusBeforeAnimationArea =
-      trolleybusTrigger && trolleybusTrigger.getBoundingClientRect().top;
-    if (
-      trolleybusBeforeAnimationArea <= triggerMargin * 4 &&
-      trolleybusBeforeAnimationArea >= 0
-    ) {
-      this.setState({ trolleybus: "trolleybus-appear" });
-      this.setState({ lenin: "lenin-appear" });
-    } else if (trolleybusBeforeAnimationArea < 0) {
-      this.setState({ trolleybus: "trolleybus-hide" });
-      this.setState({ lenin: "lenin-hide" });
-    } else {
-      this.setState({ trolleybus: "hidden" });
-      this.setState({ lenin: "hidden" });
-    }
-
-    // animation scene-8
     const teacherTrigger = document.getElementById("2014");
-    const teacherBeforeAnimationArea =
-      teacherTrigger && teacherTrigger.getBoundingClientRect().top;
-    if (
-      teacherBeforeAnimationArea <= triggerMargin * 4 &&
-      teacherBeforeAnimationArea >= 0
-    ) {
-      this.setState({ blackboard: "blackboard-appear" });
-      this.setState({ teacher: "teacher-appear" });
-      this.setState({ students: "students-appear" });
-    } else if (teacherBeforeAnimationArea < 0) {
-      this.setState({ blackboard: "blackboard-hide" });
-      this.setState({ teacher: "teacher-hide" });
-      this.setState({ students: "students-hide" });
-    } else {
-      this.setState({ blackboard: "hidden" });
-      this.setState({ teacher: "hidden" });
-      this.setState({ students: "hidden" });
+    const goatTrigger = document.getElementById("thanks");
+
+    const introPos = this.relationToView1stScene(introTrigger);
+    const ninjaPos = this.relationToView(ninjaTrigger);
+    const octopusPos = this.relationToView(octopusTrigger);
+    const demoPos = this.relationToView(demoTrigger);
+    const obPos = this.relationToView(obTrigger);
+    const bearPos = this.relationToView(bearTrigger);
+    const trolleybusPos = this.relationToView(trolleybusTrigger);
+    const teacherPos = this.relationToView(teacherTrigger);
+    const goatPos = this.relationToView(goatTrigger);
+
+    const ninjaScene = document.getElementById("scene-2");
+
+    switch (introPos) {
+      case "isVisible":
+        this.setState({ foxPinned: "fox-unpinned" });
+        break;
+      default:
+        this.setState({ foxPinned: "fox-pinned" });
+        break;
     }
 
-    // animation scene-9
-    const goatTrigger = document.getElementById("thanks");
-    const goatBeforeAnimationArea =
-      goatTrigger && goatTrigger.getBoundingClientRect().top;
-    if (
-      goatBeforeAnimationArea <= triggerMargin * 4 &&
-      goatBeforeAnimationArea >= 0
-    ) {
-      this.setState({ goat: "goat-appear" });
-    } else if (goatBeforeAnimationArea < 0) {
-      this.setState({ goat: "goat-hide" });
-    } else {
-      this.setState({ goat: "hidden" });
+    switch (ninjaPos) {
+      case "isPartiallyVisible":
+        if (!this.state.scrollBackwards) {
+          // ninjaScene.scrollIntoView({ behavior: "smooth" });
+          this.setState({snapped: "snapped"});
+        }
+        this.setState({ ninja: "ninja-appear" });
+        break;
+      case "isPartiallyHidden":
+          this.setState({snapped: ""});
+        this.setState({ ninja: "ninja-hide" });
+        break;
+      case "isConditionForBackScrollHide":
+        if (this.state.scrollBackwards) {
+          this.setState({ ninja: "ninja-hide" });
+          break;
+        } else {
+          this.setState({ ninja: "hidden" });
+          break;
+        }
+      default:
+        this.setState({ ninja: "hidden" });
+        break;
+    }
+
+    switch (octopusPos) {
+      case "isPartiallyVisible":
+        this.setState({ octopusAnim: "octopus-fall" });
+        this.setState({ octopusLifeAnim: "octopus-birth-anim" });
+        break;
+      case "isPartiallyHidden":
+        this.setState({ octopusAnim: "octopus-hide" });
+        this.setState({ octopusLifeAnim: "octopus-fly-away-anim" });
+        break;
+      case "isConditionForBackScrollHide":
+        if (this.state.scrollBackwards) {
+          this.setState({ octopusAnim: "octopus-hide" });
+          this.setState({ octopusLifeAnim: "octopus-fly-away-anim" });
+          break;
+        } else {
+          this.setState({ octopusAnim: "hidden" });
+          this.setState({ octopusLifeAnim: "hidden" });
+          break;
+        }
+      default:
+        this.setState({ octopusAnim: "hidden" });
+        this.setState({ octopusLifeAnim: "hidden" });
+        break;
+    }
+
+    switch (demoPos) {
+      case "isPartiallyVisible":
+        this.setState({ demo: "demo-appear" });
+        break;
+      case "isPartiallyHidden":
+        this.setState({ demo: "demo-hide" });
+        break;
+      case "isConditionForBackScrollHide":
+        if (this.state.scrollBackwards) {
+          this.setState({ demo: "demo-hide" });
+          break;
+        } else {
+          this.setState({ demo: "hidden" });
+          break;
+        }
+      default:
+        this.setState({ demo: "hidden" });
+        break;
+    }
+
+    switch (obPos) {
+      case "isPartiallyVisible":
+        this.setState({ ob: "ob-appear" });
+        break;
+      case "isPartiallyHidden":
+        this.setState({ ob: "ob-hide" });
+        break;
+      case "isConditionForBackScrollHide":
+        if (this.state.scrollBackwards) {
+          this.setState({ ob: "ob-hide" });
+          break;
+        } else {
+          this.setState({ ob: "hidden" });
+          break;
+        }
+      default:
+        this.setState({ ob: "hidden" });
+        break;
+    }
+
+    switch (bearPos) {
+      case "isPartiallyVisible":
+        this.setState({ bear: "bear-appear" });
+        break;
+      case "isPartiallyHidden":
+        this.setState({ bear: "bear-hide" });
+        break;
+      case "isConditionForBackScrollHide":
+        if (this.state.scrollBackwards) {
+          this.setState({ bear: "bear-hide" });
+          break;
+        } else {
+          this.setState({ bear: "hidden" });
+          break;
+        }
+      default:
+        this.setState({ bear: "hidden" });
+        break;
+    }
+
+    switch (trolleybusPos) {
+      case "isPartiallyVisible":
+        this.setState({ trolleybus: "trolleybus-appear" });
+        this.setState({ lenin: "lenin-appear" });
+        break;
+      case "isPartiallyHidden":
+        this.setState({ trolleybus: "trolleybus-hide" });
+        this.setState({ lenin: "lenin-hide" });
+        break;
+      case "isConditionForBackScrollHide":
+        if (this.state.scrollBackwards) {
+          this.setState({ trolleybus: "trolleybus-hide" });
+          this.setState({ lenin: "lenin-hide" });
+          break;
+        } else {
+          this.setState({ trolleybus: "hidden" });
+          this.setState({ lenin: "hidden" });
+          break;
+        }
+      default:
+        this.setState({ trolleybus: "hidden" });
+        this.setState({ lenin: "hidden" });
+        break;
+    }
+
+    switch (teacherPos) {
+      case "isPartiallyVisible":
+        this.setState({ blackboard: "blackboard-appear" });
+        this.setState({ teacher: "teacher-appear" });
+        this.setState({ students: "students-appear" });
+        break;
+      case "isPartiallyHidden":
+        this.setState({ blackboard: "blackboard-hide" });
+        this.setState({ teacher: "teacher-hide" });
+        this.setState({ students: "students-hide" });
+        break;
+      case "isConditionForBackScrollHide":
+        if (this.state.scrollBackwards) {
+          this.setState({ blackboard: "blackboard-hide" });
+          this.setState({ teacher: "teacher-hide" });
+          this.setState({ students: "students-hide" });
+          break;
+        } else {
+          this.setState({ blackboard: "hidden" });
+          this.setState({ teacher: "hidden" });
+          this.setState({ students: "hidden" });
+          break;
+        }
+      default:
+        this.setState({ blackboard: "hidden" });
+        this.setState({ teacher: "hidden" });
+        this.setState({ students: "hidden" });
+        break;
+    }
+
+    switch (goatPos) {
+      case "isPartiallyVisible":
+        this.setState({ goat: "goat-appear" });
+        break;
+      case "isConditionForBackScrollHide":
+        if (this.state.scrollBackwards && this.state.goat === "goat-appear") {
+          this.setState({ goat: "goat-hide" });
+          break;
+        } else {
+          this.setState({ goat: "hidden" });
+          break;
+        }
+      default:
+        this.setState({ goat: "hidden" });
+        break;
     }
   };
 
   componentDidMount() {
     window.scrollTo(0, 0);
     window.addEventListener("scroll", this.debouncedScrollListener);
+    window.addEventListener("scroll", this.debouncedScrollDirectionListener);
 
     // Animate the first Scene after loading
     setTimeout(() => {
@@ -231,12 +334,13 @@ class Home extends React.Component {
 
   componentWillUnmount() {
     window.removeEventListener("scroll", this.debouncedScrollListener);
+    window.removeEventListener("scroll", this.debouncedScrollDirectionListener);
   }
 
   render() {
     return (
       <>
-        <section>
+        <section id="wrapper">
           <div className={"scene " + this.state.introAnim} id="scene-1">
             <Intro />
             <div className={this.state.foxPinned} id="fox-anim-box">
@@ -250,7 +354,7 @@ class Home extends React.Component {
               triggerHook={0}
               classToggle="parent-ninja"
             >
-              <div className="scene" id="scene-2">
+              <div className={"scene " + this.state.snapped} id="scene-2">
                 <Skills />
                 <Tools />
                 <div className={this.state.ninja} id="ninja-anim-box">
@@ -273,7 +377,6 @@ class Home extends React.Component {
                   <ApMDemo />
                 </div>
                 <div id="androidpit-button-container">
-                  <APitTools />
                   <Button
                     buttonText="Visit Web Site"
                     buttonLink="https://www.androidpit.de/"
