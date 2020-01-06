@@ -1,6 +1,5 @@
 import React from "react";
-import "../App.scss";
-import { Controller, Scene } from "react-scrollmagic";
+import "../App.scss";   
 
 import Skills from "../components/Skills";
 import Tools from "../components/Tools";
@@ -81,13 +80,14 @@ class Home extends React.Component {
   relationToView = el => {
     const rect = el.getBoundingClientRect();
     const elemTop = rect.top;
+    const elemBottom = rect.bottom;
     const triggerMargin = window.innerHeight / 5;
 
-    if (elemTop <= triggerMargin * 4 && elemTop >= 0) {
+    if (elemTop <= (window.innerHeight - triggerMargin) && elemBottom > triggerMargin) {
       return "isPartiallyVisible";
-    } else if (elemTop < window.innerHeight - triggerMargin) {
+    } else if (elemTop < triggerMargin && elemBottom <= triggerMargin) {
       return "isPartiallyHidden";
-    } else if (elemTop > triggerMargin * 4 && elemTop <= triggerMargin * 6) {
+    } else if (elemTop > (window.innerHeight - triggerMargin) && elemTop <= (window.innerHeight + triggerMargin)) {
       return "isConditionForBackScrollHide";
     } else {
       return "isHidden";
@@ -107,8 +107,8 @@ class Home extends React.Component {
   };
 
   checkTriggerElements = () => {
-    const introTrigger = document.getElementById("myIntro");
-    const ninjaTrigger = document.getElementById("skills");
+    const introTrigger = document.getElementById("my-intro");
+    const ninjaTrigger = document.getElementById("description-container");
     const octopusTrigger = document.getElementById("history");
     const demoTrigger = document.getElementById("2018");
     const obTrigger = document.getElementById("2017");
@@ -141,7 +141,6 @@ class Home extends React.Component {
     switch (ninjaPos) {
       case "isPartiallyVisible":
         if (!this.state.scrollBackwards) {
-          // ninjaScene.scrollIntoView({ behavior: "smooth" });
           this.setState({snapped: "snapped"});
         }
         this.setState({ ninja: "ninja-appear" });
@@ -347,30 +346,21 @@ class Home extends React.Component {
               <Fox />
             </div>
           </div>
-          <Controller>
-            <Scene
-              duration={500}
-              pin={true}
-              triggerHook={0}
-              classToggle="parent-ninja"
-            >
               <div className={"scene " + this.state.snapped} id="scene-2">
+                <div id="description-container">
                 <Skills />
                 <Tools />
+                </div>
                 <div className={this.state.ninja} id="ninja-anim-box">
                   <Ninja />
                 </div>
               </div>
-            </Scene>
-            <Scene duration={500} pin={true} triggerHook={0}>
               <div className="scene" id="scene-3">
                 <History />
                 <div className={this.state.octopusAnim} id="octopus-anim-box">
                   <Octopus octopusLifeAnim={this.state.octopusLifeAnim} />
                 </div>
               </div>
-            </Scene>
-            <Scene duration={500} pin={true} triggerHook={0}>
               <div className="scene" id="scene-4">
                 <ProfHighlights content={profHighlights.y2018} />
                 <div className={this.state.demo} id="demo-anim-box">
@@ -385,24 +375,18 @@ class Home extends React.Component {
                   />
                 </div>
               </div>
-            </Scene>
-            <Scene duration={500} pin={true} triggerHook={0}>
               <div className="scene" id="scene-5">
                 <ProfHighlights content={profHighlights.y2017} />
                 <div className={this.state.ob} id="ob-anim-box">
                   <ObVideo />
                 </div>
               </div>
-            </Scene>
-            <Scene duration={500} pin={true} triggerHook={0}>
               <div className="scene" id="scene-6">
                 <ProfHighlights content={profHighlights.y2016} />
                 <div className={this.state.bear} id="bear-anim-box">
                   <Bear />
                 </div>
               </div>
-            </Scene>
-            <Scene duration={500} pin={true} triggerHook={0}>
               <div className="scene" id="scene-7">
                 <ProfHighlights content={profHighlights.y2015} />
                 <div className={this.state.lenin} id="lenin-anim-box">
@@ -412,8 +396,6 @@ class Home extends React.Component {
                   <Trolleybus />
                 </div>
               </div>
-            </Scene>
-            <Scene duration={500} pin={true} triggerHook={0}>
               <div className="scene" id="scene-8">
                 <ProfHighlights content={profHighlights.y2014} />
                 <div className={this.state.blackboard} id="blackboard-anim-box">
@@ -426,14 +408,12 @@ class Home extends React.Component {
                   <Students />
                 </div>
               </div>
-            </Scene>
             <div className="scene" id="scene-9">
               <div className={this.state.goat} id="goat-anim-box">
                 <Goat />
               </div>
               <FinalWords />
             </div>
-          </Controller>
         </section>
       </>
     );

@@ -7,7 +7,7 @@ function Intro() {
   return (
     <>
       <Logo />
-      <p id="myIntro">{introText.myIntro}</p>
+      <p id="my-intro">{introText.myIntro}</p>
     </>
   );
 }

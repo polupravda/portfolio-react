@@ -7,7 +7,7 @@ import { notFound } from "../Content.js";
 
 function NotFound() {
   return (
-    <div id="not-found">
+    <section id="not-found">
       <Code404 />
       <span class="error-message">{notFound.errorMessage}</span>
       <div id="stone-shadow"></div>
@@ -18,7 +18,7 @@ function NotFound() {
         buttonType="secondary"
         buttonWidth="210px"
       />
-    </div>
+    </section>
   );
 }
 

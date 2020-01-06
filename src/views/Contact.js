@@ -1,18 +1,21 @@
 import React from "react";
 import "../App.scss";
+import {isMobileDevice} from "../helperFunctions";
 import { contact, myContactDetails } from "../Content";
 import Coffee from "../components/Coffee";
 
 function Contact() {
   return (
-    <div id="contact">
+    <section id="contact">
       <Coffee />
+      <span id="contact-me">{contact.contactMe}</span>
       <div id="contact-intro-container">
         <span>{contact.intro1}</span>
         <span className="contact-data" id="berlin">
           {contact.berlin}
         </span>
         <span>{contact.intro2}</span>
+        {isMobileDevice() ? <br/> : ""}
         <a
           href="mailto:elena.volovicheva@gmail.com"
           target="_top"
@@ -44,8 +47,7 @@ function Contact() {
           {contact.linkedin}
         </a>
       </div>
-      <span id="contact-me">{contact.contactMe}</span>
-    </div>
+    </section>
   );
 }
 

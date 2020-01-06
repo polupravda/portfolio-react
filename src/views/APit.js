@@ -1,5 +1,6 @@
 import React from "react";
 import "../App.scss";
+import {isMobileDevice} from "../helperFunctions";
 import { aPitProject } from "../Content";
 import APitDesignSystemHeadline from "../components/APitDesignSystemHeadline";
 import LogoNuxt from "../components/LogoNuxt";
@@ -13,16 +14,18 @@ import APitPhase1 from "../components/APitPhase1";
 import APitPhase2 from "../components/APitPhase2";
 import APitPhase3 from "../components/APitPhase3";
 import Button from "../components/Button";
+import Iphone from "../components/Iphone";
+import { hints } from "../Content";
 
 class APit extends React.Component {
   componentDidMount() {
     window.scrollTo(0, 0);
-  }
+  };
 
   render() {
     return (
       <section id="apit-work-container">
-        <div id="apit-scene-1">
+        <div id="apit-scene-1" className="apit-scene">
           <APitDesignSystemHeadline />
           <h2 id="headline-2">{aPitProject.headlineMain2}</h2>
           <h2 className="subline" id="role">
@@ -41,7 +44,7 @@ class APit extends React.Component {
             {aPitProject.usedTools}
           </h2>
         </div>
-        <div id="apit-scene-2">
+        <div id="apit-scene-2" className="apit-scene">
           <div className="img-screen-left">
             <p class="img-description">{aPitProject.img1Description}</p>
             <OldDesktop alt={aPitProject.img1Description} />
@@ -49,22 +52,24 @@ class APit extends React.Component {
           <p>{aPitProject.paragraph1}</p>
           <Tag tagText={aPitProject.tagText} />
         </div>
-        <div id="apit-scene-3">
+        <div id="apit-scene-3" className="apit-scene">
           <APitPhase1 />
           <p id="scene3-p1">{aPitProject.paragraph2}</p>
-          <div id="apit-old-logo-container" className="apit-logo-container">
-            <img
-              src="assets/images/ap-logo-before.png"
-              alt={aPitProject.img2Description}
-            />
-            <p class="img-description">{aPitProject.img2Description}</p>
-          </div>
-          <div id="apit-new-logo-container" className="apit-logo-container">
-            <img
-              src="/assets/images/ap-logo-after.png"
-              alt={aPitProject.img3Description}
-            />
-            <p class="img-description">{aPitProject.img3Description}</p>
+          <div id="apit-logos-container">
+            <div id="apit-old-logo-container" className="apit-logo-container">
+              <img
+                src="assets/images/ap-logo-before.png"
+                alt={aPitProject.img2Description}
+              />
+              <p class="img-description">{aPitProject.img2Description}</p>
+            </div>
+            <div id="apit-new-logo-container" className="apit-logo-container">
+              <img
+                src="/assets/images/ap-logo-after.png"
+                alt={aPitProject.img3Description}
+              />
+              <p class="img-description">{aPitProject.img3Description}</p>
+            </div>
           </div>
           <p id="scene3-p2">{aPitProject.paragraph3}</p>
           <div id="ap-brandbook-images-container">
@@ -78,7 +83,7 @@ class APit extends React.Component {
             />
           </div>
         </div>
-        <div id="apit-scene-4">
+        <div id="apit-scene-4" className="apit-scene">
           <APitPhase2 />
           <div>
             <p>{aPitProject.paragraph4}</p>
@@ -93,7 +98,7 @@ class APit extends React.Component {
             />
           </div>
         </div>
-        <div id="apit-scene-5">
+        <div id="apit-scene-5" className="apit-scene">
           <APitPhase3 />
           <div id="apit-scene-5-paragraphs-1">
             <p>{aPitProject.paragraph8}</p>
@@ -119,34 +124,34 @@ class APit extends React.Component {
               alt={aPitProject.img8Description}
             />
           </div>
-          <AppleDesktop />
+          {isMobileDevice() ? (<> <Tag tagText={hints.scrollMe}/> <Iphone /> </>) : (<AppleDesktop />)}
           <div id="apit-scene-5-paragraph-2-container">
             <div id="apit-scene-5-paragraph-2">
               <p>{aPitProject.paragraph6}</p>
               <p>{aPitProject.paragraph7}</p>
             </div>
-            <Tag tagText={aPitProject.tagText} />
+            {isMobileDevice() ? "" : <Tag tagText={aPitProject.tagText} />}
           </div>
         </div>
-        <div id="apit-scene-6">
+        <div id="apit-scene-6" className="apit-scene">
           <p>{aPitProject.paragraph10}</p>
           <img
             id="ap-comment-1"
-            src="/assets/images/apit-comment-1.png"
+            src={isMobileDevice() ? "/assets/images/apit-comment-1-m.png" : "/assets/images/apit-comment-1.png"}
             alt={aPitProject.img9Description}
           />
           <img
             id="ap-comment-2"
-            src="/assets/images/apit-comment-2.png"
+            src={isMobileDevice() ? "/assets/images/apit-comment-2-m.png" : "/assets/images/apit-comment-2.png"}
             alt={aPitProject.img9Description}
           />
           <img
             id="ap-comment-3"
-            src="/assets/images/apit-comment-3.png"
+            src={isMobileDevice() ? "/assets/images/apit-comment-3-m.png" : "/assets/images/apit-comment-3.png"}
             alt={aPitProject.img9Description}
           />
         </div>
-        <div id="apit-scene-7">
+        <div id="apit-scene-7" className="apit-scene">
           <p className="p-1">{aPitProject.paragraph11}</p>
           <p className="p-2">{aPitProject.paragraph12}</p>
           <p className="p-3">{aPitProject.paragraph13}</p>

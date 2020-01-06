@@ -10,32 +10,45 @@ $font-secondary: "Gaegu",
 cursive;
 
 // Mixins
-@mixin mobile {
-  @media only screen and (max-width: 480px) {
+
+@mixin tablet-landscape {
+  @media only screen and (max-width: 1113px) and (orientation: landscape) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media only screen and (max-width: 834px) {
     @content;
   }
 }
 
 @mixin mobile-landscape {
-  @media only screen and (min-width: 481px) {
+  @media only screen and (max-width: 813px) and (orientation: landscape) {
     @content;
   }
 }
 
-@mixin tablet {
-  @media only screen and (min-width: 1200px) {
-    @content;
-  }
-}
-
-@mixin tablet {
-  @media only screen and (min-width: 1800px) {
+@mixin mobile {
+  @media only screen and (max-width: 813px) {
     @content;
   }
 }
 
 @mixin bodyFontSize {
-  font-size: 16px;
+  font-size: 14px;
+
+  @include tablet {
+    font-size: 20px;
+  }
+
+  @include tablet-landscape {
+    font-size: 20px;
+  }
+
+  @include mobile {
+    font-size: 14px;
+  }
 
   @include mobile {
     font-size: 14px;
@@ -51,10 +64,6 @@ body {
 }
 
 // Styles
-.test {
-  background: red;
-}
-
 .App {
   text-align: center;
   font-family: $font-primary;
@@ -88,7 +97,10 @@ body {
 }
 
 #wrapper {
-  scroll-snap-type: y mandatory;
+  @include mobile {
+    width: 100vw;
+    margin: 0 5vw;
+  }
 }
 
 h2 {
@@ -145,10 +157,15 @@ h2 {
   display: grid;
   z-index: 1;
   margin-bottom: 50vh;
-}
 
-.snapped {
-  scroll-snap-align: start;
+  @include mobile {
+    display: flex;
+    flex-direction: column;
+    width: 90vw;
+    margin: 20vh 5vw;
+    min-height: 100vh;
+    height: 100%;
+  }
 }
 
 #scene-1 {
@@ -163,6 +180,10 @@ h2 {
     "fox fox . .";
   margin-top: 10px;
 
+  @include mobile {
+    margin-top: 20vh;
+  }
+
   #profession {
     font-family: $font-secondary;
     font-size: 3.5vw;
@@ -171,11 +192,19 @@ h2 {
     position: absolute;
     right: 0;
     top: 0;
+
+    @include mobile {
+      font-size: 4.5vw;
+    }
   }
 
   #logo {
     position: relative;
     grid-area: logo;
+
+    @include mobile {
+      width: 90vw;
+    }
 
     path {
       fill: $app-black;
@@ -190,8 +219,9 @@ h2 {
     }
   }
 
-  #myIntro {
+  #my-intro {
     grid-area: introduction-text;
+    z-index: 1;
   }
 
   #fox-anim {
@@ -204,22 +234,27 @@ h2 {
 }
 
 #scene-2 {
-  grid-template-rows: 1fr max-content max-content 2fr;
-  grid-template-columns: 1fr 1fr 3fr 1fr;
+  grid-template-rows: 1fr max-content 2fr;
+  grid-template-columns: 1fr auto 1fr;
   grid-gap: 2vh;
   align-items: start;
   grid-template-areas:
-    ". . . ."
-    ". skills tools ."
-    ". . ninja ninja"
-    ". . . .";
+    ". . ."
+    ". description ."
+    ". . ninja"
+    ". . .";
 
-  #skills {
-    grid-area: skills;
+  @include mobile {
+    margin-bottom: 60vh;
   }
 
-  #tools {
-    grid-area: tools;
+  #description-container {
+    grid-area: description;
+    display: flex;
+
+    @include mobile {
+      flex-direction: column;
+    }
   }
 }
 
@@ -228,6 +263,11 @@ h2 {
   position: fixed;
   bottom: 1vw;
   right: -40vw;
+
+  @include mobile-landscape {
+    right: -56vw;
+    bottom: -3vw;
+  }
 }
 
 .ninja-appear {
@@ -247,27 +287,6 @@ h2 {
   position: static;
 }
 
-.navbar-items-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-.navbar-items {
-  font-family: $font-primary;
-  color: $app-white;
-  font-size: 18px;
-  text-decoration: none;
-  text-transform: uppercase;
-  margin: 0.5vh 0;
-
-  &:hover {
-    .underline-path {
-      animation: 0.3s draw ease-out forwards;
-    }
-  }
-}
-
 #scene-3 {
   grid-template-rows: 1fr max-content max-content 2fr;
   grid-template-columns: 1fr 1fr 3fr 1fr;
@@ -281,11 +300,26 @@ h2 {
 
   #octopus-anim {
     grid-area: octopus;
+
+    @include mobile {
+      transform: scale(2.5);
+      margin-bottom: 10vh;
+    }
+
+    @include mobile-landscape {
+      transform: scale(1.3);
+      margin-bottom: 0;
+    }
   }
 
   #history {
     grid-area: history;
     z-index: 3;
+
+    @include mobile-landscape {
+      width: 60vw;
+      align-self: flex-end;
+    }
   }
 
   h2 {
@@ -344,7 +378,11 @@ h2 {
     justify-content: space-between;
 
     @include mobile {
-      flex-wrap: wrap;
+      display: grid;
+      grid-row: 1fr 1fr;
+      grid-column: 1fr 2fr;
+      grid-gap: 3vw;
+      justify-content: stretch;
     }
 
     .i-container {
@@ -352,6 +390,32 @@ h2 {
 
       &:not(:first-child) {
         margin-left: 30px;
+
+        @include mobile {
+          margin-left: 0;
+        }
+      }
+
+      @include mobile {
+        &:nth-child(1) {
+          grid-row: 1;
+          grid-column: 1;
+        }
+
+        &:nth-child(2) {
+          grid-row: 1;
+          grid-column: 2;
+        }
+
+        &:nth-child(3) {
+          grid-row: 2;
+          grid-column: 1;
+        }
+
+        &:nth-child(4) {
+          grid-row: 2;
+          grid-column: 2;
+        }
       }
     }
   }
@@ -368,12 +432,15 @@ h2 {
   grid-template-columns: 1fr 2fr 2fr 1fr;
   grid-gap: 2vh;
   align-items: start;
-  width: 100vw;
   grid-template-areas:
     ". . mobileDemo ."
     ". story2018 mobileDemo ."
     ". story2018 apitButton ."
     ". . . .";
+
+  @include mobile-landscape {
+    margin-bottom: 50vh;
+  }
 
   #demo-anim-box {
     grid-area: mobileDemo;
@@ -381,6 +448,10 @@ h2 {
     top: 0;
     right: 13vw;
     transform-origin: left top 0;
+
+    @include mobile {
+      right: 0;
+    }
 
     &.demo-appear {
       transform: translate3d(0, -50vh, 0);
@@ -406,6 +477,10 @@ h2 {
     position: relative;
     right: -6vw;
 
+    @include mobile-landscape {
+      right: 0;
+    }
+
     .button-primary-container {
       margin: auto;
     }
@@ -418,12 +493,30 @@ h2 {
   .prof-highlights-container {
     grid-area: story2018;
     align-self: end;
+    z-index: 3;
+
+    @include mobile-landscape {
+      width: 70vw;
+    }
   }
 
   .ap-m-demo-container {
+    @include mobile {
+      transform: scale(0.7);
+      transform-origin: top right;
+    }
+
+    @include mobile-landscape {
+      transform: scale(1.5);
+    }
+
     #pda-all {
       margin-right: -4vw;
-      transform-origin: top;
+      transform-origin: top right;
+
+      @include mobile {
+        visibility: hidden;
+      }
     }
 
     #iphone-all {
@@ -444,6 +537,10 @@ h2 {
       right: 32%;
       top: 4vh;
 
+      @include mobile-landscape {
+        top: 5vh;
+      }
+
       .tag-text {
         position: relative;
         font-family: $font-secondary;
@@ -452,6 +549,10 @@ h2 {
         font-size: 16px;
         line-height: 1;
         transform: matrix(1, -0.3, 0, 1, 0, 0);
+
+        @include mobile-landscape {
+          font-size: 12px;
+        }
       }
 
       svg {
@@ -464,6 +565,10 @@ h2 {
         width: 10vh;
         transform: rotate(419deg);
         margin-bottom: -72px;
+
+        @include mobile-landscape {
+          margin-bottom: -45px;
+        }
       }
     }
   }
@@ -555,8 +660,17 @@ h2 {
     ". description ."
     ". tv .";
 
+  @include mobile-landscape {
+    margin-bottom: 50vh;
+  }
+
   .prof-highlights-container {
     grid-area: description;
+    z-index: 3;
+
+    @include mobile-landscape {
+      width: 40vw;
+    }
   }
 }
 
@@ -568,6 +682,22 @@ h2 {
   bottom: 0;
   left: 31%;
   transform-origin: bottom;
+  width: 32.5vw;
+  height: 28.2vw;
+
+  @include mobile {
+    width: 65vw;
+    height: 56.4vw;
+    left: 14%;
+    bottom: 1%;
+  }
+
+  @include mobile-landscape {
+    width: 45vw;
+    height: 39.4vw;
+    left: 50vw;
+    bottom: 0;
+  }
 }
 
 #ob-video-container {
@@ -575,8 +705,8 @@ h2 {
   position: relative;
   z-index: 5;
   align-self: end;
-  width: 32.5vw;
-  height: 28.2vw;
+  width: 100%;
+  height: 100%;
 
   img,
   video {
@@ -587,8 +717,8 @@ h2 {
   #tv-shadow {
     filter: blur(10px);
     position: absolute;
-    width: 32.3vw;
-    height: 3vw;
+    width: 100%;
+    height: 10%;
     bottom: -1vw;
     border-radius: 50%;
     background-color: #000;
@@ -597,21 +727,21 @@ h2 {
 }
 
 #ob-video {
-  height: 20vw;
-  width: 20vw;
-  top: 3.6vw;
-  left: 4.1vw;
+  height: 71%;
+  width: 87%;
+  top: 13%;
+  left: 0%;
 }
 
 .tv-canvas {
-  width: 32.5vw;
-  height: 29.2vw;
+  width: 100%;
+  height: 100%;
   position: absolute;
   overflow-x: hidden;
 }
 
 #old-tv {
-  width: 32.3vw;
+  width: 100%;
   overflow: auto;
 }
 
@@ -635,8 +765,18 @@ h2 {
     ". description ."
     "bear bear bear";
 
+  @include mobile-landscape {
+    margin-bottom: 50vh;
+  }
+
   .prof-highlights-container {
     grid-area: description;
+    z-index: 3;
+
+    @include mobile-landscape {
+      width: 70vw;
+      margin: 0 auto;
+    }
   }
 
   #bear-anim-box {
@@ -656,6 +796,14 @@ h2 {
     position: absolute;
     bottom: -2vh;
     animation: bearCycling 15000ms linear infinite;
+
+    @include mobile {
+      animation-duration: 7000ms;
+    }
+
+    @include mobile-landscape {
+      animation-duration: 15000ms;
+    }
   }
 
   .bear-appear {
@@ -681,6 +829,11 @@ h2 {
 
   .prof-highlights-container {
     grid-area: description;
+    z-index: 3;
+
+    @include mobile-landscape {
+      width: 40vw;
+    }
   }
 
   #trolleybus-anim-box {
@@ -696,6 +849,10 @@ h2 {
 
     #trolleybus {
       animation: trolleybusApper 13000ms cubic-bezier(1, 0.01, 0.99, 0.84) forwards infinite;
+
+      @include mobile {
+        animation: trolleybusApperMobile 13000ms cubic-bezier(1, 0.01, 0.99, 0.84) forwards infinite;
+      }
 
       #trolleybus-container {
         height: 100%;
@@ -726,7 +883,7 @@ h2 {
     #trolleybus-arm {
       height: 16%;
       right: 14%;
-      top: 79px;
+      top: 25%;
       transform-origin: 15% 80%;
       transform: rotate(315deg);
       animation: trolleybusArm 600ms ease-in-out infinite alternate;
@@ -756,6 +913,18 @@ h2 {
       height: 80vh;
       width: 30vh;
 
+      @include mobile {
+        right: -7vw;
+        height: 70vh;
+        width: 26vh;
+      }
+
+      @include mobile-landscape {
+        right: 3vw;
+        height: 90vh;
+        width: 33vh;
+      }
+
       img {
         position: absolute;
         display: block;
@@ -771,7 +940,7 @@ h2 {
     #lenin-arm {
       height: 9%;
       left: 0;
-      top: 18.2vh;
+      top: 23%;
       transform-origin: 85% 20%;
       transform: rotate(475deg);
       animation: leninArm 600ms ease-in-out infinite alternate;
@@ -792,6 +961,10 @@ h2 {
     "teacher description ."
     "teacher students .";
 
+  @include mobile-landscape {
+    margin-bottom: 50vh;
+  }
+
   img {
     position: absolute;
     display: block;
@@ -799,6 +972,18 @@ h2 {
 
   .prof-highlights-container {
     grid-area: description;
+    z-index: 3;
+
+    @include mobile {
+      p:not(:first-child) {
+        margin-top: 50vh;
+      }
+    }
+
+    @include mobile-landscape {
+      width: 50vw;
+      margin: 0 auto;
+    }
   }
 
   #blackboard-anim-box {
@@ -821,6 +1006,16 @@ h2 {
       position: relative;
       height: 30vw;
       width: 23vw;
+
+      @include mobile {
+        height: 60vw;
+        width: 46vw;
+      }
+
+      @include mobile-landscape {
+        height: 24vw;
+        width: 19vw;
+      }
     }
   }
 
@@ -829,6 +1024,10 @@ h2 {
     position: fixed;
     bottom: -0.5vw;
     left: 11%;
+
+    @include mobile-landscape {
+      left: 4%;
+    }
 
     &.teacher-appear {
       transform: translate3d(0, 100vh, 0);
@@ -844,6 +1043,16 @@ h2 {
       position: relative;
       height: 19vw;
       width: 16vw;
+
+      @include mobile {
+        height: 47vw;
+        width: 32vw;
+      }
+
+      @include mobile-landscape {
+        height: 20vw;
+        width: 17vw;
+      }
 
       #teacher-body {
         height: 95%;
@@ -875,6 +1084,14 @@ h2 {
     bottom: -100vh;
     right: 7vw;
 
+    @include mobile {
+      right: -5vw;
+    }
+
+    @include mobile-landscape {
+      right: 2vw;
+    }
+
     &.students-appear {
       animation: studentsAppear 300ms 2500ms ease-out forwards;
     }
@@ -888,6 +1105,16 @@ h2 {
       position: relative;
       height: 20vw;
       width: 18vw;
+
+      @include mobile {
+        height: 50vw;
+        width: 45vw;
+      }
+
+      @include mobile-landscape {
+        height: 20vw;
+        width: 17vw;
+      }
     }
   }
 }
@@ -913,7 +1140,6 @@ h2 {
 
   #final-words {
     grid-area: description;
-
     display: grid;
     grid-template-rows: 1fr auto auto auto auto 2fr;
     grid-template-columns: 1fr;
@@ -921,7 +1147,6 @@ h2 {
     grid-gap: 1vw;
     height: 100vh;
     z-index: 100;
-    font-size: 18px;
 
     a {
       text-decoration: underline;
@@ -938,12 +1163,16 @@ h2 {
     .contact-data {
       font-family: $font-secondary;
       text-transform: uppercase;
-      font-size: 2.5vw;
+      font-size: 30px;
       line-height: 1.2;
       font-weight: 300;
       color: $app-black;
       margin-bottom: 12px;
       margin: 0 5px;
+
+      @include mobile {
+        font-size: 30px;
+      }
     }
 
     #thanks {
@@ -954,6 +1183,10 @@ h2 {
       svg {
         height: 20vh;
         width: 70%;
+
+        @include mobile {
+          width: 100%;
+        }
 
         path {
           fill: $app-black;
@@ -974,12 +1207,20 @@ h2 {
       grid-column: 1;
       line-height: 1.2;
       justify-self: end;
+
+      @include mobile {
+        line-height: 2;
+      }
     }
 
     #final-words-works-container {
       grid-row: 4;
       grid-column: 1;
       line-height: 1.2;
+
+      @include mobile {
+        line-height: 2;
+      }
     }
 
     #final-words-github-container {
@@ -987,6 +1228,10 @@ h2 {
       grid-column: 1;
       line-height: 1.2;
       justify-self: end;
+
+      @include mobile {
+        line-height: 2;
+      }
     }
   }
 
@@ -1011,6 +1256,15 @@ h2 {
       height: 50vh;
       width: 100%;
 
+      @include mobile {
+        height: 30vh;
+        bottom: -2vh;
+      }
+
+      @include mobile-landscape {
+        height: 50vh;
+      }
+
       img {
         position: absolute;
         display: block;
@@ -1026,6 +1280,10 @@ h2 {
         transform-origin: 85% 50%;
         mix-blend-mode: hard-light;
         animation: goatFireGrow 2000ms forwards ease-out infinite;
+
+        @include mobile {
+          animation-duration: 1000ms;
+        }
       }
 
       #goat-fire-1-container {
@@ -1034,6 +1292,11 @@ h2 {
         left: 14%;
         top: 23%;
         animation: goatFire 2000ms forwards linear infinite;
+
+        @include mobile {
+          animation-duration: 1000ms;
+          left: 35%;
+        }
       }
 
       #goat-fire-2-container {
@@ -1042,6 +1305,11 @@ h2 {
         left: 6%;
         top: 26%;
         animation: goatFire 2000ms forwards linear infinite;
+
+        @include mobile {
+          animation-duration: 1000ms;
+          left: 20%;
+        }
       }
 
       #goat-fire-1 {
@@ -1093,31 +1361,188 @@ h2 {
   }
 }
 
-#navbar-container {
-  position: fixed;
-  z-index: 1000;
-  top: 5vh;
-  right: 3vw;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
+.App-header {
+  #navbar-container {
+    position: fixed;
+    z-index: 1000;
+    top: 5vh;
+    right: 3vw;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 
-  #linkedin {
-    fill: $app-yellow;
-    margin-top: 5vh;
+    @include mobile {
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+      overflow: hidden;
+      right: 0;
+      top: 0;
 
-    &:hover {
-      fill: $app-black;
+      &.open {
+        .navbar-items-container {
+          height: 100vh;
+        }
+
+        .navicon {
+          background: transparent;
+          width: 48px;
+
+          &::before {
+            transform: rotate(-45deg);
+          }
+
+          &::after {
+            transform: rotate(45deg);
+          }
+
+          &::before,
+          &::after {
+            top: 0;
+          }
+        }
+      }
+
+      a {
+        display: block;
+        text-decoration: none;
+      }
+
+      .navbar-items {
+        overflow: hidden;
+      }
     }
-  }
 
-  #github {
-    fill: $app-yellow;
-    margin-top: 1vh;
-    margin-right: -1px;
+    .menu-icon {
+      display: none;
 
-    &:hover {
-      fill: $app-black;
+      @include mobile {
+        cursor: pointer;
+        display: inline-block;
+        float: right;
+        padding: 40px 24px;
+        user-select: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+      }
+    }
+
+    .navicon {
+      display: none;
+
+      @include mobile {
+        background: $app-white;
+        display: block;
+        height: 8px;
+        position: relative;
+        transition: background 0.2s ease-out;
+        width: 8px;
+
+        &::before,
+        &::after {
+          background: $app-white;
+          content: "";
+          display: block;
+          height: 100%;
+          position: absolute;
+          transition: all 0.2s ease-out;
+          width: 100%;
+        }
+
+        &::before {
+          top: 16px;
+        }
+
+        &::after {
+          top: -16px;
+        }
+      }
+    }
+
+    .navbar-items-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      clear: none;
+      float: right;
+      max-height: none;
+
+      @include mobile {
+        clear: both;
+        height: 0;
+        width: 100vw;
+        transition: height 0.2s ease-out;
+        margin-top: -11vh;
+        padding: 11vh 5vw 0 5vw;
+        background-color: $app-black;
+        justify-content: center;
+      }
+
+      @include mobile-landscape {
+        padding: 11vh 20vw 0 5vw;
+      }
+    }
+
+    .navbar-items {
+      font-family: $font-primary;
+      color: $app-white;
+      font-size: 18px;
+      text-decoration: none;
+      text-transform: uppercase;
+      margin: 0.5vh 0;
+
+      @include mobile {
+        font-size: 15vw;
+      }
+
+      @include mobile-landscape {
+        font-size: 7vw;
+        line-height: 1.2;
+      }
+
+      &:hover {
+        .underline-path {
+          animation: 0.3s draw ease-out forwards;
+        }
+      }
+    }
+
+    #linkedin {
+      fill: $app-yellow;
+      margin-top: 5vh;
+      width: 24px;
+      height: 24px;
+
+      @include mobile {
+        width: 34px;
+        height: 34px;
+        margin-right: 1px;
+        margin-top: 8vh;
+      }
+
+      &:hover {
+        fill: $app-black;
+      }
+    }
+
+    #github {
+      fill: $app-yellow;
+      margin-top: 1vh;
+      margin-right: -1px;
+      width: 26px;
+      height: 26px;
+
+      @include mobile {
+        width: 36px;
+        height: 36px;
+        margin-right: 0;
+        margin-top: 5vh;
+      }
+
+      &:hover {
+        fill: $app-black;
+      }
     }
   }
 }
@@ -1176,6 +1601,16 @@ h2 {
   background-size: 1000%;
   animation: sprite 3.5s steps(9) infinite;
   z-index: 1;
+
+  @include mobile {
+    height: 59vw;
+    width: 88vw;
+  }
+
+  @include mobile-landscape {
+    height: 36vw;
+    width: 54vw;
+  }
 }
 
 // Rocket
@@ -1200,8 +1635,13 @@ h2 {
   animation: sprite 3.5s steps(3) infinite;
 
   @include mobile {
-    height: 9vh;
-    width: 10vh;
+    height: 12vh;
+    width: 14vh;
+  }
+
+  @include mobile-landscape {
+    height: 22vh;
+    width: 24vh;
   }
 }
 
@@ -1213,13 +1653,33 @@ h2 {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  z-index: 100;
+  z-index: 50;
+
+  @include mobile {
+    display: flex;
+    flex-direction: column;
+    width: 90vw;
+    margin: 0 5vw;
+  }
 
   #code-404 {
     margin: 16vh 0 2vh 0;
 
+    @include mobile {
+      margin: 26vh 0 2vh 0;
+    }
+
     svg {
       height: 15vh;
+
+      @include mobile {
+        width: 90vw;
+        height: 100%;
+      }
+
+      @include mobile-landscape {
+        width: 50vw;
+      }
 
       path,
       rect {
@@ -1239,6 +1699,11 @@ h2 {
   .error-message {
     font-size: 2.5vw;
     margin-bottom: 7vh;
+
+    @include mobile {
+      font-size: 18px;
+      text-align: center;
+    }
   }
 }
 
@@ -1273,6 +1738,16 @@ h2 {
   width: 45vh;
   transform-origin: left;
   animation: wave 1s infinite ease-in-out alternate;
+
+  @include mobile {
+    height: 45vh;
+    width: 36vh;
+  }
+
+  @include mobile-landscape {
+    height: 66vh;
+    width: 54vh;
+  }
 
   img {
     position: absolute;
@@ -1332,6 +1807,16 @@ h2 {
   height: 50vh;
   width: 45vh;
 
+  @include mobile {
+    height: 40vh;
+    width: 38vh;
+  }
+
+  @include mobile-landscape {
+    height: 70vh;
+    width: 68vh;
+  }
+
   img {
     position: absolute;
     display: block;
@@ -1371,6 +1856,10 @@ h2 {
 #octopus-anim {
   position: absolute;
   bottom: 0;
+
+  @include mobile-landscape {
+    left: -9vw;
+  }
 }
 
 .octopus-fall {
@@ -1588,11 +2077,11 @@ h2 {
 }
 
 .ap-after-canvas {
-  width: 25.7vh;
-  height: 55.7vh;
+  width: 84.5%;
+  height: 93%;
   left: 8%;
   top: 3.7%;
-  border-radius: 2.5vh;
+  border-radius: 4.5vh;
   position: absolute;
   overflow-x: hidden;
 }
@@ -1606,6 +2095,16 @@ h2 {
   width: 36.5vw;
   right: 2vw;
   z-index: 5;
+
+  @include mobile {
+    height: 90vw;
+    width: 90vw;
+  }
+
+  @include mobile-landscape {
+    height: 60vw;
+    width: 60vw;
+  }
 
   img {
     position: absolute;
@@ -1627,8 +2126,8 @@ h2 {
 }
 
 .ap-before-d-canvas {
-  width: 30.2vw;
-  height: 22vw;
+  width: 82.5%;
+  height: 60.1%;
   left: 9%;
   top: 9%;
   position: absolute;
@@ -1642,6 +2141,11 @@ h2 {
     position: sticky;
     top: 0;
     width: 39vw;
+
+    @include mobile {
+      height: 55vw;
+      width: 74vw;
+    }
   }
 }
 
@@ -1677,8 +2181,8 @@ h2 {
 }
 
 .ap-after-d-canvas {
-  width: 37.5vw;
-  height: 21.1vw;
+  width: 97.5%;
+  height: 74%;
   left: 1%;
   top: 1.7%;
   position: absolute;
@@ -1702,6 +2206,10 @@ h2 {
     position: fixed;
     bottom: 10vh;
 
+    @include mobile-landscape {
+      bottom: -4vh;
+    }
+
     #fox-anim {
       animation: xAxis 800ms ease-in forwards;
     }
@@ -1710,6 +2218,10 @@ h2 {
   .fox-unpinned {
     position: fixed;
     bottom: 10vh;
+
+    @include mobile-landscape {
+      bottom: -4vh;
+    }
 
     #fox-anim {
       animation: foxUnpin 1s ease-in forwards;
@@ -1723,14 +2235,39 @@ h2 {
 $apit-padding-area-right: minmax(100px, 15vw);
 $apit-padding-area-left: $apit-padding-area-right;
 
+.apit-scene {
+  display: grid;
+
+  @include mobile {
+    display: flex;
+    flex-direction: column;
+    width: 90vw;
+    margin: 5vh 5vw;
+    min-height: 100vh;
+    height: 100%;
+    min-height: 100%;
+  }
+}
+
 #apit-work-container {
   z-index: 1;
 
   #apit-scene-1 {
-    display: grid;
     grid-template-rows: 1fr auto auto auto auto auto 1fr;
     grid-template-columns: $apit-padding-area-left auto 1fr $apit-padding-area-right;
     height: 100vh;
+
+    @include mobile {
+      margin-bottom: 0;
+      margin-top: 0;
+      height: 100vh;
+    }
+
+    @include mobile-landscape {
+      margin-bottom: 20vh;
+      margin-top: 0;
+      height: 100%;
+    }
 
     &>* {
       margin: 0;
@@ -1739,6 +2276,14 @@ $apit-padding-area-left: $apit-padding-area-right;
     #apit-design-system-headline {
       grid-row: 2;
       grid-column: 2 / span 2;
+
+      @include mobile {
+        margin-top: 30vh;
+      }
+
+      @include mobile-landscape {
+        margin-top: 10vh;
+      }
 
       path {
         fill: $app-black;
@@ -1763,6 +2308,11 @@ $apit-padding-area-left: $apit-padding-area-right;
       font-weight: 300;
       color: $app-white;
       align-self: end;
+
+      @include mobile {
+        font-size: 17px;
+        margin-bottom: 3vh;
+      }
     }
 
     #role {
@@ -1794,6 +2344,10 @@ $apit-padding-area-left: $apit-padding-area-right;
       grid-column: 3;
       align-self: end;
 
+      @include mobile {
+        order: 2;
+      }
+
       div {
         &:not(:first-child) {
           margin-left: 1vw;
@@ -1806,15 +2360,23 @@ $apit-padding-area-left: $apit-padding-area-right;
 
       svg {
         height: 3vw;
+
+        @include mobile {
+          height: 8vw;
+          margin-top: 20px;
+        }
       }
     }
   }
 
   #apit-scene-2 {
-    display: grid;
     grid-template-rows: 1fr auto auto 1fr;
     grid-template-columns: $apit-padding-area-left 2fr 2fr $apit-padding-area-right;
     padding: 20vh 0;
+
+    @include mobile {
+      padding: 0;
+    }
 
     .img-screen-left {
       display: flex;
@@ -1833,6 +2395,13 @@ $apit-padding-area-left: $apit-padding-area-right;
       grid-row: 2;
       grid-column: 3;
       margin-top: 0;
+
+      @include mobile {
+        &:not(:first-child) {
+          order: 2;
+          margin-top: 10vh;
+        }
+      }
     }
 
     .tag-container {
@@ -1844,6 +2413,17 @@ $apit-padding-area-left: $apit-padding-area-right;
       font-family: "Gaegu", cursive;
       display: flex;
       flex-direction: column;
+
+      @include mobile {
+        align-self: flex-end;
+        width: 36vh;
+      }
+
+      @include mobile-landscape {
+        align-self: flex-end;
+        width: 25vw;
+        margin: -60vh 0 60vh 0;
+      }
 
       .tag-text {
         position: relative;
@@ -1865,13 +2445,35 @@ $apit-padding-area-left: $apit-padding-area-right;
         width: 10vh;
         transform: rotate(219deg);
         margin-bottom: -44px;
+
+        @include mobile {
+          padding: 0 20vw;
+        }
+
+        @include mobile-landscape {
+          padding: 0;
+        }
       }
     }
   }
 
   .phase {
+
+    @include mobile-landscape {
+      margin-top: 10vh;
+    }
+
     svg {
       height: 15vh;
+
+      @include mobile {
+        width: 90vw;
+      }
+
+      @include mobile-landscape {
+        height: 17.5vw;
+        width: auto;
+      }
 
       path,
       rect {
@@ -1889,19 +2491,26 @@ $apit-padding-area-left: $apit-padding-area-right;
   }
 
   .img-description {
-    font-size: 14px;
+    font-size: 12px;
     font-style: italic;
     text-transform: none;
     font-weight: 300;
     line-height: 1;
+
+    @include mobile-landscape {
+      width: 60vw;
+    }
   }
 
   #apit-scene-3 {
-    display: grid;
     grid-template-rows: 1fr auto auto auto auto 1fr;
     grid-template-columns: $apit-padding-area-left 4fr 1fr 1fr $apit-padding-area-right;
     grid-gap: 2vw;
     padding: 20vh 0;
+
+    @include mobile {
+      padding: 0;
+    }
 
     #apit-phase-1 {
       grid-row: 2;
@@ -1912,20 +2521,36 @@ $apit-padding-area-left: $apit-padding-area-right;
       grid-row: 3;
       grid-column: 2;
       margin: 0;
+
+      @include mobile {
+        margin-bottom: 5vh;
+      }
     }
 
-    #apit-old-logo-container {
+    #apit-logos-container {
+      display: flex;
       grid-row: 2 / span 2;
-      grid-column: 3;
-    }
+      grid-column: 3 / span 2;
 
-    #apit-new-logo-container {
-      grid-row: 2 / span 2;
-      grid-column: 4;
+      @include mobile {
+        margin-bottom: 10vw;
+      }
+
+      #apit-new-logo-container {
+        margin-left: 2vw;
+
+        @include mobile {
+          margin-left: 5vw;
+        }
+      }
     }
 
     .apit-logo-container {
       align-self: start;
+
+      @include mobile-landscape {
+        width: 42vw;
+      }
 
       img {
         height: 100%;
@@ -1942,6 +2567,14 @@ $apit-padding-area-left: $apit-padding-area-right;
       grid-row: 4;
       grid-column: 2 / span 3;
       margin: 0;
+
+      @include mobile {
+        margin-bottom: 10vw;
+      }
+
+      @include mobile-landscape {
+        margin-bottom: 2vh;
+      }
     }
 
     img {
@@ -1956,15 +2589,27 @@ $apit-padding-area-left: $apit-padding-area-right;
       grid-template-rows: 1fr;
       grid-template-columns: 1fr 1fr;
       grid-gap: 20px;
+
+      @include mobile {
+        display: flex;
+        flex-direction: column;
+
+        img:first-child {
+          margin-bottom: 2vh;
+        }
+      }
     }
   }
 
   #apit-scene-4 {
-    display: grid;
     grid-template-rows: 1fr auto auto 1fr;
     grid-template-columns: $apit-padding-area-left 1fr 1fr $apit-padding-area-right;
     grid-gap: 2vw;
     padding: 20vh 0;
+
+    @include mobile {
+      padding: 0;
+    }
 
     #apit-phase-2 {
       grid-row: 2;
@@ -1985,6 +2630,10 @@ $apit-padding-area-left: $apit-padding-area-right;
       grid-row: 3;
       grid-column: 2;
 
+      @include mobile {
+        margin-top: 5vh;
+      }
+
       p {
         margin: 0 0 8px 0;
       }
@@ -1997,20 +2646,41 @@ $apit-padding-area-left: $apit-padding-area-right;
   }
 
   #apit-scene-5 {
-    display: grid;
     grid-template-rows: 1fr auto auto auto auto 1fr;
     grid-template-columns: $apit-padding-area-left 1fr 1fr 1fr $apit-padding-area-right;
     grid-gap: 2vw;
     padding: 20vh 0;
 
+    @include mobile {
+      padding: 0;
+    }
+
+    @include mobile-landscape {
+      display: grid;
+      grid-template-rows: repeat(6, auto);
+      grid-template-columns: 44vw 44vw;
+      grid-column-gap: 2vw;
+      grid-row-gap: 0;
+    }
+
     #apit-phase-3 {
       grid-row: 2;
       grid-column: 2;
+
+      @include mobile-landscape {
+        grid-row: 1;
+        grid-column: 1 / span 2;
+      }
     }
 
     #apit-scene-5-paragraphs-1 {
       grid-row: 3 / span 2;
       grid-column: 2;
+
+      @include mobile-landscape {
+        grid-row: 2;
+        grid-column: 1 / span 2;
+      }
 
       p {
         margin: 0 0 20px 0;
@@ -2020,11 +2690,27 @@ $apit-padding-area-left: $apit-padding-area-right;
     #apit-old-navigation-container {
       grid-row: 2 / span 2;
       grid-column: 3;
+
+      @include mobile-landscape {
+        grid-row: 3;
+        grid-column: 1;
+      }
+
+      .img-description {
+        @include mobile-landscape {
+          width: 44vw;
+        }
+      }
     }
 
     #apit-new-navigation-container {
       grid-row: 2 / span 2;
       grid-column: 4;
+
+      @include mobile-landscape {
+        grid-row: 3;
+        grid-column: 2;
+      }
     }
 
     img {
@@ -2034,6 +2720,10 @@ $apit-padding-area-left: $apit-padding-area-right;
     .apit-navigation-container {
       p {
         margin: 0 0 10px 0;
+
+        @include mobile {
+          margin-top: 5vh;
+        }
       }
 
       img {
@@ -2041,6 +2731,15 @@ $apit-padding-area-left: $apit-padding-area-right;
         border: solid #3f3f3f;
         border-width: 20px 8px 8px 8px;
         border-radius: 6px;
+
+        @include mobile {
+          width: 93%;
+          border-width: 6vw 3vw 3vw 3vw;
+        }
+
+        @include mobile-landscape {
+          border-width: 3vw 1.5vw 1.5vw 1.5vw;
+        }
       }
     }
 
@@ -2051,9 +2750,23 @@ $apit-padding-area-left: $apit-padding-area-right;
       flex-direction: column;
       justify-content: space-between;
 
+      @include mobile-landscape {
+        grid-row: 4;
+        grid-column: 1;
+      }
+
       #apit-scene-5-paragraph-2 {
         p:first-child {
           margin-top: 0;
+
+          @include mobile {
+            margin-top: 10vh;
+          }
+
+          @include mobile-landscape {
+            grid-row: 4;
+            grid-column: 1 / span 2;
+          }
         }
       }
     }
@@ -2062,6 +2775,27 @@ $apit-padding-area-left: $apit-padding-area-right;
       grid-row: 4;
       grid-column: 1 / span 2;
       justify-self: end;
+    }
+
+    #iphone-container {
+      @include mobile {
+        order: 2;
+        height: 177vw;
+        width: 90vw;
+      }
+
+      @include mobile-landscape {
+        grid-row: 4 / span 2;
+        grid-column: 2;
+        height: 88.5vw;
+        width: 45vw;
+      }
+
+      @include tablet-landscape {
+        grid-row: 4 / span 2;
+        grid-column: 1 / span 2;
+        justify-self: end;
+      }
     }
 
     .tag-container {
@@ -2073,6 +2807,24 @@ $apit-padding-area-left: $apit-padding-area-right;
       font-family: "Gaegu", cursive;
       display: flex;
       flex-direction: column;
+
+      @include mobile {
+        order: 2;
+        align-self: flex-end;
+        width: 36vh;
+        margin-bottom: 7vh;
+      }
+
+      @include mobile-landscape {
+        grid-row: 5;
+        grid-column: 1;
+        align-self: start;
+        justify-self: end;
+      }
+
+      @include tablet-landscape {
+        grid-row: 5;
+      }
 
       .tag-text {
         position: relative;
@@ -2094,16 +2846,29 @@ $apit-padding-area-left: $apit-padding-area-right;
         width: 10vh;
         transform: rotate(219deg);
         margin-bottom: -44px;
+
+        @include mobile {
+          padding: 0 20vw;
+          transform: rotate(99deg);
+        }
+
+        @include mobile-landscape {
+          padding: 3px 4vw;
+          transform: rotate(45deg);
+        }
       }
     }
   }
 
   #apit-scene-6 {
-    display: grid;
     grid-template-rows: 1fr auto auto auto auto 1fr;
     grid-template-columns: $apit-padding-area-left 1fr 1fr 1fr 1fr $apit-padding-area-right;
     grid-gap: 1vw;
     padding: 20vh 0;
+
+    @include mobile {
+      padding: 0;
+    }
 
     p {
       grid-row: 2;
@@ -2114,6 +2879,15 @@ $apit-padding-area-left: $apit-padding-area-right;
       width: 90%;
       margin-left: 4vw;
       box-shadow: 0 8px 40px -12px rgba(0, 0, 0, 0.3);
+
+      @include mobile {
+        width: 90vw;
+        margin-left: 0;
+
+        &:not(:last-child) {
+          margin-bottom: 2vh;
+        }
+      }
     }
 
     #ap-comment-1 {
@@ -2133,22 +2907,38 @@ $apit-padding-area-left: $apit-padding-area-right;
   }
 
   #apit-scene-7 {
-    display: grid;
     grid-template-rows: 1fr auto auto auto 1fr;
     grid-template-columns: $apit-padding-area-left 1fr 210px $apit-padding-area-right;
     align-items: center;
     grid-gap: 1vw;
     height: 100vh;
 
+    @include mobile {
+      height: 100vh;
+      margin-bottom: 0;
+    }
+
     p {
       font-size: 22px;
       line-height: 1.2;
       margin: 0;
+
+      @include mobile {
+        line-height: 1.5;
+      }
+
+      @include mobile-landscape {
+        align-self: start;
+      }
     }
 
     .p-1 {
       grid-row: 2;
       grid-column: 2;
+
+      @include mobile {
+        margin-top: 20vh;
+      }
     }
 
     .p-2 {
@@ -2156,7 +2946,7 @@ $apit-padding-area-left: $apit-padding-area-right;
       grid-column: 2 / span 2;
       font-family: $font-secondary;
       text-transform: uppercase;
-      font-size: 4vw;
+      font-size: 40px;
       line-height: 1.2;
       font-weight: 300;
       color: $app-yellow;
@@ -2166,16 +2956,29 @@ $apit-padding-area-left: $apit-padding-area-right;
       text-decoration-thickness: 0.04em;
       text-underline-offset: 3px;
       margin-bottom: 12px;
+
+      @include mobile {
+        font-size: 30px;
+        line-height: 1.5;
+      }
     }
 
     .p-3 {
       grid-row: 4;
       grid-column: 2;
+
+      @include mobile {
+        margin-bottom: 5vh;
+      }
     }
 
     #button-secondary {
       grid-row: 4;
       grid-column: 3;
+
+      @include mobile-landscape {
+        align-self: flex-end;
+      }
     }
   }
 }
@@ -2187,8 +2990,15 @@ $apit-padding-area-left: $apit-padding-area-right;
   align-items: flex-start;
   grid-gap: 1vw;
   height: 100vh;
-  z-index: 100;
+  z-index: 50;
   font-size: 18px;
+
+  @include mobile {
+    display: flex;
+    flex-direction: column;
+    width: 90vw;
+    padding: 0 5vw;
+  }
 
   a {
     text-decoration: underline;
@@ -2209,9 +3019,25 @@ $apit-padding-area-left: $apit-padding-area-right;
     align-self: end;
     margin-left: -4vw;
 
+    @include mobile {
+      margin-left: 0;
+      margin-top: 10vh;
+      grid-column: 2 / span 2;
+      width: 90vw;
+    }
+
     svg {
       height: 20vh;
       width: 70%;
+
+      @include mobile {
+        width: 100%;
+      }
+
+      @include mobile-landscape {
+        height: 13vw;
+        width: auto;
+      }
 
       path {
         fill: $app-black;
@@ -2232,6 +3058,11 @@ $apit-padding-area-left: $apit-padding-area-right;
     grid-column: 3;
     line-height: 1.2;
 
+    @include mobile {
+      width: 90vw;
+      line-height: 1.7;
+    }
+
     #berlin {
       margin: 0 10px;
     }
@@ -2240,12 +3071,17 @@ $apit-padding-area-left: $apit-padding-area-right;
   .contact-data {
     font-family: $font-secondary;
     text-transform: uppercase;
-    font-size: 2.5vw;
+    font-size: 26px;
     line-height: 1.2;
     font-weight: 300;
     color: $app-black;
     margin-bottom: 12px;
     margin: 0 5px;
+
+    @include mobile {
+      font-size: 21px;
+      line-height: 1.7;
+    }
   }
 
   #contact-phone-container {
@@ -2256,6 +3092,10 @@ $apit-padding-area-left: $apit-padding-area-right;
     #contact-phone {
       line-height: 0.4;
     }
+
+    @include mobile {
+      line-height: 1.7;
+    }
   }
 
   #contact-linkedin-container {
@@ -2263,6 +3103,10 @@ $apit-padding-area-left: $apit-padding-area-right;
     grid-column: 3;
     justify-self: end;
     line-height: 1;
+
+    @include mobile {
+      line-height: 1.7;
+    }
   }
 
   #contact-me {
@@ -2275,6 +3119,16 @@ $apit-padding-area-left: $apit-padding-area-right;
     text-align: end;
     padding: 0 0 1em 0;
     line-height: 2;
+
+    @include mobile {
+      padding: 0 0 0.4em 0.5em;
+      line-height: 1.2;
+      writing-mode: horizontal-tb;
+      transform: none;
+      text-align: start;
+      padding: 0;
+      line-height: 1.7;
+    }
   }
 }
 
@@ -2747,6 +3601,26 @@ $apit-padding-area-left: $apit-padding-area-right;
   100% {
     left: 100vw;
     bottom: -20vw;
+  }
+}
+
+@keyframes trolleybusApperMobile {
+  0% {
+    left: -5vw;
+    bottom: 5vw;
+  }
+
+  50% {
+    bottom: -2vw;
+  }
+
+  80% {
+    bottom: -14vw;
+  }
+
+  100% {
+    left: 100vw;
+    bottom: -21vw;
   }
 }
 
