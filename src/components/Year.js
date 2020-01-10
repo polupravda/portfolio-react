@@ -8,16 +8,13 @@ function Year({ year }) {
         switch (year) {
           case "2018":
             return (
-              <svg
-                viewBox="0 0 573 59"
-                version="1.1"
-              >
+              <svg viewBox="0 0 573 59" version="1.1">
                 <g
                   id="Page-1"
                   stroke="none"
-                  stroke-width="1"
+                  strokeWidth="1"
                   fill="none"
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                 >
                   <g
                     id="Artboard-Copy-3"
@@ -71,16 +68,13 @@ function Year({ year }) {
             );
           case "2017":
             return (
-              <svg
-                viewBox="0 0 252 59"
-                version="1.1"
-              >
+              <svg viewBox="0 0 252 59" version="1.1">
                 <g
                   id="Page-1"
                   stroke="none"
-                  stroke-width="1"
+                  strokeWidth="1"
                   fill="none"
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                 >
                   <g
                     id="Artboard-Copy-3"
@@ -111,16 +105,13 @@ function Year({ year }) {
             );
           case "2016":
             return (
-              <svg
-                viewBox="0 0 252 59"
-                version="1.1"
-              >
+              <svg viewBox="0 0 252 59" version="1.1">
                 <g
                   id="Page-1"
                   stroke="none"
-                  stroke-width="1"
+                  strokeWidth="1"
                   fill="none"
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                 >
                   <g
                     id="Artboard-Copy-3"
@@ -154,16 +145,13 @@ function Year({ year }) {
             );
           case "2015":
             return (
-              <svg
-                viewBox="0 0 252 59"
-                version="1.1"
-              >
+              <svg viewBox="0 0 252 59" version="1.1">
                 <g
                   id="Page-1"
                   stroke="none"
-                  stroke-width="1"
+                  strokeWidth="1"
                   fill="none"
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                 >
                   <g
                     id="Artboard-Copy-3"
@@ -197,16 +185,13 @@ function Year({ year }) {
             );
           case "2014":
             return (
-              <svg
-                viewBox="0 0 252 59"
-                version="1.1"
-              >
+              <svg viewBox="0 0 252 59" version="1.1">
                 <g
                   id="Page-1"
                   stroke="none"
-                  stroke-width="1"
+                  strokeWidth="1"
                   fill="none"
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                 >
                   <g
                     id="Artboard-Copy-3"

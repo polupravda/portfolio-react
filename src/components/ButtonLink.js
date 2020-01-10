@@ -2,21 +2,24 @@ import React from "react";
 import { Link } from "react-router-dom";
 import isExternal from "is-url-external";
 
-function ButtonLink({ buttonLink, buttonText, buttonWidth, buttonType }) {
+function ButtonLink({ buttonLink, buttonText, buttonWidth = "240px", buttonType }) {
   return isExternal(buttonLink) ? (
     <a href={buttonLink} target="_blank" rel="noopener noreferrer">
-        {buttonType==="primary" ? <div class="button-primary-container">
-            <svg viewBox="0 0 134 39" height="100%" width={buttonWidth}>
-              <path
-                d="M80.56,37.71 C68.13,38.47 55.71,39.26 43.26,39.51 C36.73,39.64 30.19,39.62 23.66,39.36 C18.88,39.17 13.53,39.4 8.87,38.21 C0.55,36.09 0.52,23.96 1.34,17.11 C1.75,13.76 2.33,9.27 5.04,6.88 C7.1,5.06 11,5 12.79,5.15 C25.48,5.68 37.41,4.15 50,2.76 C64.13,1.2 78.37,0.8 92.57,1.08 C99.04,1.2 105.5,1.48 111.96,1.84 C116.27,2.09 122.45,1.37 126.47,3.13 C129.93,4.65 130.15,9.63 130.98,12.78 C132.22,17.49 134.27,22.57 134.65,27.43 C135.38,36.75 93.32,36.92 80.56,37.71 Z"
-                id="Path"
-              ></path>
-            </svg>
-            <span class="button-text">{buttonText}</span>
-          </div> : <div class="button-primary-container">
+      {buttonType === "primary" ? (
+        <div className="button-primary-container">
+          <svg viewBox="0 0 134 39" height="100%" width={buttonWidth}>
+            <path
+              d="M80.56,37.71 C68.13,38.47 55.71,39.26 43.26,39.51 C36.73,39.64 30.19,39.62 23.66,39.36 C18.88,39.17 13.53,39.4 8.87,38.21 C0.55,36.09 0.52,23.96 1.34,17.11 C1.75,13.76 2.33,9.27 5.04,6.88 C7.1,5.06 11,5 12.79,5.15 C25.48,5.68 37.41,4.15 50,2.76 C64.13,1.2 78.37,0.8 92.57,1.08 C99.04,1.2 105.5,1.48 111.96,1.84 C116.27,2.09 122.45,1.37 126.47,3.13 C129.93,4.65 130.15,9.63 130.98,12.78 C132.22,17.49 134.27,22.57 134.65,27.43 C135.38,36.75 93.32,36.92 80.56,37.71 Z"
+              id="Path"
+            ></path>
+          </svg>
+          <span className="button-text">{buttonText}</span>
+        </div>
+      ) : (
+        <div className="button-primary-container">
           <svg viewBox="0 0 142.58 47.86" height="100%" width={buttonWidth}>
             <path
-              class="st0"
+              className="st0"
               d="M140.31,15.53c-1.6,1.06-3.17,2.15-4.73,3.26c-0.3-0.98-0.59-1.96-0.84-2.92c-0.07-0.25-0.13-0.51-0.19-0.78
                       c0.46-0.7,0.92-1.38,1.37-2.08c0.93-1.44-1.02-2.85-2.25-1.89c-0.58-2.1-1.51-4.04-3.45-4.89c-0.28-0.12-0.58-0.23-0.88-0.33
                       c0.14-0.2,0.28-0.41,0.42-0.61c0.94-1.4-1.25-3.12-2.36-1.82c-0.49,0.58-0.98,1.15-1.47,1.73c-3.42-0.38-7.26-0.09-10.22-0.26
@@ -114,23 +117,27 @@ function ButtonLink({ buttonLink, buttonText, buttonWidth, buttonType }) {
                       c0.14-0.22,0.27-0.44,0.41-0.66C135.24,31.18,135.23,31.34,135.2,31.49z"
             />
           </svg>
-          <span class="button-text">{buttonText}</span>
-        </div>}
+          <span className="button-text">{buttonText}</span>
+        </div>
+      )}
     </a>
   ) : (
     <Link to={buttonLink}>
-    {buttonType==="primary" ? <div class="button-primary-container">
-            <svg viewBox="0 0 134 39" height="100%" width={buttonWidth}>
-              <path
-                d="M80.56,37.71 C68.13,38.47 55.71,39.26 43.26,39.51 C36.73,39.64 30.19,39.62 23.66,39.36 C18.88,39.17 13.53,39.4 8.87,38.21 C0.55,36.09 0.52,23.96 1.34,17.11 C1.75,13.76 2.33,9.27 5.04,6.88 C7.1,5.06 11,5 12.79,5.15 C25.48,5.68 37.41,4.15 50,2.76 C64.13,1.2 78.37,0.8 92.57,1.08 C99.04,1.2 105.5,1.48 111.96,1.84 C116.27,2.09 122.45,1.37 126.47,3.13 C129.93,4.65 130.15,9.63 130.98,12.78 C132.22,17.49 134.27,22.57 134.65,27.43 C135.38,36.75 93.32,36.92 80.56,37.71 Z"
-                id="Path"
-              ></path>
-            </svg>
-            <span class="button-text">{buttonText}</span>
-          </div> : <div class="button-primary-container">
+      {buttonType === "primary" ? (
+        <div className="button-primary-container">
+          <svg viewBox="0 0 134 39" height="100%" width={buttonWidth}>
+            <path
+              d="M80.56,37.71 C68.13,38.47 55.71,39.26 43.26,39.51 C36.73,39.64 30.19,39.62 23.66,39.36 C18.88,39.17 13.53,39.4 8.87,38.21 C0.55,36.09 0.52,23.96 1.34,17.11 C1.75,13.76 2.33,9.27 5.04,6.88 C7.1,5.06 11,5 12.79,5.15 C25.48,5.68 37.41,4.15 50,2.76 C64.13,1.2 78.37,0.8 92.57,1.08 C99.04,1.2 105.5,1.48 111.96,1.84 C116.27,2.09 122.45,1.37 126.47,3.13 C129.93,4.65 130.15,9.63 130.98,12.78 C132.22,17.49 134.27,22.57 134.65,27.43 C135.38,36.75 93.32,36.92 80.56,37.71 Z"
+              id="Path"
+            ></path>
+          </svg>
+          <span className="button-text">{buttonText}</span>
+        </div>
+      ) : (
+        <div className="button-primary-container">
           <svg viewBox="0 0 142.58 47.86" height="100%" width={buttonWidth}>
             <path
-              class="st0"
+              className="st0"
               d="M140.31,15.53c-1.6,1.06-3.17,2.15-4.73,3.26c-0.3-0.98-0.59-1.96-0.84-2.92c-0.07-0.25-0.13-0.51-0.19-0.78
                       c0.46-0.7,0.92-1.38,1.37-2.08c0.93-1.44-1.02-2.85-2.25-1.89c-0.58-2.1-1.51-4.04-3.45-4.89c-0.28-0.12-0.58-0.23-0.88-0.33
                       c0.14-0.2,0.28-0.41,0.42-0.61c0.94-1.4-1.25-3.12-2.36-1.82c-0.49,0.58-0.98,1.15-1.47,1.73c-3.42-0.38-7.26-0.09-10.22-0.26
@@ -228,8 +235,9 @@ function ButtonLink({ buttonLink, buttonText, buttonWidth, buttonType }) {
                       c0.14-0.22,0.27-0.44,0.41-0.66C135.24,31.18,135.23,31.34,135.2,31.49z"
             />
           </svg>
-          <span class="button-text">{buttonText}</span>
-        </div>}
+          <span className="button-text">{buttonText}</span>
+        </div>
+      )}
     </Link>
   );
 }

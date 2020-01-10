@@ -8,7 +8,7 @@ function Logo() {
       <span id="profession">{introText.myTitle}</span>
       <svg viewBox="0 0 1082 199">
         <g
-          fill-rule="evenodd"
+          fillRule="evenodd"
         >
           <path
             d="M950.882251,199 L883,199 L883,103 L926.636364,103 L926.636364,155.363636 L935.363636,155.363636 L935.363636,103 L979,103 L979,170.882251 L950.882251,199 Z"

@@ -9,7 +9,7 @@ function ProfHighlights({ content: { year, highlightParagraphs } }) {
       <div className="i-container">
         <div>
           {highlightParagraphs.map(paragraph => {
-            return <p>{paragraph}</p>;
+            return <p key={paragraph}>{paragraph}</p>;
           })}
         </div>
       </div>

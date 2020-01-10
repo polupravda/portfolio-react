@@ -8,7 +8,7 @@ function Skills() {
       <h2>{skillsList.title}</h2>
       <div className="i-container">
         {skillsList.items.map(item => (
-          <span>{item}</span>
+          <span key={item}>{item}</span>
         ))}
       </div>
     </div>

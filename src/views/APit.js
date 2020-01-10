@@ -1,6 +1,6 @@
 import React from "react";
 import "../App.scss";
-import {isMobileDevice} from "../helperFunctions";
+import { isMobileDevice } from "../helperFunctions";
 import { aPitProject } from "../Content";
 import APitDesignSystemHeadline from "../components/APitDesignSystemHeadline";
 import LogoNuxt from "../components/LogoNuxt";
@@ -18,14 +18,25 @@ import Iphone from "../components/Iphone";
 import { hints } from "../Content";
 
 class APit extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      introAnim: "hidden"
+    };
+  }
   componentDidMount() {
     window.scrollTo(0, 0);
-  };
+
+    // Animate the first Scene after loading
+    setTimeout(() => {
+      this.setState({ introAnim: "intro-anim" });
+    }, 1000);
+  }
 
   render() {
     return (
       <section id="apit-work-container">
-        <div id="apit-scene-1" className="apit-scene">
+        <div id="apit-scene-1" className={"apit-scene " + this.state.introAnim}>
           <APitDesignSystemHeadline />
           <h2 id="headline-2">{aPitProject.headlineMain2}</h2>
           <h2 className="subline" id="role">
@@ -46,7 +57,7 @@ class APit extends React.Component {
         </div>
         <div id="apit-scene-2" className="apit-scene">
           <div className="img-screen-left">
-            <p class="img-description">{aPitProject.img1Description}</p>
+            <p className="img-description">{aPitProject.img1Description}</p>
             <OldDesktop alt={aPitProject.img1Description} />
           </div>
           <p>{aPitProject.paragraph1}</p>
@@ -61,14 +72,14 @@ class APit extends React.Component {
                 src="assets/images/ap-logo-before.png"
                 alt={aPitProject.img2Description}
               />
-              <p class="img-description">{aPitProject.img2Description}</p>
+              <p className="img-description">{aPitProject.img2Description}</p>
             </div>
             <div id="apit-new-logo-container" className="apit-logo-container">
               <img
                 src="/assets/images/ap-logo-after.png"
                 alt={aPitProject.img3Description}
               />
-              <p class="img-description">{aPitProject.img3Description}</p>
+              <p className="img-description">{aPitProject.img3Description}</p>
             </div>
           </div>
           <p id="scene3-p2">{aPitProject.paragraph3}</p>
@@ -90,7 +101,7 @@ class APit extends React.Component {
             <p>{aPitProject.paragraph5}</p>
           </div>
           <div id="ap-design-system-img-container">
-            <p class="img-description">{aPitProject.img6Description}</p>
+            <p className="img-description">{aPitProject.img6Description}</p>
             <img
               id="ap-design-system"
               src="/assets/images/apit-design-system.png"
@@ -108,7 +119,7 @@ class APit extends React.Component {
             id="apit-old-navigation-container"
             className="apit-navigation-container"
           >
-            <p class="img-description">{aPitProject.img7Description}</p>
+            <p className="img-description">{aPitProject.img7Description}</p>
             <img
               src="/assets/images/ap-navigation-old.png"
               alt={aPitProject.img7Description}
@@ -118,13 +129,20 @@ class APit extends React.Component {
             id="apit-new-navigation-container"
             className="apit-navigation-container"
           >
-            <p class="img-description">{aPitProject.img8Description}</p>
+            <p className="img-description">{aPitProject.img8Description}</p>
             <img
               src="/assets/images/ap-navigation-new.png"
               alt={aPitProject.img8Description}
             />
           </div>
-          {isMobileDevice() ? (<> <Tag tagText={hints.scrollMe}/> <Iphone /> </>) : (<AppleDesktop />)}
+          {isMobileDevice() ? (
+            <>
+              {" "}
+              <Tag tagText={hints.scrollMe} /> <Iphone />{" "}
+            </>
+          ) : (
+            <AppleDesktop />
+          )}
           <div id="apit-scene-5-paragraph-2-container">
             <div id="apit-scene-5-paragraph-2">
               <p>{aPitProject.paragraph6}</p>
@@ -137,17 +155,29 @@ class APit extends React.Component {
           <p>{aPitProject.paragraph10}</p>
           <img
             id="ap-comment-1"
-            src={isMobileDevice() ? "/assets/images/apit-comment-1-m.png" : "/assets/images/apit-comment-1.png"}
+            src={
+              isMobileDevice()
+                ? "/assets/images/apit-comment-1-m.png"
+                : "/assets/images/apit-comment-1.png"
+            }
             alt={aPitProject.img9Description}
           />
           <img
             id="ap-comment-2"
-            src={isMobileDevice() ? "/assets/images/apit-comment-2-m.png" : "/assets/images/apit-comment-2.png"}
+            src={
+              isMobileDevice()
+                ? "/assets/images/apit-comment-2-m.png"
+                : "/assets/images/apit-comment-2.png"
+            }
             alt={aPitProject.img9Description}
           />
           <img
             id="ap-comment-3"
-            src={isMobileDevice() ? "/assets/images/apit-comment-3-m.png" : "/assets/images/apit-comment-3.png"}
+            src={
+              isMobileDevice()
+                ? "/assets/images/apit-comment-3-m.png"
+                : "/assets/images/apit-comment-3.png"
+            }
             alt={aPitProject.img9Description}
           />
         </div>

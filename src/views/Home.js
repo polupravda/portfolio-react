@@ -1,5 +1,6 @@
 import React from "react";
-import "../App.scss";   
+import "../App.scss";
+import {debounce} from "../helperFunctions";
 
 import Skills from "../components/Skills";
 import Tools from "../components/Tools";
@@ -44,28 +45,12 @@ class Home extends React.Component {
       snapped: "",
       scrollBackwards: false
     };
-    this.debouncedScrollListener = this.debounce(this.checkTriggerElements);
-    this.debouncedScrollDirectionListener = this.debounce(
+    this.debouncedScrollListener = debounce(this.checkTriggerElements);
+    this.debouncedScrollDirectionListener = debounce(
       this.checkScrollDirection
     );
     this.scrollPos = 0;
   }
-
-  debounce = (func, wait = 10, immediate = true) => {
-    let timeout;
-    return function() {
-      const context = this,
-        args = arguments;
-      const later = function() {
-        timeout = null;
-        if (!immediate) func.apply(context, args);
-      };
-      const callNow = immediate && !timeout;
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-      if (callNow) func.apply(context, args);
-    };
-  };
 
   checkScrollDirection = () => {
     if (document.body.getBoundingClientRect().top > this.scrollPos) {
@@ -126,8 +111,6 @@ class Home extends React.Component {
     const trolleybusPos = this.relationToView(trolleybusTrigger);
     const teacherPos = this.relationToView(teacherTrigger);
     const goatPos = this.relationToView(goatTrigger);
-
-    const ninjaScene = document.getElementById("scene-2");
 
     switch (introPos) {
       case "isVisible":

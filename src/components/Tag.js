@@ -5,9 +5,9 @@ import ArrowFat from "./ArrowFat";
 class Tag extends React.Component {
   render() {
     return (
-      <div class="tag-container">
+      <div className="tag-container">
         <ArrowFat />
-        <div class="tag-text">{this.props.tagText}</div>
+        <div className="tag-text">{this.props.tagText}</div>
       </div>
     );
   }

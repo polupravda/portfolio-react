@@ -8,9 +8,9 @@ function Tools() {
       <h2>{toolsList.title}</h2>
       <div className="tools-items-container">
         {toolsList.items.map(item => (
-          <div className="i-container">
+          <div className="i-container" key={item}>
             {item.map(i => (
-              <span>{i}</span>
+              <span key={i}>{i}</span>
             ))}
           </div>
         ))}

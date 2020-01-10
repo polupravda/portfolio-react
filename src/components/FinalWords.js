@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "../App.scss";
 import { finalWords, myContactDetails } from "../Content";
 import Thanks from "../components/Thanks";
+import Button from "../components/Button";
 
 function FinalWords() {
   return (
@@ -26,6 +27,25 @@ function FinalWords() {
         >
           {finalWords.github}
         </a>
+      </div>
+      <div id="cv-container">
+        <span>{finalWords.paragraph3}</span>
+        <a
+          href="/assets/pdf/Elena-Volovicheva-CV.pdf"
+          download="Elena-Volovicheva-CV.pdf"
+          target="_blank"
+          title="Download Resume"
+        >
+          {finalWords.buttonCV}
+        </a>
+        <Button
+          buttonLink="/assets/pdf/Elena-Volovicheva-CV.pdf"
+          buttonText={finalWords.buttonCV}
+          buttonType="primary"
+          download="Elena-Volovicheva-CV.pdf"
+          target="_blank"
+          title="Download CV"
+        ></Button>
       </div>
     </div>
   );

@@ -8,7 +8,7 @@ export const introText = {
   myName: "Elena Volovicheva",
   myTitle: "Creative Developer",
   myIntro:
-    "I design UI with unique looks which provide highly positive user experience, and I perform development for web with modern front-end and robust back-end. I am in Berlin."
+    "That's me! I design cool things for web and do development using modern front-end technologies. My strength is developing visually appealing and user-friendly interfaces. I am in Berlin."
 };
 
 export const skillsList = {
@@ -34,7 +34,7 @@ export const toolsList = {
 export const history = {
   historyHeading: "A bit of history...",
   historyP1:
-    "I started my career in tech in 2011 as a Web Designer. On my way I have worked mostly in product companies, but also have entrepreneurial experience  and shortly worked as a freelancer.",
+    "I started my career in tech in 2011 as a Web Designer. On my way I have worked mostly in product companies, but also had entrepreneurial experience  and shortly worked as a freelancer.",
   historyP2:
     "Today I am fully engaged in web development. However, I am still extremely excited when it comes to digital design and animation."
 };
@@ -89,10 +89,14 @@ export const aPitTechStack = {
 export const finalWords = {
   thanks: "Thanks",
   paragraph0: "...for reading my story.",
-  paragraph1: "If you want to see examples of what I do, have a look at the demo of my selected",
+  paragraph1:
+    "If you want to see examples of what I do, have a look at the demo of my selected",
   works: "works",
   paragraph2: "or visit me on",
-  github: "GitHub"
+  github: "GitHub",
+  paragraph3:
+    "Want to read the same story with boring details and dates? Download my CV!",
+  buttonCV: "Download CV"
 };
 
 export const languages = {
@@ -115,7 +119,7 @@ export const myContactDetails = {
   linkedin: "https://www.linkedin.com/in/volovicheva/",
   phone: "+49 176 47110458",
   email: "elena.volovicheva@gmail.com"
-}
+};
 
 export const notFound = {
   errorCode: "404",
@@ -179,5 +183,5 @@ export const contact = {
   intro2: "just drop me a message to",
   intro3: "or call me",
   intro4: "Would be also great to stay connected on",
-  linkedin: " LinkedIn",
-}
+  linkedin: " LinkedIn"
+};
