@@ -1,6 +1,6 @@
 import React from "react";
 import "../App.scss";
-import {debounce} from "../helperFunctions";
+import { debounce } from "../helperFunctions";
 
 import Skills from "../components/Skills";
 import Tools from "../components/Tools";
@@ -34,7 +34,7 @@ class Home extends React.Component {
       ninja: "hidden",
       octopusAnim: "hidden",
       octopusLifeAnim: "hidden",
-      theatre: "",
+      theatre: "hidden",
       demo: "hidden",
       bear: "hidden",
       ob: "hidden",
@@ -48,9 +48,7 @@ class Home extends React.Component {
       scrollBackwards: false
     };
     this.debouncedScrollListener = debounce(this.checkTriggerElements);
-    this.debouncedScrollDirectionListener = debounce(
-      this.checkScrollDirection
-    );
+    this.debouncedScrollDirectionListener = debounce(this.checkScrollDirection);
     this.scrollPos = 0;
   }
 
@@ -70,11 +68,17 @@ class Home extends React.Component {
     const elemBottom = rect.bottom;
     const triggerMargin = window.innerHeight / 5;
 
-    if (elemTop <= (window.innerHeight - triggerMargin) && elemBottom > triggerMargin) {
+    if (
+      elemTop <= window.innerHeight - triggerMargin &&
+      elemBottom > triggerMargin
+    ) {
       return "isPartiallyVisible";
     } else if (elemTop < triggerMargin && elemBottom <= triggerMargin) {
       return "isPartiallyHidden";
-    } else if (elemTop > (window.innerHeight - triggerMargin) && elemTop <= (window.innerHeight + triggerMargin)) {
+    } else if (
+      elemTop > window.innerHeight - triggerMargin &&
+      elemTop <= window.innerHeight + triggerMargin
+    ) {
       return "isConditionForBackScrollHide";
     } else {
       return "isHidden";
@@ -128,12 +132,12 @@ class Home extends React.Component {
     switch (ninjaPos) {
       case "isPartiallyVisible":
         if (!this.state.scrollBackwards) {
-          this.setState({snapped: "snapped"});
+          this.setState({ snapped: "snapped" });
         }
         this.setState({ ninja: "ninja-appear" });
         break;
       case "isPartiallyHidden":
-          this.setState({snapped: ""});
+        this.setState({ snapped: "" });
         this.setState({ ninja: "ninja-hide" });
         break;
       case "isConditionForBackScrollHide":
@@ -353,80 +357,82 @@ class Home extends React.Component {
               <Fox />
             </div>
           </div>
-              <div className={"scene " + this.state.snapped} id="scene-2">
-                <div id="description-container">
-                <Skills />
-                <Tools />
-                </div>
-                <div className={this.state.ninja} id="ninja-anim-box">
-                  <Ninja />
-                </div>
-              </div>
-              <div className="scene" id="scene-3">
-                <History />
-                <div className={this.state.octopusAnim} id="octopus-anim-box">
-                  <Octopus octopusLifeAnim={this.state.octopusLifeAnim} />
-                </div>
-              </div>
-              <div className="scene" id="scene-4">
-                <ProfHighlights content={profHighlights.y2018} />
-                <div className={this.state.demo} id="demo-anim-box">
-                  <ApMDemo />
-                </div>
-                <div id="androidpit-button-container">
-                  <Button
-                    buttonText="Visit Web Site"
-                    buttonLink="https://www.androidpit.de/"
-                    buttonType="secondary"
-                    buttonWidth="210px"
-                  />
-                </div>
-              </div>
-              <div className="scene" id="scene-4-2">
-                <div id="theatre-description">{profHighlights.y2018.highlightParagraphs2}</div>
-                <div className={this.state.theatre} id="theatre-anim-box">
-                  <Theatre />
-                </div>
-              </div>
-              <div className="scene" id="scene-5">
-                <ProfHighlights content={profHighlights.y2017} />
-                <div className={this.state.ob} id="ob-anim-box">
-                  <ObVideo />
-                </div>
-              </div>
-              <div className="scene" id="scene-6">
-                <ProfHighlights content={profHighlights.y2016} />
-                <div className={this.state.bear} id="bear-anim-box">
-                  <Bear />
-                </div>
-              </div>
-              <div className="scene" id="scene-7">
-                <ProfHighlights content={profHighlights.y2015} />
-                <div className={this.state.lenin} id="lenin-anim-box">
-                  <Lenin />
-                </div>
-                <div className={this.state.trolleybus} id="trolleybus-anim-box">
-                  <Trolleybus />
-                </div>
-              </div>
-              <div className="scene" id="scene-8">
-                <ProfHighlights content={profHighlights.y2014} />
-                <div className={this.state.blackboard} id="blackboard-anim-box">
-                  <Blackboard />
-                </div>
-                <div className={this.state.teacher} id="teacher-anim-box">
-                  <Teacher />
-                </div>
-                <div className={this.state.students} id="students-anim-box">
-                  <Students />
-                </div>
-              </div>
-            <div className="scene" id="scene-9">
-              <div className={this.state.goat} id="goat-anim-box">
-                <Goat />
-              </div>
-              <FinalWords />
+          <div className={"scene " + this.state.snapped} id="scene-2">
+            <div id="description-container">
+              <Skills />
+              <Tools />
             </div>
+            <div className={this.state.ninja} id="ninja-anim-box">
+              <Ninja />
+            </div>
+          </div>
+          <div className="scene" id="scene-3">
+            <History />
+            <div className={this.state.octopusAnim} id="octopus-anim-box">
+              <Octopus octopusLifeAnim={this.state.octopusLifeAnim} />
+            </div>
+          </div>
+          <div className="scene" id="scene-4">
+            <ProfHighlights content={profHighlights.y2018} />
+            <div className={this.state.demo} id="demo-anim-box">
+              <ApMDemo />
+            </div>
+            <div id="androidpit-button-container">
+              <Button
+                buttonText="Visit Web Site"
+                buttonLink="https://www.androidpit.de/"
+                buttonType="secondary"
+                buttonWidth="210px"
+              />
+            </div>
+          </div>
+          <div className="scene" id="scene-4-2">
+            <div id="theatre-description">
+              {profHighlights.y2018.highlightParagraphs2}
+            </div>
+            <div className={this.state.theatre} id="theatre-anim-box">
+              <Theatre />
+            </div>
+          </div>
+          <div className="scene" id="scene-5">
+            <ProfHighlights content={profHighlights.y2017} />
+            <div className={this.state.ob} id="ob-anim-box">
+              <ObVideo />
+            </div>
+          </div>
+          <div className="scene" id="scene-6">
+            <ProfHighlights content={profHighlights.y2016} />
+            <div className={this.state.bear} id="bear-anim-box">
+              <Bear />
+            </div>
+          </div>
+          <div className="scene" id="scene-7">
+            <ProfHighlights content={profHighlights.y2015} />
+            <div className={this.state.lenin} id="lenin-anim-box">
+              <Lenin />
+            </div>
+            <div className={this.state.trolleybus} id="trolleybus-anim-box">
+              <Trolleybus />
+            </div>
+          </div>
+          <div className="scene" id="scene-8">
+            <ProfHighlights content={profHighlights.y2014} />
+            <div className={this.state.blackboard} id="blackboard-anim-box">
+              <Blackboard />
+            </div>
+            <div className={this.state.teacher} id="teacher-anim-box">
+              <Teacher />
+            </div>
+            <div className={this.state.students} id="students-anim-box">
+              <Students />
+            </div>
+          </div>
+          <div className="scene" id="scene-9">
+            <div className={this.state.goat} id="goat-anim-box">
+              <Goat />
+            </div>
+            <FinalWords />
+          </div>
         </section>
       </>
     );
