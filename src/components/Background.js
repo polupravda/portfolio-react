@@ -1,6 +1,6 @@
 import React from "react";
 import "../App.scss";
-import { debounce } from "../helperFunctions";
+import { debounce, updateVh } from "../helperFunctions";
 
 import Ufo from "../components/Ufo";
 import Rocket from "../components/Rocket";
@@ -8,16 +8,11 @@ import Rocket from "../components/Rocket";
 class Background extends React.Component {
   constructor(props) {
     super(props);
-    this.debouncedResizeListener = debounce(this.updateVh);
+    this.debouncedResizeListener = debounce(updateVh);
   }
 
-  updateVh = () => {
-    let vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty("--vh", `${vh}px`);
-  };
-
   componentDidMount() {
-    this.updateVh();
+    updateVh();
     window.addEventListener("resize", this.debouncedResizeListener);
   }
 

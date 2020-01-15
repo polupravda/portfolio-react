@@ -137,8 +137,7 @@ class APit extends React.Component {
           </div>
           {isMobileDevice() ? (
             <>
-              {" "}
-              <Tag tagText={hints.scrollMe} /> <Iphone />{" "}
+              <Tag tagText={hints.scrollMe} /> <Iphone />
             </>
           ) : (
             <AppleDesktop />

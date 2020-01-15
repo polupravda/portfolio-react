@@ -12,6 +12,7 @@ import Ninja from "../components/Ninja";
 import History from "../components/History";
 import Octopus from "../components/Octopus";
 import ApMDemo from "../components/ApMDemo";
+import Theatre from "../components/Theatre";
 import ProfHighlights from "../components/ProfHighlights";
 import ObVideo from "../components/ObVideo";
 import Trolleybus from "../components/Trolleybus";
@@ -33,6 +34,7 @@ class Home extends React.Component {
       ninja: "hidden",
       octopusAnim: "hidden",
       octopusLifeAnim: "hidden",
+      theatre: "",
       demo: "hidden",
       bear: "hidden",
       ob: "hidden",
@@ -96,6 +98,7 @@ class Home extends React.Component {
     const ninjaTrigger = document.getElementById("description-container");
     const octopusTrigger = document.getElementById("history");
     const demoTrigger = document.getElementById("2018");
+    const theatreTrigger = document.getElementById("theatre-description");
     const obTrigger = document.getElementById("2017");
     const bearTrigger = document.getElementById("2016");
     const trolleybusTrigger = document.getElementById("2015");
@@ -106,6 +109,7 @@ class Home extends React.Component {
     const ninjaPos = this.relationToView(ninjaTrigger);
     const octopusPos = this.relationToView(octopusTrigger);
     const demoPos = this.relationToView(demoTrigger);
+    const theatrePos = this.relationToView(theatreTrigger);
     const obPos = this.relationToView(obTrigger);
     const bearPos = this.relationToView(bearTrigger);
     const trolleybusPos = this.relationToView(trolleybusTrigger);
@@ -187,6 +191,26 @@ class Home extends React.Component {
         }
       default:
         this.setState({ demo: "hidden" });
+        break;
+    }
+
+    switch (theatrePos) {
+      case "isPartiallyVisible":
+        this.setState({ theatre: "theatre-appear" });
+        break;
+      case "isPartiallyHidden":
+        this.setState({ theatre: "theatre-hide" });
+        break;
+      case "isConditionForBackScrollHide":
+        if (this.state.scrollBackwards) {
+          this.setState({ theatre: "theatre-hide" });
+          break;
+        } else {
+          this.setState({ theatre: "hidden" });
+          break;
+        }
+      default:
+        this.setState({ theatre: "hidden" });
         break;
     }
 
@@ -356,6 +380,12 @@ class Home extends React.Component {
                     buttonType="secondary"
                     buttonWidth="210px"
                   />
+                </div>
+              </div>
+              <div className="scene" id="scene-4-2">
+                <div id="theatre-description">{profHighlights.y2018.highlightParagraphs2}</div>
+                <div className={this.state.theatre} id="theatre-anim-box">
+                  <Theatre />
                 </div>
               </div>
               <div className="scene" id="scene-5">

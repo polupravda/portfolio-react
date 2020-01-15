@@ -30,14 +30,6 @@ function FinalWords() {
       </div>
       <div id="cv-container">
         <span>{finalWords.paragraph3}</span>
-        <a
-          href="/assets/pdf/Elena-Volovicheva-CV.pdf"
-          download="Elena-Volovicheva-CV.pdf"
-          target="_blank"
-          title="Download Resume"
-        >
-          {finalWords.buttonCV}
-        </a>
         <Button
           buttonLink="/assets/pdf/Elena-Volovicheva-CV.pdf"
           buttonText={finalWords.buttonCV}

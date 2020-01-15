@@ -6,14 +6,11 @@ import React from "react";
 import "../App.scss";
 import ButtonLink from "./ButtonLink";
 
-function Button({ buttonLink, buttonText, buttonType, buttonWidth }) {
+function Button( props ) {
   return (
     <div id="button-secondary">
       <ButtonLink
-        buttonLink={buttonLink}
-        buttonText={buttonText}
-        buttonWidth={buttonWidth}
-        buttonType={buttonType}
+        {...props}
       />
     </div>
   );

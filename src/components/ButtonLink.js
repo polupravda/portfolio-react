@@ -2,9 +2,20 @@ import React from "react";
 import { Link } from "react-router-dom";
 import isExternal from "is-url-external";
 
-function ButtonLink({ buttonLink, buttonText, buttonWidth = "240px", buttonType }) {
+function ButtonLink({
+  buttonLink,
+  buttonText,
+  buttonWidth = "240px",
+  buttonType,
+  ...restOfProps
+}) {
   return isExternal(buttonLink) ? (
-    <a href={buttonLink} target="_blank" rel="noopener noreferrer">
+    <a
+      href={buttonLink}
+      target="_blank"
+      rel="noopener noreferrer"
+      {...restOfProps}
+    >
       {buttonType === "primary" ? (
         <div className="button-primary-container">
           <svg viewBox="0 0 134 39" height="100%" width={buttonWidth}>
@@ -122,7 +133,7 @@ function ButtonLink({ buttonLink, buttonText, buttonWidth = "240px", buttonType 
       )}
     </a>
   ) : (
-    <Link to={buttonLink}>
+    <Link to={buttonLink} {...restOfProps}>
       {buttonType === "primary" ? (
         <div className="button-primary-container">
           <svg viewBox="0 0 134 39" height="100%" width={buttonWidth}>
