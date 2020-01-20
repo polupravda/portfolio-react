@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../App.scss";
 import { finalWords, myContactDetails } from "../Content";
-import Thanks from "../components/Thanks";
-import Button from "../components/Button";
+import Thanks from "./Thanks";
+import Button from "./Button";
 
 function FinalWords() {
   return (
@@ -31,7 +31,7 @@ function FinalWords() {
       <div id="cv-container">
         <span>{finalWords.paragraph3}</span>
         <Button
-          buttonLink="/assets/pdf/Elena-Volovicheva-CV.pdf"
+          buttonLink="https://drive.google.com/file/d/1-Q38MUypDisnEO3a0OFSY0TVk4dRO6lx/view?usp=sharing"
           buttonText={finalWords.buttonCV}
           buttonType="primary"
           download="Elena-Volovicheva-CV.pdf"

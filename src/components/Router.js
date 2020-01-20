@@ -6,7 +6,7 @@ import Works from "../views/Works";
 import Contact from "../views/Contact";
 import NotFound from "../views/NotFound";
 import Background from "./Background";
-import NavBar from "../components/NavBar";
+import NavBar from "./NavBar";
 
 const Router = () => (
   <Background>
