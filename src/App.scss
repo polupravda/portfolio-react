@@ -374,9 +374,9 @@ h2 {
     "octopus octopus history ."
     "octopus octopus . .";
 
-    @include mobile {
-      margin: 20vh 0;
-    }
+  @include mobile {
+    margin: 20vh 0;
+  }
 
   #octopus-anim {
     grid-area: octopus;
@@ -2704,7 +2704,7 @@ h2 {
 }
 
 .screen-canvas {
-  overflow: hidden;
+  overflow: scroll;
 }
 
 .ap-before-canvas {
