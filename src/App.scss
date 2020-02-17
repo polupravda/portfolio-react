@@ -245,10 +245,6 @@ h2 {
     flex-direction: column;
     align-items: center;
 
-    @include mobile {
-      visibility: hidden;
-    }
-
     &.pointer-appear {
       visibility: visible;
       animation: scrollHintAppear 300ms ease-out forwards 1;

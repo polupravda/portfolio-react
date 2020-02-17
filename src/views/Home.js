@@ -1,6 +1,6 @@
 import React from "react";
 import "../App.scss";
-import { debounce } from "../helperFunctions";
+import { debounce, isMobileDevice } from "../helperFunctions";
 
 import Skills from "../components/Skills";
 import PointerScroll from "../components/PointerScroll";
@@ -364,7 +364,11 @@ class Home extends React.Component {
             <div className={this.state.foxPinned} id="fox-anim-box">
               <Fox />
             </div>
-            <PointerScroll animClass={this.state.pointerScroll} />
+            {isMobileDevice() ? (
+              <div />
+            ) : (
+              <PointerScroll animClass={this.state.pointerScroll} />
+            )}
           </div>
           <div className={"scene " + this.state.snapped} id="scene-2">
             <div id="description-container">
