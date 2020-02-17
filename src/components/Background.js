@@ -26,7 +26,7 @@ class Background extends React.Component {
         <div className="bgCanvas">
           <Rocket />
           <Ufo />
-          <div className="foreground"></div>
+          <div className="foreground images-loaded-container" />
         </div>
         {this.props.children}
       </div>

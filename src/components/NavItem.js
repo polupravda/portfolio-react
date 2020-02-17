@@ -8,7 +8,7 @@ function NavItem({ name, url }) {
     <>
       <Link to={url} className="navbar-items">
         {name}
-        <Underline></Underline>
+        <Underline />
       </Link>
     </>
   );
