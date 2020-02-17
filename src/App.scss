@@ -217,7 +217,7 @@ h2 {
 
 #scene-1 {
   grid-template-rows: 1fr -webkit-max-content -webkit-max-content 2fr;
-  grid-template-rows: 1fr max-content max-content 2fr;
+  grid-template-rows: 1fr max-content 1fr 1fr 1fr;
   grid-template-columns: 1fr 1fr 3fr 1fr;
   grid-gap: 2vh;
   -webkit-box-align: start;
@@ -227,11 +227,49 @@ h2 {
     ". . . ."
     ". logo logo ."
     "fox fox introduction-text ."
-    "fox fox . .";
+    "fox fox . ."
+    ". pointer pointer .";
   margin-top: 10px;
 
   @include mobile {
     margin-top: 20vh;
+  }
+
+  #pointer-scroll {
+    position: fixed;
+    bottom: 2vh;
+    left: 49%;
+    grid-area: pointer;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &.pointer-appear {
+      visibility: visible;
+      animation: scrollHintAppear 300ms ease-out forwards 1;
+    }
+
+    &.pointer-hide {
+      animation: scrollHintHide 300ms ease-out forwards 1;
+    }
+
+    #pointer-scroll-text {
+      font-family: $font-secondary;
+      color: $app-white;
+      font-size: 20px;
+      text-transform: uppercase;
+    }
+
+    #pointer-scroll-hand-container {
+      display: flex;
+      justify-content: center;
+
+      img {
+        width: 40%;
+        animation: handScroll 4500ms ease-out infinite;
+      }
+    }
   }
 
   #profession {
@@ -5984,5 +6022,60 @@ $apit-padding-area-left: $apit-padding-area-right;
 
   100% {
     bottom: -100vh;
+  }
+}
+
+@keyframes handScroll {
+  0% {
+    transform: translateY(0);
+  }
+
+  5% {
+    transform: translateY(5px);
+  }
+
+  10% {
+    transform: translateY(0);
+  }
+
+  15% {
+    transform: translateY(5px);
+  }
+
+  20% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes scrollHintAppear {
+  0% {
+    transform: scale(0);
+    visibility: hidden;
+  }
+
+  5% {
+    visibility: visible;
+  }
+
+  100% {
+    transform: scale(1);
+    visibility: visible;
+  }
+}
+
+@keyframes scrollHintHide {
+  0% {
+    transform: scale(1);
+    visibility: visible;
+
+  }
+
+  95% {
+    visibility: visible;
+  }
+
+  100% {
+    transform: scale(0);
+    visibility: hidden;
   }
 }

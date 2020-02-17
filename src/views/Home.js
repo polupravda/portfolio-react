@@ -3,6 +3,7 @@ import "../App.scss";
 import { debounce } from "../helperFunctions";
 
 import Skills from "../components/Skills";
+import PointerScroll from "../components/PointerScroll";
 import Tools from "../components/Tools";
 import Button from "../components/Button";
 import Fox from "../components/Fox";
@@ -31,6 +32,7 @@ class Home extends React.Component {
     this.state = {
       introAnim: "hidden",
       foxPinned: "fox-pinned",
+      pointerScroll: "hidden",
       ninja: "hidden",
       octopusAnim: "hidden",
       octopusLifeAnim: "hidden",
@@ -123,6 +125,7 @@ class Home extends React.Component {
     switch (introPos) {
       case "isVisible":
         this.setState({ foxPinned: "fox-unpinned" });
+        this.setState({ pointerScroll: "pointer-hide" });
         break;
       default:
         this.setState({ foxPinned: "fox-pinned" });
@@ -336,6 +339,11 @@ class Home extends React.Component {
     window.addEventListener("scroll", this.debouncedScrollListener);
     window.addEventListener("scroll", this.debouncedScrollDirectionListener);
 
+    // Animate scroll hint
+    setTimeout(() => {
+      this.setState({ pointerScroll: "pointer-appear" });
+    }, 2000);
+
     // Animate the first Scene after loading
     setTimeout(() => {
       this.setState({ introAnim: "intro-anim" });
@@ -356,6 +364,7 @@ class Home extends React.Component {
             <div className={this.state.foxPinned} id="fox-anim-box">
               <Fox />
             </div>
+            <PointerScroll animClass={this.state.pointerScroll} />
           </div>
           <div className={"scene " + this.state.snapped} id="scene-2">
             <div id="description-container">

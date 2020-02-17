@@ -8,7 +8,8 @@ export const introText = {
   myName: "Elena Volovicheva",
   myTitle: "Creative Developer",
   myIntro:
-    "That's me! I design cool things for web and do development using modern front-end technologies. My strength is developing visually appealing and user-friendly interfaces. I am in Berlin."
+    "That's me! I design cool things for web and do development using modern front-end technologies. My strength is developing visually appealing and user-friendly interfaces. I am in Berlin.",
+  scroll: "Scroll"
 };
 
 export const skillsList = {
@@ -45,7 +46,8 @@ export const profHighlights = {
     highlightParagraphs: [
       "My team and I performed rebranding of Androidpit - one of the biggest Tech News Portals in Germany, redesigned the web portal and rebuilt certain parts of it. The brand got a fresh look, the potal got a friendlier user interface. The navigation of the portal was reconsidered in order to support a better optimisation for search engines, as well as its architecture and technology stack changed."
     ],
-    highlightParagraphs2: "I held multiple talks and workshops dedicated to design and front-end, 2 of them in international conferences: PyCon.DE ’18 and PyConPl ’18."
+    highlightParagraphs2:
+      "I held multiple talks and workshops dedicated to design and front-end, 2 of them in international conferences: PyCon.DE ’18 and PyConPl ’18."
   },
   y2017: {
     year: "2017",
