@@ -1,3 +1,7 @@
+export const spinnerText = {
+  loading: "Loading...",
+};
+
 export const tagText = {
   tagBefore: "Before",
   tagAfter: "After",

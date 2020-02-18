@@ -5,7 +5,7 @@ function Fox() {
   return (
     <>
     <div id="fox-anim">
-      <div id="fox"></div>
+      <div id="fox" className="images-loaded-container"></div>
       </div>
     </>
   );

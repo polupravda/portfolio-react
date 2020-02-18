@@ -4,7 +4,7 @@ import "../App.scss";
 function Rocket() {
   return (
     <div id="rocket-container">
-      <div id="rocket"></div>
+      <div id="rocket" className="images-loaded-container"></div>
     </div>
   );
 }

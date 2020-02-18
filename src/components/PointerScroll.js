@@ -12,6 +12,7 @@ class PointerScroll extends React.Component {
             src="/assets/images/pointer-scroll.png"
             alt="scroll"
             id="pointer-scroll-hand"
+            className="images-loaded-container"
           />
         </div>
       </div>

@@ -1,7 +1,8 @@
 import React from "react";
 import "../App.scss";
-import { debounce, isMobileDevice } from "../helperFunctions";
+import ImagesLoaded from 'react-images-loaded';
 
+import Spinner from "../components/Spinner";
 import Skills from "../components/Skills";
 import PointerScroll from "../components/PointerScroll";
 import Tools from "../components/Tools";
@@ -25,11 +26,13 @@ import Goat from "../components/Goat";
 import FinalWords from "../components/FinalWords";
 
 import { profHighlights } from "../Content";
+import { debounce, isMobileDevice } from "../helperFunctions";
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      imagesLoading: true,
       introAnim: "hidden",
       foxPinned: "fox-pinned",
       pointerScroll: "hidden",
@@ -52,7 +55,15 @@ class Home extends React.Component {
     this.debouncedScrollListener = debounce(this.checkTriggerElements);
     this.debouncedScrollDirectionListener = debounce(this.checkScrollDirection);
     this.scrollPos = 0;
-  }
+  };
+
+  handleOnAlways = instance => {console.log("handleOnAlways")};
+ 
+  handleOnProgress = (instance, image) => {this.setState({imagesLoading: true})};
+ 
+  handleOnFail = instance => {console.log("handleOnFail")};
+ 
+  handleDone = instance => {this.setState({imagesLoading: false})};
 
   checkScrollDirection = () => {
     if (document.body.getBoundingClientRect().top > this.scrollPos) {
@@ -358,7 +369,17 @@ class Home extends React.Component {
   render() {
     return (
       <>
-        <section id="wrapper">
+      <ImagesLoaded
+        elementType={'div'} // defaults to 'div'
+        className={'images-loaded-container'} // defaults to 'images-loaded-container'
+        onAlways={this.handleOnAlways}
+        onProgress={this.handleOnProgress}
+        onFail={this.handleOnFail}
+        done={this.handleDone}
+        background=".image"
+      >
+        <section id="wrapper" className="images-loaded-container">
+          {this.state.imagesLoading ? <Spinner /> : <div />}
           <div className={"scene " + this.state.introAnim} id="scene-1">
             <Intro />
             <div className={this.state.foxPinned} id="fox-anim-box">
@@ -447,6 +468,7 @@ class Home extends React.Component {
             <FinalWords />
           </div>
         </section>
+        </ImagesLoaded>
       </>
     );
   }
