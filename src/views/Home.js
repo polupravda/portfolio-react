@@ -32,7 +32,7 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      imagesLoading: true,
+      imagesLoadingState: "progress",
       introAnim: "hidden",
       foxPinned: "fox-pinned",
       pointerScroll: "hidden",
@@ -59,11 +59,11 @@ class Home extends React.Component {
 
   handleOnAlways = instance => {console.log("handleOnAlways")};
  
-  handleOnProgress = (instance, image) => {this.setState({imagesLoading: true})};
+  handleOnProgress = (instance, image) => {this.setState({imagesLoadingState: "progress"})};
  
-  handleOnFail = instance => {console.log("handleOnFail")};
+  handleOnFail = instance => {console.log(instance)};
  
-  handleDone = instance => {this.setState({imagesLoading: false})};
+  handleDone = instance => {this.setState({imagesLoadingState: "done", introAnim: "intro-anim"})};
 
   checkScrollDirection = () => {
     if (document.body.getBoundingClientRect().top > this.scrollPos) {
@@ -354,11 +354,6 @@ class Home extends React.Component {
     setTimeout(() => {
       this.setState({ pointerScroll: "pointer-appear" });
     }, 2000);
-
-    // Animate the first Scene after loading
-    setTimeout(() => {
-      this.setState({ introAnim: "intro-anim" });
-    }, 1000);
   }
 
   componentWillUnmount() {
@@ -379,7 +374,7 @@ class Home extends React.Component {
         background=".image"
       >
         <section id="wrapper" className="images-loaded-container">
-          {this.state.imagesLoading ? <Spinner /> : <div />}
+          <Spinner spinnerClass={this.state.imagesLoadingState} />
           <div className={"scene " + this.state.introAnim} id="scene-1">
             <Intro />
             <div className={this.state.foxPinned} id="fox-anim-box">

@@ -130,6 +130,22 @@ body {
   justify-content: center;
   align-items: center;
 
+  &.progress {
+    visibility: visible;
+  }
+
+  &.done {
+    animation: spinnerHide 300ms forwards linear;
+  }
+
+  &.always {
+    visibility: hidden;
+  }
+
+  // &.fail {
+
+  // }
+
   #ev {
     svg {
       width: 25vw;
@@ -6122,5 +6138,22 @@ $apit-padding-area-left: $apit-padding-area-right;
   100% {
     transform: scale(0);
     visibility: hidden;
+  }
+}
+
+@keyframes spinnerHide {
+  0% {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  99% {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  100% {
+    visibility: hidden;
+    opacity: 0;
   }
 }
