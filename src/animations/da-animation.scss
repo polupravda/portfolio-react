@@ -1,0 +1,334 @@
+// Digital Anvil Logo Animation
+
+#digital-anvil-logo-demo {
+  background-color: #e7e7e7;
+
+  * {
+    visibility: hidden;
+  }
+
+  &.update {
+
+    * {
+      visibility: visible;
+    }
+    
+    .cls-1,
+    .cls-3,
+    .cls-4 {
+      fill: none;
+      stroke-miterlimit: 10;
+    }
+  
+    .cls-1 {
+      stroke: #ffffff;
+    }
+  
+    .cls-3 {
+      stroke: #ffffff;
+    }
+  
+    .cls-4 {
+      stroke: #765b64;
+    }
+  
+    .line-vert {
+      stroke-width: 1px;
+      stroke: url(#linear-gradient-vert-light);
+    }
+  
+    .line-horiz {
+      stroke-width: 1px;
+      stroke: url(#linear-gradient-horiz-light);
+    }
+  
+    .line {
+      stroke-width: 1px;
+    }
+  
+    .circ-front {
+      stroke-width: 1px;
+    }
+  
+    .circ {
+      stroke-width: 1px;
+      fill: transparent;
+      stroke-linecap: round;
+    }
+  
+    /* Animated */
+  
+    /* scene-1 */
+  
+    .line-vert-1 {
+      animation: 900ms drawLineVertFromTop ease-in-out forwards;
+    }
+  
+    .line-vert-2 {
+      animation: 900ms drawLineVertFromBottom ease-in-out forwards;
+    }
+  
+    .line-horiz-1 {
+      animation: 900ms drawLineVertFromTop ease-in-out forwards;
+    }
+  
+    .line-horiz-2 {
+      animation: 900ms drawLineVertFromBottom ease-in-out forwards;
+    }
+  
+    /* scene-2 */
+  
+    .circ-front-prim {
+      stroke-width: 1px;
+      stroke-dasharray: 0 700;
+      stroke-dashoffset: -328;
+      animation: 600ms 600ms drawCirclePrimary ease-in-out forwards;
+    }
+  
+    .circ-front-sec {
+      stroke-width: 1px;
+      stroke-dasharray: 0 700;
+      stroke-dashoffset: -328;
+      animation: 600ms 600ms drawCirclePrimary ease-in-out forwards;
+    }
+  
+    /* scene-3 */
+  
+    .circ-back-sec {
+      stroke-dasharray: 140 540;
+      stroke-dashoffset: -474;
+      opacity: 0;
+      animation: 500ms drawCircleSmall ease-in-out forwards;
+    }
+  
+    .circ-back-prim {
+      stroke-dasharray: 140 540;
+      stroke-dashoffset: -474;
+      animation: 500ms drawCircleSmall ease-in-out forwards;
+    }
+  
+    .circ-big {
+      stroke-dasharray: 141 546;
+      stroke-dashoffset: -544;
+      opacity: 0;
+      animation: 500ms drawCircleBig ease-in-out forwards;
+    }
+  
+    #c3 {
+      animation-delay: 1900ms;
+    }
+  
+    #c4 {
+      animation-delay: 1950ms;
+    }
+  
+    #c5 {
+      animation-delay: 2000ms;
+    }
+  
+    #c6 {
+      animation-delay: 2050ms;
+    }
+  
+    #c7,
+    #c13,
+    #c12,
+    #c23 {
+      animation-delay: 2100ms;
+    }
+  
+    #c8,
+    #c14,
+    #c15,
+    #c16,
+    #c21 {
+      animation-delay: 2150ms;
+    }
+  
+    #c9,
+    #c17,
+    #c19,
+    #c22 {
+      animation-delay: 2200ms;
+    }
+  
+    #c10,
+    #c11,
+    #c20 {
+      animation-delay: 2250ms;
+    }
+  
+    .circ-colored {
+      opacity: 0;
+      stroke: #765b64;
+      animation: circleColored 300ms 2850ms ease-in-out forwards;
+    }
+  
+    .line-colored {
+      animation: circleColored 300ms 2850ms ease-in-out forwards;
+    }
+  
+    .line-colored-horiz {
+      opacity: 0;
+      stroke: url(#linear-gradient-horiz);
+    }
+  
+    .line-colored-vert {
+      opacity: 0;
+      stroke: url(#linear-gradient-vert);
+    }
+  
+    /* scene-4 */
+  
+    .anvil {
+      stroke: none;
+      fill: #ccc;
+      opacity: 0;
+      animation: 800ms 3100ms anvilAppear ease-in-out forwards;
+    }
+  
+    /* scene-5 */
+  
+    .letter {
+      fill: #281c21;
+      opacity: 0;
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: 800ms 4500ms letterAppear ease-in-out forwards;
+    } 
+  }
+}
+
+/* Animations */
+
+@keyframes drawCircleBig {
+  0% {
+    stroke-dasharray: 141 546;
+    stroke-dashoffset: -544;
+    opacity: 0;
+  }
+
+  1% {
+    opacity: 1;
+  }
+
+  100% {
+    stroke-dasharray: 760;
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes drawCircleSmall {
+  0% {
+    stroke-dasharray: 140 540;
+    stroke-dashoffset: -474;
+    opacity: 0;
+  }
+
+  1% {
+    opacity: 1;
+  }
+
+  100% {
+    stroke-dasharray: 760;
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes drawCirclePrimary {
+  0% {
+    stroke-dasharray: 0 700;
+    stroke-dashoffset: -328;
+    opacity: 0;
+  }
+
+  1% {
+    opacity: 1;
+  }
+
+  100% {
+    stroke-dasharray: 715 0;
+    stroke-dashoffset: 28;
+    opacity: 1;
+  }
+}
+
+@keyframes drawLineVertFromTop {
+  0% {
+    stroke-dasharray: 0 700;
+    stroke-dashoffset: -558;
+    opacity: 0;
+  }
+
+  1% {
+    opacity: 1;
+  }
+
+  100% {
+    stroke-dasharray: 715 0;
+    stroke-dashoffset: 28;
+    opacity: 1;
+  }
+}
+
+@keyframes drawLineVertFromBottom {
+  0% {
+    stroke-dashoffset: 0;
+    stroke-dasharray: 0 700;
+    opacity: 0;
+  }
+
+  1% {
+    opacity: 1;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+    stroke-dasharray: 715 0;
+    opacity: 1;
+  }
+}
+
+@keyframes anvilAppear {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes letterAppear {
+  0% {
+    opacity: 0;
+    transform-origin: center center;
+    transform: scaleY(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+    transform-origin: center center;
+  }
+}
+
+@keyframes colorEmphasis {
+  0% {
+    stroke: #ede6ea;
+  }
+  100% {
+    stroke: #765b64;
+  }
+}
+
+@keyframes circleColored {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

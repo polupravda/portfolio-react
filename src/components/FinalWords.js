@@ -12,7 +12,7 @@ function FinalWords() {
       <span id="thanks-paragraph">{finalWords.paragraph0}</span>
       <div id="final-words-works-container">
         <span>{finalWords.paragraph1}</span>
-        <Link to="/works" className="contact-data" id="works">
+        <Link to="/works" className="contact-data">
           {finalWords.works}
         </Link>
       </div>

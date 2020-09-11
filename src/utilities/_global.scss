@@ -1,0 +1,40 @@
+@import "utilities/variables";
+@import "utilities/mixins";
+
+.elena-font-yellow {
+    svg {
+        path,
+        rect,
+        polygon {
+          fill: $app-yellow;
+    
+          &:hover {
+            fill: $app-black;
+          }
+    
+          &:active {
+            -webkit-animation: letterJump 500ms ease-in-out;
+            animation: letterJump 500ms ease-in-out;
+          }
+        }
+    }
+  }
+
+  .elena-font-black {
+    svg {
+        path,
+        rect,
+        polygon {
+          fill: $app-black;
+    
+          &:hover {
+            fill: $app-yellow;
+          }
+    
+          &:active {
+            -webkit-animation: letterJump 500ms ease-in-out;
+            animation: letterJump 500ms ease-in-out;
+          }
+        }
+    }
+  }

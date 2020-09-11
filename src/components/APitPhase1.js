@@ -4,7 +4,7 @@ import { aPitProject } from "../Content.js";
 
 function APitPhase1() {
   return (
-    <div id="apit-phase-1" className="phase" alt={aPitProject.headlinePhase1}>
+    <div id="apit-phase-1" className="phase elena-font-yellow" alt={aPitProject.headlinePhase1}>
       <svg viewBox="0 0 997 200" version="1.1">
         <g
           id="Page-1"

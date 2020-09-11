@@ -4,7 +4,7 @@ import { contact } from "../Content.js";
 
 function Coffee() {
   return (
-    <div id="coffee" alt={contact.coffee}>
+    <div id="coffee" className="elena-font-black" alt={contact.coffee}>
       <svg viewBox="0 0 1173 200">
         <g
           id="Page-1"

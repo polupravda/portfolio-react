@@ -4,7 +4,7 @@ import { introText } from "../Content.js";
 
 function Logo() {
   return (
-    <div id="logo">
+    <div id="logo" className="elena-font-black">
       <span id="profession">{introText.myTitle}</span>
       <svg viewBox="0 0 1082 199">
         <g

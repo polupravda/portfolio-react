@@ -4,7 +4,7 @@ import { finalWords } from "../Content.js";
 
 function Thanks() {
   return (
-    <div id="thanks" alt={finalWords.thanks}>
+    <div id="thanks" className="elena-font-black" alt={finalWords.thanks}>
       <svg viewBox="0 0 630 96">
         <g
           id="Page-1"

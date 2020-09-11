@@ -4,7 +4,7 @@ import { aPitProject } from "../Content.js";
 
 function APitDesignSystemHeadline() {
   return (
-    <div id="apit-design-system-headline" alt={aPitProject.headlineMain1}>
+    <div id="apit-design-system-headline" alt={aPitProject.headlineMain1} className="elena-font-black">
       <svg viewBox="0 0 1243 200" version="1.1">
         <g
           id="Page-1"

@@ -31,8 +31,8 @@ export const toolsList = {
   items: [
     ["HTML5", "CSS3", "Sass"],
     ["JS", "React", "Vue"],
-    ["Python", "Flask", "SQL"],
-    ["Photoshop", "Illustrator", "Sketch", "After Effects", "Animate"]
+    ["Photoshop", "Illustrator", "Sketch", "After Effects", "Animate"],
+    ["Salesforce"]
   ]
 };
 
@@ -180,6 +180,53 @@ export const aPitProject = {
   buttonText: "Visit Web Site",
   buttonLink: "https://www.androidpit.de/"
 };
+
+export const motorola5GBattleProject = {
+  headlineMain1: "Motorola 5G Battle 2020",
+  headlineMain2:
+    "Web site for Motorola's 5G Battle 2020 Campaign",
+  subline: "My role: Concept Co-creator/UI Designer/Front-End Developer",
+  years: "Year: 2020",
+  usedTools: "Used Tools: Sass + React.js + Gatsby",
+  credits: "Credits: Motorola, NextPit",
+  paragraph1:
+    'In August 2020, as part of the 5G Battle campaign and in collaboration with DUCATI and Telekom, Motorola is realizing the "5G Battle" series of live (taking place in Telekom-Shops) and online competitions.',
+  paragraph2:
+    "The main goal of the Web Site is to keep the Participants updated about the latest events, scores and winners. They also should be able to see if their names are still on top positions of the Leaderboard. Therefore clear navigation structure with submenue was designed, as well as multiple entry points were created, to give the Participants an oppportunity to sign up for a newsletter with updates.",
+  paragraph3:
+    "Each of the 3 Competitions got a unique color code, so that the Participants could easily recognize which Challenge they are currently watching.",
+    paragraph4:
+    "Streetfighter Challenge is taking place in multiple cities of Germany and it does not happen at the same time. How do the Participants know when and where exactly will the Challenge take place in their city? For that purpose a Calendar was designed, showing all the information in a compact and intuitive way.",
+  img1Description: "Motorola 5G Battle Challenges",
+  img2Description: "Motorola 5G Battle Calendar",
+  paragraph5:
+    "Score Boards are almost never look particularly exciting :) We did our best though, to design them in a way that every User feels proud about the Participants from their city!",
+    img3Description: "Motorola 5G Battle Leaderboard desktop",
+    img4Description: "Motorola 5G Battle Leaderboard mobile",
+  paragraph6:
+    "But of course the biggest motivation to take part in a Challenge are the amazing prizes you can get! Beautiful presentation and clear instructions on how to get the prize - that was our main goal.",
+  img5Description: "Motorola 5G Battle prizes slider desktop",
+  img6Description: "Motorola 5G Battle prizes slider mobile",
+  paragraph7: "Break speed limits with Motorola...",
+  paragraph8:
+    "...and experience the most exciting challenge of the year 2020!",
+  paragraph9: "In case if it's too late to participate ",
+  paragraph10:  ", at least...",
+  buttonText: "Visit Web Site",
+  buttonLink: "https://www.5g-battle.de/"
+};
+
+export const bonus1 = {
+  headlineMain: "Animated Logo for Digital Anvil",
+  years: "Year: 2019",
+  usedTools: "Used Technologies: SVG + Sass"
+}
+
+export const bonus2 = {
+  headlineMain: "Pure CSS Animation",
+  years: "Year: 2019",
+  usedTools: "Used Technologies: Pug + Sass"
+}
 
 export const contact = {
   coffee: "Let's meet for a coffee",

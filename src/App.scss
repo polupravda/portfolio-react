@@ -1,60 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Gaegu:700|Space+Mono:400,700|&display=swap");
 
-// Variables
-$app-yellow: #ffb600;
-$app-black: #333;
-$app-white: #fff;
-$app-bg-blue: #4c7a82;
-$font-primary: "Space Mono",
-monospace;
-$font-secondary: "Gaegu",
-cursive;
-
-// Mixins
-
-@mixin tablet-landscape {
-  @media only screen and (max-width: 1113px) and (orientation: landscape) {
-    @content;
-  }
-}
-
-@mixin tablet {
-  @media only screen and (max-width: 1025px) {
-    @content;
-  }
-}
-
-@mixin mobile-landscape {
-  @media only screen and (max-width: 813px) and (orientation: landscape) {
-    @content;
-  }
-}
-
-@mixin mobile {
-  @media only screen and (max-width: 456px) {
-    @content;
-  }
-}
-
-@mixin bodyFontSize {
-  font-size: 14px;
-
-  @include tablet {
-    font-size: 20px;
-  }
-
-  @include tablet-landscape {
-    font-size: 20px;
-  }
-
-  @include mobile {
-    font-size: 14px;
-  }
-
-  @include mobile {
-    font-size: 14px;
-  }
-}
+@import "utilities/variables";
+@import "utilities/global";
+@import "animations/da-animation";
+@import "animations/rocket-animation";
 
 body {
   cursor: url("/assets/images/cursor.png"), auto;
@@ -167,6 +116,7 @@ body {
   }
 
   .underline-path {
+    stroke-linecap: round;
     -webkit-animation: 1000ms draw ease-out alternate forwards;
     animation: 1000ms draw ease-out forwards alternate infinite;
   }
@@ -206,7 +156,8 @@ h2 {
     width: 110%;
     height: 110%;
     z-index: -10;
-    background: url("/assets/images/background.png") no-repeat center center, $app-bg-blue;
+    background: url("/assets/images/background.png") no-repeat center center,
+      $app-bg-blue;
     background-size: cover;
     background-position: bottom;
   }
@@ -352,19 +303,6 @@ h2 {
 
     @include mobile {
       width: 90vw;
-    }
-
-    path {
-      fill: $app-black;
-
-      &:hover {
-        fill: $app-yellow;
-      }
-
-      &:active {
-        -webkit-animation: letterJump 500ms ease-in-out;
-        animation: letterJump 500ms ease-in-out;
-      }
     }
   }
 
@@ -678,7 +616,8 @@ h2 {
     &.demo-appear {
       -webkit-transform: translate3d(0, -50vh, 0);
       transform: translate3d(0, -50vh, 0);
-      -webkit-animation: demoAppear 2000ms cubic-bezier(0.52, 0.01, 1, 0.37) forwards;
+      -webkit-animation: demoAppear 2000ms cubic-bezier(0.52, 0.01, 1, 0.37)
+        forwards;
       animation: demoAppear 2000ms cubic-bezier(0.52, 0.01, 1, 0.37) forwards;
     }
 
@@ -1273,25 +1212,32 @@ h2 {
     width: 100%;
 
     &.trolleybus-hide {
-      -webkit-animation: trolleybusHide 1000ms cubic-bezier(1, 0.01, 1, 0.29) forwards;
+      -webkit-animation: trolleybusHide 1000ms cubic-bezier(1, 0.01, 1, 0.29)
+        forwards;
       animation: trolleybusHide 1000ms cubic-bezier(1, 0.01, 1, 0.29) forwards;
     }
 
     #trolleybus {
-      -webkit-animation: trolleybusApper 13000ms cubic-bezier(1, 0.01, 0.99, 0.84) forwards infinite;
-      animation: trolleybusApper 13000ms cubic-bezier(1, 0.01, 0.99, 0.84) forwards infinite;
+      -webkit-animation: trolleybusApper 13000ms
+        cubic-bezier(1, 0.01, 0.99, 0.84) forwards infinite;
+      animation: trolleybusApper 13000ms cubic-bezier(1, 0.01, 0.99, 0.84)
+        forwards infinite;
 
       @include mobile {
-        -webkit-animation: trolleybusApperMobile 13000ms cubic-bezier(1, 0.01, 0.99, 0.84) forwards infinite;
-        animation: trolleybusApperMobile 13000ms cubic-bezier(1, 0.01, 0.99, 0.84) forwards infinite;
+        -webkit-animation: trolleybusApperMobile 13000ms
+          cubic-bezier(1, 0.01, 0.99, 0.84) forwards infinite;
+        animation: trolleybusApperMobile 13000ms
+          cubic-bezier(1, 0.01, 0.99, 0.84) forwards infinite;
       }
 
       #trolleybus-container {
         height: 100%;
         -webkit-transform-origin: bottom left;
         transform-origin: bottom left;
-        -webkit-animation: trolleybusGrow 13000ms cubic-bezier(1, 0.01, 0.99, 0.84) forwards infinite;
-        animation: trolleybusGrow 13000ms cubic-bezier(1, 0.01, 0.99, 0.84) forwards infinite;
+        -webkit-animation: trolleybusGrow 13000ms
+          cubic-bezier(1, 0.01, 0.99, 0.84) forwards infinite;
+        animation: trolleybusGrow 13000ms cubic-bezier(1, 0.01, 0.99, 0.84)
+          forwards infinite;
       }
     }
 
@@ -1447,7 +1393,8 @@ h2 {
     &.blackboard-appear {
       -webkit-transform: translate3d(0, -100vh, 0);
       transform: translate3d(0, -100vh, 0);
-      -webkit-animation: blackboardAppear 2000ms cubic-bezier(0, 0.53, 0.07, 1) forwards;
+      -webkit-animation: blackboardAppear 2000ms cubic-bezier(0, 0.53, 0.07, 1)
+        forwards;
       animation: blackboardAppear 2000ms cubic-bezier(0, 0.53, 0.07, 1) forwards;
     }
 
@@ -1524,8 +1471,10 @@ h2 {
         top: 0%;
         -webkit-transform-origin: 100% 90%;
         transform-origin: 100% 90%;
-        -webkit-animation: teacherPoint 2000ms cubic-bezier(0.8, 0.01, 0.3, 1) alternate infinite;
-        animation: teacherPoint 2000ms cubic-bezier(0.8, 0.01, 0.3, 1) alternate infinite;
+        -webkit-animation: teacherPoint 2000ms cubic-bezier(0.8, 0.01, 0.3, 1)
+          alternate infinite;
+        animation: teacherPoint 2000ms cubic-bezier(0.8, 0.01, 0.3, 1) alternate
+          infinite;
       }
 
       #teacher-foot {
@@ -1666,22 +1615,7 @@ h2 {
         @include mobile {
           width: 100%;
         }
-
-        path {
-          fill: $app-black;
-
-          &:hover {
-            fill: $app-yellow;
-          }
-
-          &:active {
-            -webkit-animation: letterJump 500ms ease-in-out;
-            animation: letterJump 500ms ease-in-out;
-          }
-        }
       }
-
-
     }
 
     #thanks-paragraph {
@@ -1734,7 +1668,8 @@ h2 {
     width: 100%;
 
     &.goat-appear {
-      -webkit-animation: goatAppear 1000ms cubic-bezier(0, 0.53, 0.07, 1) forwards;
+      -webkit-animation: goatAppear 1000ms cubic-bezier(0, 0.53, 0.07, 1)
+        forwards;
       animation: goatAppear 1000ms cubic-bezier(0, 0.53, 0.07, 1) forwards;
     }
 
@@ -1881,7 +1816,6 @@ h2 {
     -webkit-box-pack: end;
     -ms-flex-pack: end;
     justify-content: flex-end;
-
 
     @include mobile-landscape {
       width: 100vw;
@@ -2374,20 +2308,6 @@ h2 {
 
       @include mobile-landscape {
         width: 50vw;
-      }
-
-      path,
-      rect {
-        fill: $app-white;
-
-        &:hover {
-          fill: $app-black;
-        }
-
-        &:active {
-          -webkit-animation: letterJump 500ms ease-in-out;
-          animation: letterJump 500ms ease-in-out;
-        }
       }
     }
   }
@@ -3032,10 +2952,339 @@ h2 {
   }
 }
 
-// APit work
-
 $apit-padding-area-right: minmax(100px, 15vw);
 $apit-padding-area-left: $apit-padding-area-right;
+
+$work-width: minmax(30vw, 45vw);
+
+// Works
+
+#works {
+  display: grid;
+  grid-template-rows: auto auto auto;
+  grid-template-columns: $apit-padding-area-left $work-width 3vw $work-width $apit-padding-area-right;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  grid-row-gap: 10vw;
+  z-index: 50;
+  grid-template-areas:
+    ". work1 work1 work1 ."
+    ". work2 work2 work2 ."
+    ". work3 . work4 .";
+  margin: 15vh 0 10vh 0;
+
+  @include tablet {
+    display: flex;
+    flex-direction: column;
+    width: 60vw;
+    margin: 5vh 20vw;
+  }
+
+  @include mobile {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 90vw;
+    padding: 0 5vw;
+    margin: 10vh 0 0 0;
+  }
+
+  #work-apit {
+    grid-area: work1;
+  }
+
+  #work-motorola {
+    grid-area: work2;
+  }
+
+  #work-bonus-1 {
+    grid-area: work3;
+  }
+
+  #work-bonus-2 {
+    grid-area: work4;
+  }
+
+  .work-demo {
+    max-width: 90vw;
+    height: 100%;
+
+    @include tablet {
+      margin-bottom: 0;
+      margin-top: 0;
+      width: 60vw;
+    }
+
+    @include mobile-landscape {
+      margin-bottom: 20vh;
+      margin-top: 0;
+      height: 100%;
+    }
+
+    @include mobile {
+      width: 90vw;
+      margin-top: 10vh;
+    }
+
+    .elena-font-black {
+      max-width: 100%;
+    }
+
+    a {
+      height: 100%;
+      text-decoration: none;
+      color: $app-white;
+      display: grid;
+      grid-template-rows: auto auto auto;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 1vw;
+      grid-template-areas:
+        "headline subline"
+        "headline info"
+        "image image";
+
+      @include tablet {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    .flex {
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+      align-self: end;
+      grid-area: info;
+
+      .subline {
+        margin: 3px 0;
+        line-height: 1;
+      }
+
+      @include mobile {
+        margin-bottom: 6px;
+      }
+    }
+
+    img {
+      width: 100%;
+      grid-area: image;
+
+      @include mobile {
+        width: 95vw;
+        margin-left: -5vw;
+      }
+    }
+
+    & > * {
+      margin: 0;
+    }
+
+    #motorola-5g-battle-headline-3-lines,
+    #apit-design-system-headline-3-lines {
+      height: 12vw;
+      grid-area: headline;
+
+      @include tablet {
+        height: 20vw;
+      }
+
+      @include mobile-landscape {
+        margin-top: 10vh;
+      }
+
+      @include mobile {
+        height: 26.7vw;
+      }
+
+      svg {
+        height: 100%;
+      }
+    }
+
+    .headline-2 {
+      font-family: $font-secondary;
+      text-transform: uppercase;
+      font-size: 2.3vw;
+      line-height: 0.8;
+      font-weight: 300;
+      color: $app-white;
+      margin: 0;
+      grid-area: subline;
+
+      @include tablet {
+        font-size: 17px;
+        margin-bottom: 1vh;
+      }
+
+      @include mobile {
+        margin-top: 1vw;
+        line-height: 0.9;
+      }
+    }
+
+    h2.subline {
+      font-size: 14px;
+      font-style: italic;
+      text-transform: none;
+      font-weight: 300;
+    }
+
+    .tech-stack-container {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      align-self: end;
+
+      @include tablet {
+        -webkit-box-ordinal-group: 3;
+        -ms-flex-order: 2;
+        order: 2;
+      }
+
+      div {
+        &:not(:first-child) {
+          margin-left: 1vw;
+        }
+      }
+
+      #logo-nuxt {
+        margin-left: 0;
+      }
+
+      svg {
+        height: 3vw;
+
+        @include tablet {
+          height: 8vw;
+          margin-top: 20px;
+        }
+      }
+    }
+  }
+
+  .work-demo-bonus {
+    max-width: 45vw;
+    height: 100%;
+
+    @include tablet {
+      margin-bottom: 0;
+      margin-top: 0;
+      width: 60vw;
+      max-width: 60vw;
+    }
+
+    @include mobile-landscape {
+      margin-bottom: 20vh;
+      margin-top: 0;
+      height: 100%;
+    }
+
+    @include mobile {
+      width: 90vw;
+      max-width: 90vw;
+      margin-top: 10vh;
+    }
+
+    .elena-font-black {
+      max-width: 100%;
+    }
+
+    .flex {
+      display: flex;
+      flex-direction: column;
+      margin: 15px 0 10px 0;
+      justify-self: flex-end;
+
+      .subline {
+        margin: 3px 0;
+        line-height: 1;
+      }
+    }
+
+    a {
+      height: 100%;
+      text-decoration: none;
+      color: $app-white;
+      display: flex;
+      flex-direction: column;
+    }
+
+    img {
+      width: 100%;
+    }
+
+    & > * {
+      margin: 0;
+    }
+
+    .headline-2 {
+      font-family: $font-secondary;
+      text-transform: uppercase;
+      font-size: 1.5vw;
+      line-height: 0.8;
+      font-weight: 300;
+      color: $app-white;
+      align-self: end;
+
+      @include tablet {
+        font-size: 17px;
+        margin: 0 0 1vh 0;
+      }
+
+      @include mobile {
+        margin-top: 1vw;
+        line-height: 0.9;
+      }
+    }
+
+    h2.subline {
+      font-size: 14px;
+      font-style: italic;
+      text-transform: none;
+      font-weight: 300;
+    }
+
+    .tech-stack-container {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      align-self: end;
+
+      @include tablet {
+        -webkit-box-ordinal-group: 3;
+        -ms-flex-order: 2;
+        order: 2;
+      }
+
+      div {
+        &:not(:first-child) {
+          margin-left: 1vw;
+        }
+      }
+
+      #logo-nuxt {
+        margin-left: 0;
+      }
+
+      svg {
+        height: 3vw;
+
+        @include tablet {
+          height: 8vw;
+          margin-top: 20px;
+        }
+      }
+    }
+  }
+}
+
+// APit work
 
 .apit-scene {
   display: grid;
@@ -3061,10 +3310,16 @@ $apit-padding-area-left: $apit-padding-area-right;
   }
 }
 
-#apit-work-container {
+#apit-work-container,
+#motorola-work-container,
+#digital-anvil-logo,
+#css-rocket {
   z-index: 1;
 
-  #apit-scene-1 {
+  #apit-scene-1,
+  #motorola-scene-1,
+  #da-scene-1,
+  #cr-scene-1 {
     grid-template-rows: 1fr auto auto auto auto auto 1fr;
     grid-template-columns: $apit-padding-area-left auto 1fr $apit-padding-area-right;
     height: 100vh;
@@ -3081,11 +3336,21 @@ $apit-padding-area-left: $apit-padding-area-right;
       height: 100%;
     }
 
-    &>* {
+    & > * {
       margin: 0;
     }
 
+    #motorola-5g-battle-headline,
     #apit-design-system-headline {
+      @include tablet {
+        height: fit-content;
+      }
+    }
+
+    #motorola-5g-battle-headline,
+    #apit-design-system-headline,
+    #bonus-1,
+    #bonus-2 {
       grid-row: 2;
       grid-column: 2 / span 2;
 
@@ -3096,22 +3361,9 @@ $apit-padding-area-left: $apit-padding-area-right;
       @include mobile-landscape {
         margin-top: 10vh;
       }
-
-      path {
-        fill: $app-black;
-
-        &:hover {
-          fill: $app-yellow;
-        }
-
-        &:active {
-          -webkit-animation: letterJump 500ms ease-in-out;
-          animation: letterJump 500ms ease-in-out;
-        }
-      }
     }
 
-    #headline-2 {
+    .headline-2 {
       grid-row: 3;
       grid-column: 2;
       font-family: $font-secondary;
@@ -3128,19 +3380,24 @@ $apit-padding-area-left: $apit-padding-area-right;
       }
     }
 
-    #role {
+    .role {
       grid-row: 4;
       grid-column: 2;
       margin-top: 20px;
     }
 
-    #years {
+    .years {
       grid-row: 5;
       grid-column: 2;
     }
 
-    #used-tools {
+    .used-tools {
       grid-row: 6;
+      grid-column: 2;
+    }
+
+    .credits {
+      grid-row: 7;
       grid-column: 2;
     }
 
@@ -3158,6 +3415,7 @@ $apit-padding-area-left: $apit-padding-area-right;
       grid-row: 3;
       grid-column: 3;
       align-self: end;
+      justify-content: flex-end;
 
       @include tablet {
         -webkit-box-ordinal-group: 3;
@@ -3169,10 +3427,10 @@ $apit-padding-area-left: $apit-padding-area-right;
         &:not(:first-child) {
           margin-left: 1vw;
         }
+      }
 
-        &:last-child {
-          margin-left: 0;
-        }
+      #logo-nuxt {
+        margin-left: 0;
       }
 
       svg {
@@ -3182,6 +3440,295 @@ $apit-padding-area-left: $apit-padding-area-right;
           height: 8vw;
           margin-top: 20px;
         }
+      }
+    }
+  }
+
+  #motorola-scene-2 {
+    grid-template-rows: auto auto;
+    grid-template-columns: $apit-padding-area-left auto $apit-padding-area-right;
+    padding: 20vh 0;
+    grid-gap: 1vw;
+    grid-template-areas:
+      ". text ."
+      ". screenDesktopVideo .";
+
+    @include tablet {
+      grid-row-gap: 3vh;
+      padding: 0;
+    }
+
+    @include mobile {
+      grid-row-gap: 3vh;
+      padding: 3vh 0;
+    }
+
+    .description {
+      grid-area: text;
+
+      @include mobile {
+        margin-bottom: 1vh;
+      }
+    }
+
+    video {
+      grid-area: screenDesktopVideo;
+      width: 100%;
+      border: solid #3f3f3f;
+      border-width: 20px 8px 8px 8px;
+      border-radius: 6px;
+
+      @include tablet {
+        border-width: 3vw 1vw 1vw 1vw;
+        width: 78vw;
+        margin-left: -18vw;
+      }
+
+      @include mobile-landscape {
+        border-width: 3vw 1.5vw 1.5vw 1.5vw;
+      }
+
+      @include mobile {
+        width: 92vw;
+        margin-left: -8vw;
+        border-width: 1vw 3vw;
+      }
+    }
+  }
+
+  #motorola-scene-3 {
+    grid-template-rows: auto 1fr;
+    grid-template-columns: $apit-padding-area-left 1fr 2fr $apit-padding-area-right;
+    grid-column-gap: 3vw;
+    grid-row-gap: 1vw;
+    padding: 20vh 0;
+    grid-template-areas:
+      ". featuresVideo logo ."
+      ". featuresVideo description .";
+
+    @include tablet {
+      grid-row-gap: 3vh;
+      padding: 0;
+    }
+
+    @include tablet-landscape {
+      display: grid;
+      grid-template-rows: auto auto;
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas:
+        'logo logo'
+        'description featuresVideo';
+    }
+
+    @include mobile {
+      grid-row-gap: 3vh;
+      padding: 3vh 0;
+    }
+
+    #motorola-logo {
+      grid-area: logo;
+      width: 100%;
+    }
+
+    div {
+      grid-area: description;
+    }
+
+    video {
+      grid-area: featuresVideo;
+      width: 100%;
+      border: solid #3f3f3f;
+      border-width: 20px 8px 8px 8px;
+      border-radius: 6px;
+
+      @include tablet {
+        width: 90%;
+        border-width: 3vw 1vw 1vw 1vw;
+      }
+
+      @include mobile-landscape {
+        border-width: 3vw 1.5vw 1.5vw 1.5vw;
+      }
+
+      @include mobile {
+        width: 93%;
+        border-width: 6vw 3vw 3vw 3vw;
+      }
+    }
+  }
+
+  #motorola-scene-4 {
+    grid-template-rows: auto auto auto auto;
+    grid-template-columns: $apit-padding-area-left auto $apit-padding-area-right;
+    padding: 20vh 0;
+    grid-gap: 1vw;
+    grid-template-areas:
+      ". text ."
+      ". screenDesktop1 ."
+      ". text2 ."
+      ". screenDesktop2 .";
+
+    @include tablet {
+      grid-row-gap: 3vh;
+      padding: 0;
+    }
+
+    @include mobile {
+      grid-row-gap: 3vh;
+      padding: 3vh 0;
+    }
+
+    .description {
+      grid-area: text;
+
+      @include mobile {
+        margin-bottom: 3vh;
+      }
+    }
+
+    .description-2 {
+      grid-area: text2;
+      margin-top: 15px;
+
+      @include mobile {
+        margin: 10vh 0 3vh 0;
+      }
+    }
+
+    #motorola-intro {
+      grid-area: screenDesktop1;
+
+      @include tablet {
+        width: 85vw;
+        margin-left: -20vw;
+      }
+
+      @include mobile {
+        width: 95vw;
+        margin-left: -5vw;
+      }
+    }
+
+    #motorola-calendar {
+      grid-area: screenDesktop2;
+
+      @include tablet {
+        width: 85vw;
+        margin-left: -20vw;
+      }
+
+      @include mobile {
+        width: 95vw;
+        margin-left: -5vw;
+      }
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+
+  #motorola-scene-5,
+  #motorola-scene-6 {
+    grid-template-rows: auto auto;
+    grid-template-columns: $apit-padding-area-left auto auto $apit-padding-area-right;
+    padding: 20vh 0;
+    grid-gap: 1vw;
+    grid-template-areas:
+      ". text text ."
+      ". screenDesktop screenMobile .";
+
+    @include tablet {
+      grid-row-gap: 3vh;
+      padding: 0;
+    }
+
+    @include tablet-landscape {
+      display: grid;
+      grid-template-rows: auto auto;
+      grid-template-columns: 3fr 2fr;
+      grid-template-areas:
+        'text screenMobile'
+        'screenDesktop screenMobile';
+    }
+
+    @include mobile {
+      grid-row-gap: 3vh;
+      padding: 3vh 0;
+    }
+
+    .description {
+      grid-area: text;
+    }
+
+    #motorola-scores {
+      grid-area: screenDesktop;
+
+      @include tablet {
+        width: 85vw;
+        margin-left: -20vw;
+      }
+
+      @include tablet-landscape {
+        width: 54vw;
+        margin-left: -20vw;
+        align-self: end;
+      }
+
+      @include mobile {
+        width: 95vw;
+        margin-left: -5vw;
+      }
+    }
+
+    #motorola-scores-m {
+      grid-area: screenMobile;
+
+      @include tablet-landscape {
+        align-self: end;
+      }
+    }
+
+    #motorola-slider {
+      grid-area: screenDesktop;
+
+      @include tablet {
+        width: 85vw;
+        margin-left: -20vw;
+      }
+
+      @include tablet-landscape {
+        width: 54vw;
+        margin-left: -20vw;
+        align-self: end;
+      }
+
+      @include mobile {
+        width: 95vw;
+        margin-left: -5vw;
+      }
+    }
+
+    #motorola-slider-m {
+      grid-area: screenMobile;
+
+      @include tablet-landscape {
+        align-self: end;
+      }
+    }
+
+    img {
+      max-height: 70vh;
+      width: auto;
+
+      @include tablet {
+        width: 100%;
+        max-height: 100%;
+      }
+
+      @include mobile {
+        width: 100%;
+        max-height: 100%;
       }
     }
   }
@@ -3294,7 +3841,6 @@ $apit-padding-area-left: $apit-padding-area-right;
   }
 
   .phase {
-
     @include mobile-landscape {
       margin-top: 10vh;
     }
@@ -3315,20 +3861,6 @@ $apit-padding-area-left: $apit-padding-area-right;
       @include mobile {
         height: 18vw;
         width: auto;
-      }
-
-      path,
-      rect {
-        fill: $app-yellow;
-
-        &:hover {
-          fill: $app-black;
-        }
-
-        &:active {
-          -webkit-animation: letterJump 500ms ease-in-out;
-          animation: letterJump 500ms ease-in-out;
-        }
       }
     }
   }
@@ -3673,7 +4205,7 @@ $apit-padding-area-left: $apit-padding-area-right;
 
       @include mobile {
         grid-row: 5;
-        grid-column: 1 / span 2
+        grid-column: 1 / span 2;
       }
 
       #apit-scene-5-paragraph-2 {
@@ -4009,6 +4541,69 @@ $apit-padding-area-left: $apit-padding-area-right;
   }
 }
 
+#css-rocket,
+#digital-anvil-logo {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+
+  .codepen {
+    width: 80vw;
+    margin: auto;
+
+    @include mobile-landscape {
+      height: 95vh;
+    }
+
+    @include mobile {
+      width: 90vw;
+      height: 80vh;
+      margin-bottom: 5vw;
+    }
+  }
+
+  #cr-scene-1,
+  #da-scene-1 {
+    .headline-2 {
+      align-self: start;
+    }
+
+    .role {
+      display: none;
+    }
+
+    @include mobile {
+      height: 70vh;
+    }
+  }
+}
+
+#logo-pug {
+  svg {
+    .cls-1 {
+      fill: #efcca3;
+    }
+    .cls-2 {
+      fill: #ccac8d;
+    }
+    .cls-3 {
+      fill: #fff;
+    }
+    .cls-4 {
+      fill: #56332b;
+    }
+    .cls-5 {
+      fill: #442823;
+    }
+    .cls-6 {
+      fill: #7f4a41;
+    }
+    .cls-7 {
+      fill: #331712;
+    }
+  }
+}
+
 #contact {
   display: grid;
   grid-template-rows: 1fr 1fr auto 1fr auto 1fr;
@@ -4072,19 +4667,6 @@ $apit-padding-area-left: $apit-padding-area-right;
       @include mobile-landscape {
         height: 13vw;
         width: auto;
-      }
-
-      path {
-        fill: $app-black;
-
-        &:hover {
-          fill: $app-yellow;
-        }
-
-        &:active {
-          -webkit-animation: letterJump 500ms ease-in-out;
-          animation: letterJump 500ms ease-in-out;
-        }
       }
     }
   }
@@ -6128,7 +6710,6 @@ $apit-padding-area-left: $apit-padding-area-right;
   0% {
     transform: scale(1);
     visibility: visible;
-
   }
 
   95% {

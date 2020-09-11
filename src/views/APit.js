@@ -38,8 +38,8 @@ class APit extends React.Component {
       <section id="apit-work-container">
         <div id="apit-scene-1" className={"apit-scene " + this.state.introAnim}>
           <APitDesignSystemHeadline />
-          <h2 id="headline-2">{aPitProject.headlineMain2}</h2>
-          <h2 className="subline" id="role">
+          <h2 className="headline-2">{aPitProject.headlineMain2}</h2>
+          <h2 className="subline role">
             {aPitProject.subline}
           </h2>
           <div className="tech-stack-container">
@@ -48,10 +48,10 @@ class APit extends React.Component {
             <LogoVue />
             <LogoNuxt />
           </div>
-          <h2 className="subline" id="years">
+          <h2 className="subline years">
             {aPitProject.years}
           </h2>
-          <h2 className="subline" id="used-tools">
+          <h2 className="subline used-tools">
             {aPitProject.usedTools}
           </h2>
         </div>

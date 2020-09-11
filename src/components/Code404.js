@@ -4,7 +4,7 @@ import { notFound } from "../Content.js";
 
 function Code404() {
   return (
-    <div id="code-404" alt={notFound.errorCode}>
+    <div id="code-404" className="elena-font-black" alt={notFound.errorCode}>
       <svg viewBox="0 0 304 96" version="1.1">
         <g
           id="Page-1"
